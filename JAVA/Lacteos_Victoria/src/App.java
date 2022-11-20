@@ -1,7 +1,7 @@
 import java.util.Scanner;
 
 public class App {
-    public static void main(String[] args) throws Exception {
+    public static void main(String[] args){
         Scanner teclado = new Scanner(System.in);
         String nom_emp = "Lacteos La Victoria", nom_empleado, tipo_empleado;
         int sueldo_ex = 1000000, sueldo_in = 1200000, ventas, cant_hijos, valor_hijos = 20000, hijos;
