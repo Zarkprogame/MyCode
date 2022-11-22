@@ -1,17 +1,12 @@
-import java.util.Scanner;
-
+import javax.swing.JOptionPane;
 public class App {
     public static void main(String[] args) throws Exception {
         int user_number, pares = 0, impares = 0, count_pares = 0, count_impares = 0, suma, promedio;
-
-        Scanner teclado = new Scanner(System.in);
-        
-        System.out.println("<Ingresa 10 numeros>");
-
-        for (int counter = 1; counter <= 10; counter ++){
-            System.out.print("Ingrese el Numero " + counter + ": ");
-            user_number = teclado.nextInt();
-
+        String vector[] = new String[6];
+        String texto[] = new String[6];
+        String mostrar = "";
+        for (int counter = 1; counter <= 10; counter++){
+            user_number = Integer.parseInt(JOptionPane.showInputDialog("Ingresa 10 numeros \n Ingrese el Numero " + counter + ": "));
             if (user_number % 2 == 0){
                 pares = pares + user_number;
                 count_pares ++;
@@ -20,15 +15,27 @@ public class App {
                 count_impares ++;
             }
         }
-
         suma = pares + impares;
         promedio = suma / 10;
 
-        System.out.println("Hay " + count_pares + " Pares");
-        System.out.println("Hay " + count_impares + " Impares");
-        System.out.println("La suma de los Pares es: " + pares);
-        System.out.println("La suma de los impares es: " + impares);
-        System.out.println("La suma de los 10 numeros es: " + suma);
-        System.out.println("El promedio de los numeros es: " + promedio);
-    }
-}
+        texto[0] = "Cantidad de Pares: ";
+        texto[1] = "Cantidad de Impares: ";
+        texto[2] = "Suma de Pares";
+        texto[3] = "Suma de Impares";
+        texto[4] = "Suma Total: ";
+        texto[5] = "Promedio: ";
+
+        vector[0] = String.valueOf(count_pares);
+        vector[1] = String.valueOf(count_impares);
+        vector[2] = String.valueOf(pares);
+        vector[3] = String.valueOf(impares);
+        vector[4] = String.valueOf(suma);
+        vector[5] = String.valueOf(promedio);
+
+        for (int i = 0; i < 6; i++){
+            mostrar += texto[i] + vector[i];
+            mostrar += "\n";
+        }
+        JOptionPane.showMessageDialog(null, mostrar);
+     }
+ }
