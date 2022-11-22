@@ -20,8 +20,8 @@ public class App {
 
         texto[0] = "Cantidad de Pares: ";
         texto[1] = "Cantidad de Impares: ";
-        texto[2] = "Suma de Pares";
-        texto[3] = "Suma de Impares";
+        texto[2] = "Suma de Pares: ";
+        texto[3] = "Suma de Impares: ";
         texto[4] = "Suma Total: ";
         texto[5] = "Promedio: ";
 
