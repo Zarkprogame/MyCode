@@ -38,7 +38,7 @@ public class MdiPrincipal extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        fileMenu.setMnemonic('f');
+        fileMenu.setMnemonic('e');
         fileMenu.setText("Entidades");
 
         clienteMenuItem.setMnemonic('c');
@@ -59,7 +59,7 @@ public class MdiPrincipal extends javax.swing.JFrame {
         empresaMenuItem.setToolTipText("");
         fileMenu.add(empresaMenuItem);
 
-        cajaMenuItem.setMnemonic('c');
+        cajaMenuItem.setMnemonic('j');
         cajaMenuItem.setText("Caja");
         cajaMenuItem.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -70,7 +70,6 @@ public class MdiPrincipal extends javax.swing.JFrame {
 
         menuBar.add(fileMenu);
 
-        editMenu.setMnemonic('e');
         editMenu.setText("Edit");
 
         cutMenuItem.setMnemonic('t');
@@ -131,6 +130,19 @@ public class MdiPrincipal extends javax.swing.JFrame {
             String users = JOptionPane.showInputDialog("Digite Cantidad de Registros:");
             cant_users = Integer.parseInt(users);
             setTitle("Entidad Cliente");
+            
+            if (cant_users == 0) {
+                JOptionPane.showMessageDialog(null, "No se Pueden Agregar 0 Registros");
+                dispose();
+                
+                java.awt.EventQueue.invokeLater(new Runnable() {
+                    public void run() {
+                        new logIn().setVisible(true); 
+                    }
+                });
+                
+            }
+            
             if (cliente == null || cliente.isClosed()) {
                 cliente = new ClienteForm();
                 this.desktopPane.add(cliente);

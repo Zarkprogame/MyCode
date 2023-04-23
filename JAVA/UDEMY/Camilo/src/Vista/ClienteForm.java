@@ -4,23 +4,21 @@
  */
 package Vista;
 
-import static Vista.MdiPrincipal.cant_users;
 import java.awt.Component;
+import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.HashSet;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
-import javax.swing.SpinnerNumberModel;
+import javax.swing.JPanel;
 import javax.swing.Timer;
-import javax.swing.UIManager;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
 /**
@@ -29,13 +27,14 @@ import javax.swing.filechooser.FileNameExtensionFilter;
  */
 public class ClienteForm extends javax.swing.JInternalFrame {
 
-    public static String[][] tabla = new String[MdiPrincipal.cant_users][8];
-    public static String[][] Datos = new String[MdiPrincipal.cant_users][8];
-    public static String[] titulo = new String [] {"Id", "Nombre", "Apellido", "Edad", "Genero","Direccion" , "Telefono", "Foto"};
+    fondoPanel1 fondo1 = new fondoPanel1();
+    public static String[][] Datos = new String[MdiPrincipal.cant_users][9];
+    public static String[] titulo = new String [] {"Id","Documento" ,"Nombre", "Apellido", "Edad", "Genero","Direccion" , "Telefono", "Foto"};
     public static int counter = 0, counter_filas;
     public static String ruta = "";
     
     public ClienteForm() {
+        this.setContentPane(fondo1);
         initComponents();
         Bloq();
         botones.add(b_m);
@@ -43,6 +42,27 @@ public class ClienteForm extends javax.swing.JInternalFrame {
         Fecha();
         lblFoto.setIcon(null);
         btnImp.setEnabled(false);
+        btnEditar.setEnabled(false);
+        btnEliminar.setEnabled(false);
+    }
+    
+    class fondoPanel1 extends JPanel{
+        
+        private Image imagen1;
+        
+        @Override
+        public void paint(Graphics g){
+            imagen1 = new ImageIcon(getClass().getResource("/img/mini.jpg")).getImage();
+            g.drawImage(imagen1, 0, 0, pnl_form.getWidth(),pnl_form.getHeight(),this);
+            setOpaque(false);
+            super.paint(g);
+        }
+                
+    }
+    
+    public static void modificarDatos(int filas, int columnas){
+        String valor = JOptionPane.showInputDialog("Digite su " + titulo[columnas] + ": ");
+        Datos[filas][columnas] = valor;
     }
     
     public void Fecha(){
@@ -114,8 +134,14 @@ public class ClienteForm extends javax.swing.JInternalFrame {
             tf_telefono.setToolTipText("");
         }
         
+        if (tf_documento.getText().isEmpty()) {
+            tf_documento.setToolTipText("*Campo Requerido");
+        }else {
+            tf_documento.setToolTipText("");
+        }
+        
         if (tf_id.getText().isEmpty() || tf_nombre.getText().isEmpty() || tf_apellido.getText().isEmpty() || tf_direccion.getText().isEmpty() || 
-                tf_telefono.getText().isEmpty()) {
+                tf_telefono.getText().isEmpty() || tf_documento.getText().isEmpty()) {
             btnAdd2.setEnabled(false);
         }else {
             btnAdd2.setEnabled(true);
@@ -153,6 +179,8 @@ public class ClienteForm extends javax.swing.JInternalFrame {
         jLabel13 = new javax.swing.JLabel();
         tf_telefono = new javax.swing.JTextField();
         tf_direccion = new javax.swing.JTextField();
+        jLabel14 = new javax.swing.JLabel();
+        tf_documento = new javax.swing.JTextField();
         jPanel7 = new javax.swing.JPanel();
         pnl_nav = new javax.swing.JPanel();
         jButton1 = new javax.swing.JButton();
@@ -161,11 +189,11 @@ public class ClienteForm extends javax.swing.JInternalFrame {
         jButton5 = new javax.swing.JButton();
         pnl_mtto2 = new javax.swing.JPanel();
         btnEditar = new javax.swing.JButton();
-        jButton30 = new javax.swing.JButton();
+        btnEliminar = new javax.swing.JButton();
         btnAdd2 = new javax.swing.JToggleButton();
         pnl_fnEspeciales = new javax.swing.JPanel();
         btnBuscar = new javax.swing.JButton();
-        jButton32 = new javax.swing.JButton();
+        btnAyuda = new javax.swing.JButton();
         btnSalir = new javax.swing.JButton();
         btnImp = new javax.swing.JButton();
         lblFecha = new javax.swing.JLabel();
@@ -321,6 +349,17 @@ public class ClienteForm extends javax.swing.JInternalFrame {
             }
         });
 
+        jLabel14.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        jLabel14.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        jLabel14.setText("Documento");
+        jLabel14.setToolTipText("");
+
+        tf_documento.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                tf_documentoKeyReleased(evt);
+            }
+        });
+
         javax.swing.GroupLayout pnl_formLayout = new javax.swing.GroupLayout(pnl_form);
         pnl_form.setLayout(pnl_formLayout);
         pnl_formLayout.setHorizontalGroup(
@@ -342,11 +381,14 @@ public class ClienteForm extends javax.swing.JInternalFrame {
                         .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(125, 125, 125))
                     .addGroup(pnl_formLayout.createSequentialGroup()
-                        .addGroup(pnl_formLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(tf_apellido, javax.swing.GroupLayout.PREFERRED_SIZE, 198, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(pnl_genero, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel13, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(tf_telefono, javax.swing.GroupLayout.PREFERRED_SIZE, 198, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(pnl_formLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(tf_documento, javax.swing.GroupLayout.PREFERRED_SIZE, 198, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(pnl_formLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(tf_apellido, javax.swing.GroupLayout.PREFERRED_SIZE, 198, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(pnl_genero, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jLabel13, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(tf_telefono, javax.swing.GroupLayout.PREFERRED_SIZE, 198, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jLabel14, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addComponent(pnl_foto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(15, 15, 15))
@@ -360,9 +402,13 @@ public class ClienteForm extends javax.swing.JInternalFrame {
                         .addComponent(pnl_foto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, pnl_formLayout.createSequentialGroup()
                         .addGap(15, 15, 15)
-                        .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(pnl_formLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel14, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(tf_id, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(pnl_formLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(tf_id, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(tf_documento, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(pnl_formLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -386,12 +432,12 @@ public class ClienteForm extends javax.swing.JInternalFrame {
                         .addGroup(pnl_formLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(tf_direccion, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(tf_telefono, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(16, Short.MAX_VALUE))
+                .addContainerGap(27, Short.MAX_VALUE))
         );
 
         pnl_nav.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(187, 187, 187)), "Nav", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Dialog", 1, 14))); // NOI18N
 
-        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/previus.png"))); // NOI18N
+        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/anterior.png"))); // NOI18N
         jButton1.setToolTipText("Previo");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -399,7 +445,7 @@ public class ClienteForm extends javax.swing.JInternalFrame {
             }
         });
 
-        jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/first.png"))); // NOI18N
+        jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/primero.png"))); // NOI18N
         jButton3.setToolTipText("Primero");
         jButton3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -407,7 +453,7 @@ public class ClienteForm extends javax.swing.JInternalFrame {
             }
         });
 
-        jButton4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/last.png"))); // NOI18N
+        jButton4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/ultimo.png"))); // NOI18N
         jButton4.setToolTipText("Ultimo");
         jButton4.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -415,7 +461,7 @@ public class ClienteForm extends javax.swing.JInternalFrame {
             }
         });
 
-        jButton5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/next.png"))); // NOI18N
+        jButton5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/siguiente.png"))); // NOI18N
         jButton5.setToolTipText("Siguiente");
         jButton5.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -452,7 +498,7 @@ public class ClienteForm extends javax.swing.JInternalFrame {
 
         pnl_mtto2.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(187, 187, 187)), "Mtto", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Dialog", 1, 14))); // NOI18N
 
-        btnEditar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/editar.png"))); // NOI18N
+        btnEditar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/mod.png"))); // NOI18N
         btnEditar.setToolTipText("Editar");
         btnEditar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -460,15 +506,15 @@ public class ClienteForm extends javax.swing.JInternalFrame {
             }
         });
 
-        jButton30.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/delete.png"))); // NOI18N
-        jButton30.setToolTipText("Eliminar");
-        jButton30.addActionListener(new java.awt.event.ActionListener() {
+        btnEliminar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/eliminar.png"))); // NOI18N
+        btnEliminar.setToolTipText("Eliminar");
+        btnEliminar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton30ActionPerformed(evt);
+                btnEliminarActionPerformed(evt);
             }
         });
 
-        btnAdd2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/add.png"))); // NOI18N
+        btnAdd2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/añadir.png"))); // NOI18N
         btnAdd2.setToolTipText("Añadir / Guardar");
         btnAdd2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -486,7 +532,7 @@ public class ClienteForm extends javax.swing.JInternalFrame {
                 .addGap(18, 18, 18)
                 .addComponent(btnEditar, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(jButton30, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         pnl_mtto2Layout.setVerticalGroup(
@@ -494,7 +540,7 @@ public class ClienteForm extends javax.swing.JInternalFrame {
             .addGroup(pnl_mtto2Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(pnl_mtto2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jButton30, javax.swing.GroupLayout.DEFAULT_SIZE, 58, Short.MAX_VALUE)
+                    .addComponent(btnEliminar, javax.swing.GroupLayout.DEFAULT_SIZE, 58, Short.MAX_VALUE)
                     .addComponent(btnEditar, javax.swing.GroupLayout.DEFAULT_SIZE, 58, Short.MAX_VALUE)
                     .addComponent(btnAdd2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(0, 0, Short.MAX_VALUE))
@@ -502,7 +548,7 @@ public class ClienteForm extends javax.swing.JInternalFrame {
 
         pnl_fnEspeciales.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(187, 187, 187)), "Fn Especiales", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Dialog", 1, 14))); // NOI18N
 
-        btnBuscar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/buscar.png"))); // NOI18N
+        btnBuscar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/consulta.png"))); // NOI18N
         btnBuscar.setToolTipText("Consultar");
         btnBuscar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -510,23 +556,23 @@ public class ClienteForm extends javax.swing.JInternalFrame {
             }
         });
 
-        jButton32.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/ayuda.png"))); // NOI18N
-        jButton32.setToolTipText("Ayuda");
-        jButton32.addActionListener(new java.awt.event.ActionListener() {
+        btnAyuda.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/ayuda.png"))); // NOI18N
+        btnAyuda.setToolTipText("Ayuda");
+        btnAyuda.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton32ActionPerformed(evt);
+                btnAyudaActionPerformed(evt);
             }
         });
 
-        btnSalir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/salir.png"))); // NOI18N
-        btnSalir.setToolTipText("<html>\n<body>\n<div>\n<img src =  \"file:C:/Users/Zark/MyCode/JAVA/UDEMY/Camilo/src/img/loco.jpg\" />\n</div>\n</body>\n </html>");
+        btnSalir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/cerrar.png"))); // NOI18N
+        btnSalir.setToolTipText("<html>\n<body>\n<div>\n<img src =  \"file:C:/Users/Usuario/MyCode/JAVA/UDEMY/Camilo/src/img/loco.jpg\" />\n</div>\n</body>\n </html>");
         btnSalir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnSalirActionPerformed(evt);
             }
         });
 
-        btnImp.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/print.png"))); // NOI18N
+        btnImp.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/impresora.png"))); // NOI18N
         btnImp.setToolTipText("Imprimir");
         btnImp.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -540,7 +586,7 @@ public class ClienteForm extends javax.swing.JInternalFrame {
             pnl_fnEspecialesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnl_fnEspecialesLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jButton32, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnAyuda, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btnBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
@@ -557,7 +603,7 @@ public class ClienteForm extends javax.swing.JInternalFrame {
                     .addComponent(btnSalir, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnImp, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton32, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btnAyuda, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(0, 16, Short.MAX_VALUE))
         );
 
@@ -603,7 +649,7 @@ public class ClienteForm extends javax.swing.JInternalFrame {
                 .addComponent(pnl_form, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(14, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
@@ -659,46 +705,119 @@ public class ClienteForm extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jButton5ActionPerformed
 
     private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarActionPerformed
-        String idUser = JOptionPane.showInputDialog("Coloca la Identificacion del Usuario: ");
         
-        for (int i = 0; i < Datos.length; i++) {
-            if (Datos[i][0].equals(idUser)) {
-                String valor = JOptionPane.showInputDialog("Digite el dato que quiere Editar: \n"
-                                    + "[Id][Nombre][Apellido][Edad][Genero][Direccion][Telefono]");
-                JOptionPane.showInputDialog("Digite su nuevo " + titulo[i]);
-            }
+        boolean encuentra = false;
+        int fila = 0, columna = 0;
+        
+        String idUser = JOptionPane.showInputDialog(null,"Coloca la Identificacion del Usuario: ","Consulta",JOptionPane.PLAIN_MESSAGE );
+        
+        if (MdiPrincipal.cant_users == 0) {
+            JOptionPane.showMessageDialog(null, "No hay Datos");
         }
+        
+        while (!encuentra && fila < MdiPrincipal.cant_users ){
+            if (idUser.equals(Datos[fila][0])) {
+                encuentra = true;
+            }else {
+                fila ++;
+            }
+            
+        }
+        
+        if (fila < MdiPrincipal.cant_users) {
+            String valor = JOptionPane.showInputDialog("Ingresa Valor: \n"
+                                            + "[0-Id Cliente] [1-Documento] [2-Nombre] [3-Apellido] [4-Edad] [5-Genero] [6-Direccion] [7-Telefono] [8-Imagen]");
+            try{
+                columna = Integer.parseInt(valor);
+                modificarDatos(fila,columna);
+                JOptionPane.showMessageDialog(null, "Dato Actualizado con Exito");
+            }catch (Exception e) {
+                JOptionPane.showMessageDialog(null, "No es un Campo Valido \n"
+                                                                + e);
+            }
+            
+        }else {
+            JOptionPane.showMessageDialog(null, "No se Encuentra el ID");
+        }
+        
+        
+        
         
     }//GEN-LAST:event_btnEditarActionPerformed
 
-    private void jButton30ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton30ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton30ActionPerformed
+    private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
+
+        boolean encuentra1 = false;
+        int fila1 = 0, contador;
+        String idUser1 = JOptionPane.showInputDialog(null,"Coloca la Identificacion del Usuario: ","Eliminar",JOptionPane.PLAIN_MESSAGE);
+        int userFilas = MdiPrincipal.cant_users;
+        
+        while (!encuentra1 && fila1 < userFilas ){
+            if (idUser1.equals(Datos[fila1][0])) {
+                encuentra1 = true;
+            }else {
+                fila1 ++;
+            }
+        }
+        
+        if (fila1 < userFilas) { // si poscision es menor a los registros
+            if (userFilas == 1) { // verificamos si hay solo un registro para no tener error de desbordamiento
+                userFilas = userFilas + 0;
+            }else{
+                userFilas = userFilas - 1;
+            }
+            
+            Object[][] nuevaMatriz = new Object[userFilas][Datos[0].length]; // creamos una nueva matriz para reemplazarla por la que vamos a eliminar
+            contador = 0;
+            
+            for (int filaActual = 0; filaActual < userFilas; filaActual++) { // recorremos las filas
+                for (int columnaActual = 0; columnaActual < titulo.length; columnaActual++) { // recorremos las columnas
+                    if (fila1 == filaActual) { // nos pocisionas en el dato dentro de la matriz
+                        filaActual ++;
+                    }
+                    if (fila1 > 0) {
+                        nuevaMatriz[contador][columnaActual] = Datos[filaActual][columnaActual];
+                    }
+                }
+                contador++;
+            }
+            
+            for (int i = 0; i < titulo.length; i++) { //Remplazamos con null los valores de la matriz
+                Datos[fila1][i] = "null";
+            }
+            
+            JOptionPane.showMessageDialog(null, "Datos Eliminados con Exito");
+            
+        }else {
+            JOptionPane.showMessageDialog(null, "No se Encuentra el ID");
+        }
+    }//GEN-LAST:event_btnEliminarActionPerformed
 
     private void btnAdd2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAdd2ActionPerformed
         
         counter++;
         
         if (counter % 2 == 0) {
-            
-            btnAdd2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/add.png")));
+            JOptionPane.showMessageDialog(null, "Registro Exitoso");
+            btnAdd2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/añadir.png")));
             Bloq();
             Datos[counter_filas][0] = tf_id.getText();
-            Datos[counter_filas][1] = tf_nombre.getText();
-            Datos[counter_filas][2] = tf_apellido.getText();
-            Datos[counter_filas][3] = s_edad.getValue().toString();
+            Datos[counter_filas][1] = tf_documento.getText();
+            Datos[counter_filas][2] = tf_nombre.getText();
+            Datos[counter_filas][3] = tf_apellido.getText();
+            Datos[counter_filas][4] = s_edad.getValue().toString();
 
             if (b_m.isSelected()) {
-                Datos[counter_filas][4] = "Masculino";
+                Datos[counter_filas][5] = "Masculino";
             } else if (b_f.isSelected()) {
-                Datos[counter_filas][4] = "Femenino";
+                Datos[counter_filas][5] = "Femenino";
             } else {
-                Datos[counter_filas][4] = "No se selecciono";
+                Datos[counter_filas][5] = "No se selecciono";
             }
 
-            Datos[counter_filas][5] = tf_direccion.getText();
-            Datos[counter_filas][6] = tf_telefono.getText();
-            Datos[counter_filas][7] = ruta;
+            Datos[counter_filas][6] = tf_direccion.getText();
+            Datos[counter_filas][7] = tf_telefono.getText();
+            Datos[counter_filas][8] = ruta;
             
             counter_filas++;
             
@@ -706,13 +825,16 @@ public class ClienteForm extends javax.swing.JInternalFrame {
                 btnAdd2.setEnabled(false);
             }
         }else {
+            
             DesBloq();
             btnImp.setEnabled(true);
+            btnEditar.setEnabled(true);
+            btnEliminar.setEnabled(true);
             tf_telefono.setEnabled(false);
             btnAdd2.setEnabled(false);
-            String titulo = String.format("Usuario %s de %s",counter_filas + 1,MdiPrincipal.cant_users);
+            String titulo = String.format("Usuario %s de %s",counter_filas + 1, MdiPrincipal.cant_users);
             setTitle(titulo);
-            btnAdd2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/save.png")));
+            btnAdd2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/guardar.png")));
             tf_id.setText("");
             tf_nombre.setText("");
             tf_apellido.setText("");
@@ -738,13 +860,6 @@ public class ClienteForm extends javax.swing.JInternalFrame {
 
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
         
-        
-        for (int i = 0; i < tabla.length; i++) {
-            for (int l = 0; l <= 7; l++) {
-                tabla[i][l] = Datos[i][l];
-            }
-        }
-        
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new consultat().setVisible(true);
@@ -752,16 +867,16 @@ public class ClienteForm extends javax.swing.JInternalFrame {
         });
     }//GEN-LAST:event_btnBuscarActionPerformed
 
-    private void jButton32ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton32ActionPerformed
+    private void btnAyudaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAyudaActionPerformed
         try {
-            String url = "C:/Users/Zark/MyCode/JAVA/UDEMY/Camilo/src/img/ayuda.jpg";
+            String url = "file:C:/Users/Usuario/MyCode/JAVA/UDEMY/Camilo/src/img/ayuda.jpg";
             ProcessBuilder p = new ProcessBuilder();
             p.command("cmd.exe","/c",url);
             p.start();
         } catch (IOException ex) {
             Logger.getLogger(ClienteForm.class.getName()).log(Level.SEVERE, null, ex);
         }
-    }//GEN-LAST:event_jButton32ActionPerformed
+    }//GEN-LAST:event_btnAyudaActionPerformed
 
     private void btnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirActionPerformed
         JOptionPane.showMessageDialog(null, "Hasta la Proxima");
@@ -809,27 +924,32 @@ public class ClienteForm extends javax.swing.JInternalFrame {
         validar();
     }//GEN-LAST:event_s_edadMouseReleased
 
+    private void tf_documentoKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tf_documentoKeyReleased
+        // TODO add your handling code here:
+    }//GEN-LAST:event_tf_documentoKeyReleased
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JRadioButton b_f;
     private javax.swing.JRadioButton b_m;
     private javax.swing.ButtonGroup botones;
     private javax.swing.JToggleButton btnAdd2;
+    private javax.swing.JButton btnAyuda;
     private javax.swing.JButton btnBuscar;
     private javax.swing.JButton btnEditar;
+    private javax.swing.JButton btnEliminar;
     private javax.swing.JButton btnImp;
     private javax.swing.JButton btnSalir;
     private javax.swing.JButton btn_foto;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton30;
-    private javax.swing.JButton jButton32;
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
+    private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel7;
@@ -844,6 +964,7 @@ public class ClienteForm extends javax.swing.JInternalFrame {
     private javax.swing.JSpinner s_edad;
     private javax.swing.JTextField tf_apellido;
     private javax.swing.JTextField tf_direccion;
+    private javax.swing.JTextField tf_documento;
     private javax.swing.JTextField tf_id;
     private javax.swing.JTextField tf_nombre;
     private javax.swing.JTextField tf_telefono;

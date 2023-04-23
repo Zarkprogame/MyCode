@@ -6,7 +6,7 @@
       <SubComponents>
         <Menu class="javax.swing.JMenu" name="fileMenu">
           <Properties>
-            <Property name="mnemonic" type="int" value="102"/>
+            <Property name="mnemonic" type="int" value="101"/>
             <Property name="text" type="java.lang.String" value="Entidades"/>
           </Properties>
           <SubComponents>
@@ -34,7 +34,7 @@
             </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="cajaMenuItem">
               <Properties>
-                <Property name="mnemonic" type="int" value="99"/>
+                <Property name="mnemonic" type="int" value="106"/>
                 <Property name="text" type="java.lang.String" value="Caja"/>
               </Properties>
               <Events>
@@ -45,7 +45,6 @@
         </Menu>
         <Menu class="javax.swing.JMenu" name="editMenu">
           <Properties>
-            <Property name="mnemonic" type="int" value="101"/>
             <Property name="text" type="java.lang.String" value="Edit"/>
           </Properties>
           <SubComponents>

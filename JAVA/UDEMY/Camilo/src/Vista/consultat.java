@@ -12,8 +12,6 @@ public class consultat extends javax.swing.JFrame {
         setResizable(false);
         
     }
-    
-    
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -24,7 +22,7 @@ public class consultat extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(ClienteForm.tabla,ClienteForm.titulo));
+        jTable1.setModel(new javax.swing.table.DefaultTableModel(ClienteForm.Datos,ClienteForm.titulo));
         jScrollPane1.setViewportView(jTable1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -46,10 +44,6 @@ public class consultat extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    //String[][] tabla = new String[MdiPrincipal.cant_users][8];
-    //String[] titulo = {"Id", "Nombre", "Apellido", "Edad", "Genero","Direccion" + "Telefono"};
-    //JTable jtabla = new JTable(tabla, titulo);
     
     
     
