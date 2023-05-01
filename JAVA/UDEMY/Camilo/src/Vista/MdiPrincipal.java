@@ -36,7 +36,7 @@ public class MdiPrincipal extends javax.swing.JFrame {
         contentMenuItem = new javax.swing.JMenuItem();
         aboutMenuItem = new javax.swing.JMenuItem();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
 
         fileMenu.setMnemonic('e');
         fileMenu.setText("Entidades");
@@ -59,8 +59,8 @@ public class MdiPrincipal extends javax.swing.JFrame {
         empresaMenuItem.setToolTipText("");
         fileMenu.add(empresaMenuItem);
 
-        cajaMenuItem.setMnemonic('j');
-        cajaMenuItem.setText("Caja");
+        cajaMenuItem.setMnemonic('s');
+        cajaMenuItem.setText("Salir");
         cajaMenuItem.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cajaMenuItemActionPerformed(evt);
@@ -109,7 +109,9 @@ public class MdiPrincipal extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(desktopPane, javax.swing.GroupLayout.DEFAULT_SIZE, 692, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(desktopPane, javax.swing.GroupLayout.PREFERRED_SIZE, 686, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)

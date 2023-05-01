@@ -22,6 +22,7 @@ import javax.swing.JPanel;
 public class logIn extends javax.swing.JFrame {
 
     fondoPanel fondo = new fondoPanel();
+    public static Object nivel;
     
     /**
      * Creates new form logIn
@@ -250,11 +251,12 @@ public class logIn extends javax.swing.JFrame {
             if (tfContra.getText().equalsIgnoreCase("1234")) {
                 
                 Icon foto = new ImageIcon(getClass().getResource("/img/camilo.jpeg"));
-                Object nivel = JOptionPane.showInputDialog(rootPane, "Cual es el Nivel del Usuario?","Nivel del Usuario", JOptionPane.QUESTION_MESSAGE, foto,
-                new Object[]{"Administrador", "Usuario Comun"},"Administrador");
+                nivel = JOptionPane.showInputDialog(rootPane, "Cual es el Nivel del Usuario?","Nivel del Usuario", JOptionPane.QUESTION_MESSAGE, foto,
+                new Object[]{"Administrador", "Empleado"},"Administrador");
                 JOptionPane.showMessageDialog(rootPane, nivel);
                 //JOptionPane.showMessageDialog(null, "Bienenido Zark.");
                 tfContra.setEnabled(false);
+                nivel.toString();
                 
                 ImageIcon pFoto = new ImageIcon(getClass().getResource("/img/camilo.jpeg"));
                 ImageIcon icono = new ImageIcon(pFoto.getImage().getScaledInstance(lblFoto.getWidth(), lblFoto.getHeight(),Image.SCALE_DEFAULT));

@@ -4,8 +4,8 @@
  */
 package Vista;
 
+import java.awt.Color;
 import java.awt.Component;
-import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -17,7 +17,6 @@ import java.util.logging.Logger;
 import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
-import javax.swing.JPanel;
 import javax.swing.Timer;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
@@ -27,14 +26,12 @@ import javax.swing.filechooser.FileNameExtensionFilter;
  */
 public class ClienteForm extends javax.swing.JInternalFrame {
 
-    fondoPanel1 fondo1 = new fondoPanel1();
     public static String[][] Datos = new String[MdiPrincipal.cant_users][9];
     public static String[] titulo = new String [] {"Id","Documento" ,"Nombre", "Apellido", "Edad", "Genero","Direccion" , "Telefono", "Foto"};
     public static int counter = 0, counter_filas;
     public static String ruta = "";
     
     public ClienteForm() {
-        this.setContentPane(fondo1);
         initComponents();
         Bloq();
         botones.add(b_m);
@@ -46,19 +43,6 @@ public class ClienteForm extends javax.swing.JInternalFrame {
         btnEliminar.setEnabled(false);
     }
     
-    class fondoPanel1 extends JPanel{
-        
-        private Image imagen1;
-        
-        @Override
-        public void paint(Graphics g){
-            imagen1 = new ImageIcon(getClass().getResource("/img/mini.jpg")).getImage();
-            g.drawImage(imagen1, 0, 0, pnl_form.getWidth(),pnl_form.getHeight(),this);
-            setOpaque(false);
-            super.paint(g);
-        }
-                
-    }
     
     public static void modificarDatos(int filas, int columnas){
         String valor = JOptionPane.showInputDialog("Digite su " + titulo[columnas] + ": ");
@@ -181,6 +165,12 @@ public class ClienteForm extends javax.swing.JInternalFrame {
         tf_direccion = new javax.swing.JTextField();
         jLabel14 = new javax.swing.JLabel();
         tf_documento = new javax.swing.JTextField();
+        jSeparator1 = new javax.swing.JSeparator();
+        jSeparator2 = new javax.swing.JSeparator();
+        jSeparator3 = new javax.swing.JSeparator();
+        jSeparator4 = new javax.swing.JSeparator();
+        jSeparator5 = new javax.swing.JSeparator();
+        jSeparator6 = new javax.swing.JSeparator();
         jPanel7 = new javax.swing.JPanel();
         pnl_nav = new javax.swing.JPanel();
         jButton1 = new javax.swing.JButton();
@@ -198,11 +188,13 @@ public class ClienteForm extends javax.swing.JInternalFrame {
         btnImp = new javax.swing.JButton();
         lblFecha = new javax.swing.JLabel();
 
+        setBackground(new java.awt.Color(153, 153, 153));
         setTitle("Clientes");
         setToolTipText("");
 
-        pnl_form.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        pnl_form.setBackground(new java.awt.Color(153, 153, 153));
 
+        pnl_genero.setBackground(new java.awt.Color(153, 153, 153));
         pnl_genero.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(187, 187, 187)), "Genero", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Dialog", 1, 18))); // NOI18N
 
         b_m.setText("Masculino");
@@ -239,6 +231,7 @@ public class ClienteForm extends javax.swing.JInternalFrame {
                 .addContainerGap(14, Short.MAX_VALUE))
         );
 
+        pnl_foto.setBackground(new java.awt.Color(153, 153, 153));
         pnl_foto.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(187, 187, 187)), "Foto", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Dialog", 1, 18))); // NOI18N
 
         btn_foto.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/camara.png"))); // NOI18N
@@ -275,7 +268,23 @@ public class ClienteForm extends javax.swing.JInternalFrame {
         jLabel8.setText("Id");
         jLabel8.setToolTipText("");
 
+        tf_id.setBackground(new java.awt.Color(153, 153, 153));
+        tf_id.setText("Ingrese el Id");
+        tf_id.setBorder(null);
+        tf_id.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                tf_idFocusGained(evt);
+            }
+        });
+        tf_id.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                tf_idActionPerformed(evt);
+            }
+        });
         tf_id.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                tf_idKeyPressed(evt);
+            }
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 tf_idKeyReleased(evt);
             }
@@ -286,12 +295,33 @@ public class ClienteForm extends javax.swing.JInternalFrame {
         jLabel9.setText("Nombre");
         jLabel9.setToolTipText("");
 
+        tf_apellido.setBackground(new java.awt.Color(153, 153, 153));
+        tf_apellido.setText("Ingrese el Apellido");
+        tf_apellido.setBorder(null);
+        tf_apellido.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                tf_apellidoFocusGained(evt);
+            }
+        });
         tf_apellido.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 tf_apellidoKeyReleased(evt);
             }
         });
 
+        tf_nombre.setBackground(new java.awt.Color(153, 153, 153));
+        tf_nombre.setText("Ingrese el Nombre");
+        tf_nombre.setBorder(null);
+        tf_nombre.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                tf_nombreFocusGained(evt);
+            }
+        });
+        tf_nombre.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                tf_nombreActionPerformed(evt);
+            }
+        });
         tf_nombre.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 tf_nombreKeyReleased(evt);
@@ -337,12 +367,28 @@ public class ClienteForm extends javax.swing.JInternalFrame {
         jLabel13.setText("Telefono");
         jLabel13.setToolTipText("");
 
+        tf_telefono.setBackground(new java.awt.Color(153, 153, 153));
+        tf_telefono.setText("Ingrese el Telefono");
+        tf_telefono.setBorder(null);
+        tf_telefono.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                tf_telefonoFocusGained(evt);
+            }
+        });
         tf_telefono.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 tf_telefonoKeyReleased(evt);
             }
         });
 
+        tf_direccion.setBackground(new java.awt.Color(153, 153, 153));
+        tf_direccion.setText("Ingrese la Direccion");
+        tf_direccion.setBorder(null);
+        tf_direccion.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                tf_direccionFocusGained(evt);
+            }
+        });
         tf_direccion.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 tf_direccionKeyReleased(evt);
@@ -354,6 +400,14 @@ public class ClienteForm extends javax.swing.JInternalFrame {
         jLabel14.setText("Documento");
         jLabel14.setToolTipText("");
 
+        tf_documento.setBackground(new java.awt.Color(153, 153, 153));
+        tf_documento.setText("Ingrese el Documento");
+        tf_documento.setBorder(null);
+        tf_documento.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                tf_documentoFocusGained(evt);
+            }
+        });
         tf_documento.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 tf_documentoKeyReleased(evt);
@@ -366,32 +420,44 @@ public class ClienteForm extends javax.swing.JInternalFrame {
             pnl_formLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnl_formLayout.createSequentialGroup()
                 .addGap(14, 14, 14)
-                .addGroup(pnl_formLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(tf_id, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(tf_nombre, javax.swing.GroupLayout.PREFERRED_SIZE, 198, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(pnl_formLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(s_edad, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(tf_direccion, javax.swing.GroupLayout.PREFERRED_SIZE, 198, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 29, Short.MAX_VALUE)
-                .addGroup(pnl_formLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnl_formLayout.createSequentialGroup()
-                        .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(125, 125, 125))
+                    .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jSeparator3)
+                    .addComponent(jSeparator5, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(pnl_formLayout.createSequentialGroup()
-                        .addGroup(pnl_formLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(tf_documento, javax.swing.GroupLayout.PREFERRED_SIZE, 198, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(pnl_formLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(tf_apellido, javax.swing.GroupLayout.PREFERRED_SIZE, 198, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(pnl_genero, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(jLabel13, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(tf_telefono, javax.swing.GroupLayout.PREFERRED_SIZE, 198, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(jLabel14, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                .addComponent(pnl_foto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(15, 15, 15))
+                        .addGap(6, 6, 6)
+                        .addGroup(pnl_formLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(tf_direccion, javax.swing.GroupLayout.PREFERRED_SIZE, 198, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(tf_nombre, javax.swing.GroupLayout.PREFERRED_SIZE, 198, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(tf_id, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addGroup(pnl_formLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(pnl_formLayout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addGroup(pnl_formLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(pnl_genero, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel13, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel14, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jSeparator4, javax.swing.GroupLayout.PREFERRED_SIZE, 198, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(pnl_formLayout.createSequentialGroup()
+                                .addGap(6, 6, 6)
+                                .addGroup(pnl_formLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(tf_documento, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(tf_apellido, javax.swing.GroupLayout.PREFERRED_SIZE, 198, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(tf_telefono, javax.swing.GroupLayout.PREFERRED_SIZE, 198, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(pnl_foto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(15, 15, 15))
+                    .addGroup(pnl_formLayout.createSequentialGroup()
+                        .addGap(18, 18, 18)
+                        .addComponent(jSeparator6, javax.swing.GroupLayout.PREFERRED_SIZE, 201, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
         pnl_formLayout.setVerticalGroup(
             pnl_formLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -405,10 +471,17 @@ public class ClienteForm extends javax.swing.JInternalFrame {
                         .addGroup(pnl_formLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel14, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(pnl_formLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(pnl_formLayout.createSequentialGroup()
+                                .addGap(7, 7, 7)
+                                .addComponent(tf_id, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnl_formLayout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(tf_documento, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(pnl_formLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(tf_id, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(tf_documento, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(pnl_formLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(pnl_formLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -417,13 +490,19 @@ public class ClienteForm extends javax.swing.JInternalFrame {
                         .addGroup(pnl_formLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(tf_nombre, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(tf_apellido, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(pnl_formLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jSeparator3, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jSeparator4, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGroup(pnl_formLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(pnl_formLayout.createSequentialGroup()
-                                .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(10, 10, 10)
+                                .addComponent(pnl_genero, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(pnl_formLayout.createSequentialGroup()
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(s_edad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(pnl_genero, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(10, 10, 10)
+                                .addComponent(s_edad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(18, 18, 18)
                         .addGroup(pnl_formLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -432,9 +511,16 @@ public class ClienteForm extends javax.swing.JInternalFrame {
                         .addGroup(pnl_formLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(tf_direccion, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(tf_telefono, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(27, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(pnl_formLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jSeparator5, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jSeparator6, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(19, Short.MAX_VALUE))
         );
 
+        jPanel7.setBackground(new java.awt.Color(153, 153, 153));
+
+        pnl_nav.setBackground(new java.awt.Color(153, 153, 153));
         pnl_nav.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(187, 187, 187)), "Nav", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Dialog", 1, 14))); // NOI18N
 
         jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/anterior.png"))); // NOI18N
@@ -496,6 +582,7 @@ public class ClienteForm extends javax.swing.JInternalFrame {
                 .addGap(0, 15, Short.MAX_VALUE))
         );
 
+        pnl_mtto2.setBackground(new java.awt.Color(153, 153, 153));
         pnl_mtto2.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(187, 187, 187)), "Mtto", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Dialog", 1, 14))); // NOI18N
 
         btnEditar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/mod.png"))); // NOI18N
@@ -541,11 +628,12 @@ public class ClienteForm extends javax.swing.JInternalFrame {
                 .addContainerGap()
                 .addGroup(pnl_mtto2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(btnEliminar, javax.swing.GroupLayout.DEFAULT_SIZE, 58, Short.MAX_VALUE)
-                    .addComponent(btnEditar, javax.swing.GroupLayout.DEFAULT_SIZE, 58, Short.MAX_VALUE)
+                    .addComponent(btnEditar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(btnAdd2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(0, 0, Short.MAX_VALUE))
         );
 
+        pnl_fnEspeciales.setBackground(new java.awt.Color(153, 153, 153));
         pnl_fnEspeciales.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(187, 187, 187)), "Fn Especiales", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Dialog", 1, 14))); // NOI18N
 
         btnBuscar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/consulta.png"))); // NOI18N
@@ -614,14 +702,16 @@ public class ClienteForm extends javax.swing.JInternalFrame {
             .addGroup(jPanel7Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(lblFecha, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel7Layout.createSequentialGroup()
+                        .addComponent(lblFecha, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(jPanel7Layout.createSequentialGroup()
                         .addComponent(pnl_nav, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGap(16, 16, 16)
                         .addComponent(pnl_mtto2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(pnl_fnEspeciales, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(18, Short.MAX_VALUE))
+                        .addGap(18, 18, 18)
+                        .addComponent(pnl_fnEspeciales, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap())))
         );
         jPanel7Layout.setVerticalGroup(
             jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -640,16 +730,15 @@ public class ClienteForm extends javax.swing.JInternalFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(pnl_form, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-            .addComponent(jPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(pnl_form, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(pnl_form, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(jPanel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
@@ -709,7 +798,7 @@ public class ClienteForm extends javax.swing.JInternalFrame {
         boolean encuentra = false;
         int fila = 0, columna = 0;
         
-        String idUser = JOptionPane.showInputDialog(null,"Coloca la Identificacion del Usuario: ","Consulta",JOptionPane.PLAIN_MESSAGE );
+        String idUser = JOptionPane.showInputDialog(rootPane,"Coloca la Identificacion del Usuario: ","Consulta",JOptionPane.PLAIN_MESSAGE);
         
         if (MdiPrincipal.cant_users == 0) {
             JOptionPane.showMessageDialog(null, "No hay Datos");
@@ -819,6 +908,14 @@ public class ClienteForm extends javax.swing.JInternalFrame {
             Datos[counter_filas][7] = tf_telefono.getText();
             Datos[counter_filas][8] = ruta;
             
+            tf_id.setText("");
+            tf_nombre.setText("");
+            tf_apellido.setText("");
+            tf_direccion.setText("");
+            tf_telefono.setText("");
+            tf_documento.setText("");
+            lblFoto.setIcon(null);
+            
             counter_filas++;
             
             if (MdiPrincipal.cant_users == counter_filas) {
@@ -827,6 +924,10 @@ public class ClienteForm extends javax.swing.JInternalFrame {
         }else {
             
             DesBloq();
+            if (logIn.nivel.equals("Empleado")) {
+                btnEditar.setEnabled(false);
+                btnEliminar.setEnabled(false);
+            }
             btnImp.setEnabled(true);
             btnEditar.setEnabled(true);
             btnEliminar.setEnabled(true);
@@ -835,12 +936,6 @@ public class ClienteForm extends javax.swing.JInternalFrame {
             String titulo = String.format("Usuario %s de %s",counter_filas + 1, MdiPrincipal.cant_users);
             setTitle(titulo);
             btnAdd2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/guardar.png")));
-            tf_id.setText("");
-            tf_nombre.setText("");
-            tf_apellido.setText("");
-            tf_direccion.setText("");
-            tf_telefono.setText("");
-            lblFoto.setIcon(null);
             
             if ((Integer)s_edad.getValue() != 0) {
                 s_edad.setValue(0);
@@ -928,10 +1023,66 @@ public class ClienteForm extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_tf_documentoKeyReleased
 
+    private void tf_idKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tf_idKeyPressed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_tf_idKeyPressed
+
+    private void tf_idFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_tf_idFocusGained
+        if (tf_id.getText().equals("Ingrese el Id")) {
+            tf_id.setText("");
+            tf_id.setForeground(Color.BLACK);
+        }
+    }//GEN-LAST:event_tf_idFocusGained
+
+    private void tf_documentoFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_tf_documentoFocusGained
+        if (tf_documento.getText().equals("Ingrese el Documento")) {
+            tf_documento.setText("");
+            tf_documento.setForeground(Color.BLACK);
+        }
+    }//GEN-LAST:event_tf_documentoFocusGained
+
+    private void tf_nombreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tf_nombreActionPerformed
+        
+    }//GEN-LAST:event_tf_nombreActionPerformed
+
+    private void tf_apellidoFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_tf_apellidoFocusGained
+        if (tf_apellido.getText().equals("Ingrese el Apellido")) {
+            tf_apellido.setText("");
+            tf_apellido.setForeground(Color.BLACK);
+        }
+    }//GEN-LAST:event_tf_apellidoFocusGained
+
+    private void tf_direccionFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_tf_direccionFocusGained
+        if (tf_direccion.getText().equals("Ingrese la Direccion")) {
+            tf_direccion.setText("");
+            tf_direccion.setForeground(Color.BLACK);
+        }
+    }//GEN-LAST:event_tf_direccionFocusGained
+
+    private void tf_telefonoFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_tf_telefonoFocusGained
+        if (tf_telefono.getText().equals("Ingrese el Telefono")) {
+            tf_telefono.setText("");
+            tf_telefono.setForeground(Color.BLACK);
+        }
+    }//GEN-LAST:event_tf_telefonoFocusGained
+
+    private void tf_idActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tf_idActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_tf_idActionPerformed
+
+    private void tf_nombreFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_tf_nombreFocusGained
+        if (tf_nombre.getText().equals("Ingrese el Nombre")) {
+            tf_nombre.setText("");
+            tf_nombre.setForeground(Color.BLACK);
+        }
+    }//GEN-LAST:event_tf_nombreFocusGained
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JRadioButton b_f;
+    private javax.swing.JRadioButton b_f1;
     private javax.swing.JRadioButton b_m;
+    private javax.swing.JRadioButton b_m1;
     private javax.swing.ButtonGroup botones;
     private javax.swing.JToggleButton btnAdd2;
     private javax.swing.JButton btnAyuda;
@@ -953,12 +1104,20 @@ public class ClienteForm extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel7;
+    private javax.swing.JSeparator jSeparator1;
+    private javax.swing.JSeparator jSeparator2;
+    private javax.swing.JSeparator jSeparator3;
+    private javax.swing.JSeparator jSeparator4;
+    private javax.swing.JSeparator jSeparator5;
+    private javax.swing.JSeparator jSeparator6;
     private javax.swing.JLabel lblFecha;
     private javax.swing.JLabel lblFoto;
     private javax.swing.JPanel pnl_fnEspeciales;
     private javax.swing.JPanel pnl_form;
+    private javax.swing.JPanel pnl_form1;
     private javax.swing.JPanel pnl_foto;
     private javax.swing.JPanel pnl_genero;
+    private javax.swing.JPanel pnl_genero1;
     private javax.swing.JPanel pnl_mtto2;
     private javax.swing.JPanel pnl_nav;
     private javax.swing.JSpinner s_edad;
