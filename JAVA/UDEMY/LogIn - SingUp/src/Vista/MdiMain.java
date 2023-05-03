@@ -8,19 +8,19 @@ package Vista;
  *
  * @author Usuario
  */
-public class MdiAdmin extends javax.swing.JFrame {
-
-    /**
-     * Creates new form MdiAdmin
-     */
-    public MdiAdmin() {
+public class MdiMain extends javax.swing.JFrame {
+    
+    public static FormUser User = null;
+    
+    
+    public MdiMain() {
         initComponents();
         setLocationRelativeTo(null);
         setResizable(false);
-        String com = (String)SignUp.combo.getSelectedItem();
-            if (com.equals("Employee")) {
-                AdminMenu.setEnabled(false);
-            }
+        setTitle("MINIMARKET");
+        if (SignUp.job[LogIn.fila][2].equals("Employee")) {
+            Employeed.setEnabled(false);
+        }
     }
 
     /**
@@ -35,7 +35,7 @@ public class MdiAdmin extends javax.swing.JFrame {
         desktopPane = new javax.swing.JDesktopPane();
         menuBar = new javax.swing.JMenuBar();
         AdminMenu = new javax.swing.JMenu();
-        openMenuItem = new javax.swing.JMenuItem();
+        Employeed = new javax.swing.JMenuItem();
         exitMenuItem = new javax.swing.JMenuItem();
         editMenu = new javax.swing.JMenu();
         cutMenuItem = new javax.swing.JMenuItem();
@@ -43,14 +43,19 @@ public class MdiAdmin extends javax.swing.JFrame {
         pasteMenuItem = new javax.swing.JMenuItem();
         deleteMenuItem = new javax.swing.JMenuItem();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
 
-        AdminMenu.setMnemonic('f');
-        AdminMenu.setText("Administrar");
+        AdminMenu.setMnemonic('m');
+        AdminMenu.setText("Manage");
 
-        openMenuItem.setMnemonic('o');
-        openMenuItem.setText("Empleado");
-        AdminMenu.add(openMenuItem);
+        Employeed.setMnemonic('e');
+        Employeed.setText("Employees");
+        Employeed.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                EmployeedActionPerformed(evt);
+            }
+        });
+        AdminMenu.add(Employeed);
 
         exitMenuItem.setMnemonic('x');
         exitMenuItem.setText("Exit");
@@ -64,10 +69,10 @@ public class MdiAdmin extends javax.swing.JFrame {
         menuBar.add(AdminMenu);
 
         editMenu.setMnemonic('e');
-        editMenu.setText("Tablas");
+        editMenu.setText("Tables");
 
         cutMenuItem.setMnemonic('t');
-        cutMenuItem.setText("Clientes");
+        cutMenuItem.setText("Clients");
         cutMenuItem.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cutMenuItemActionPerformed(evt);
@@ -76,11 +81,16 @@ public class MdiAdmin extends javax.swing.JFrame {
         editMenu.add(cutMenuItem);
 
         copyMenuItem.setMnemonic('y');
-        copyMenuItem.setText("Productos");
+        copyMenuItem.setText("Products");
+        copyMenuItem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                copyMenuItemActionPerformed(evt);
+            }
+        });
         editMenu.add(copyMenuItem);
 
         pasteMenuItem.setMnemonic('p');
-        pasteMenuItem.setText("Empresa");
+        pasteMenuItem.setText("Company");
         pasteMenuItem.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 pasteMenuItemActionPerformed(evt);
@@ -89,7 +99,7 @@ public class MdiAdmin extends javax.swing.JFrame {
         editMenu.add(pasteMenuItem);
 
         deleteMenuItem.setMnemonic('d');
-        deleteMenuItem.setText("Caja");
+        deleteMenuItem.setText("Cash");
         editMenu.add(deleteMenuItem);
 
         menuBar.add(editMenu);
@@ -111,7 +121,9 @@ public class MdiAdmin extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void exitMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exitMenuItemActionPerformed
-        System.exit(0);
+        dispose();
+        User = null;
+        new LogIn().setVisible(true);
     }//GEN-LAST:event_exitMenuItemActionPerformed
 
     private void cutMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cutMenuItemActionPerformed
@@ -122,51 +134,29 @@ public class MdiAdmin extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_pasteMenuItemActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(MdiAdmin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(MdiAdmin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(MdiAdmin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(MdiAdmin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+    private void EmployeedActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EmployeedActionPerformed
+        if (User == null || User.isClosed()) {
+                User = new FormUser();
+                this.desktopPane.add(User);
         }
-        //</editor-fold>
+        User.setVisible(true);    
+    }//GEN-LAST:event_EmployeedActionPerformed
 
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new MdiAdmin().setVisible(true);
-            }
-        });
-    }
+    private void copyMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_copyMenuItemActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_copyMenuItemActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenu AdminMenu;
+    public static javax.swing.JMenuItem Employeed;
     private javax.swing.JMenuItem copyMenuItem;
     private javax.swing.JMenuItem cutMenuItem;
     private javax.swing.JMenuItem deleteMenuItem;
-    private javax.swing.JDesktopPane desktopPane;
+    public static javax.swing.JDesktopPane desktopPane;
     private javax.swing.JMenu editMenu;
     private javax.swing.JMenuItem exitMenuItem;
     private javax.swing.JMenuBar menuBar;
-    private javax.swing.JMenuItem openMenuItem;
     private javax.swing.JMenuItem pasteMenuItem;
     // End of variables declaration//GEN-END:variables
 

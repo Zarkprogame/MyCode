@@ -15,6 +15,8 @@ import javax.swing.JOptionPane;
 public class LogIn extends javax.swing.JFrame {
 
     public static int SignUpCounter = 5;
+    public static String UsuarioActivo;
+    public static int fila = 0;
     /**
      * Creates new form LogIn
      */
@@ -144,6 +146,7 @@ public class LogIn extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
+        btnLogIn.setMnemonic('l');
         btnLogIn.setText("Log In");
         btnLogIn.setBorder(null);
         btnLogIn.addActionListener(new java.awt.event.ActionListener() {
@@ -152,6 +155,7 @@ public class LogIn extends javax.swing.JFrame {
             }
         });
 
+        btnSignUp.setMnemonic('s');
         btnSignUp.setText("Sign Up");
         btnSignUp.setBorder(null);
         btnSignUp.addActionListener(new java.awt.event.ActionListener() {
@@ -264,15 +268,14 @@ public class LogIn extends javax.swing.JFrame {
         for (int i = 0; i < SignUp.job.length; i++) {
             if (txtUser.getText().equals(SignUp.job[i][0]) && password.equals(SignUp.job[i][1])) {
                 encuentra = true;
+                UsuarioActivo = SignUp.job[i][0];
+                fila = i;
             }
         }
         
-        System.out.println(txtUser.getText());
-        System.out.println(password);
-        
         if (encuentra == true) {
             JOptionPane.showMessageDialog(null, "Usuario Valido");
-            new MdiAdmin().setVisible(true);
+            new MdiMain().setVisible(true);
             dispose();
         }else {
             JOptionPane.showMessageDialog(null, "Usuario no Encontrado");
@@ -296,6 +299,8 @@ public class LogIn extends javax.swing.JFrame {
             for (int i = 0; i < SignUp.job.length; i++) {
                 if (txtUser.getText().equals(SignUp.job[i][0]) && password.equals(SignUp.job[i][1])) {
                     encuentra = true;
+                    UsuarioActivo = SignUp.job[i][0];
+                    fila = i;
                 }
             }
 
@@ -304,7 +309,7 @@ public class LogIn extends javax.swing.JFrame {
 
             if (encuentra == true) {
                 JOptionPane.showMessageDialog(null, "Usuario Valido");
-                new MdiAdmin().setVisible(true);
+                new MdiMain().setVisible(true);
                 dispose();
             }else {
                 JOptionPane.showMessageDialog(null, "Usuario no Encontrado");

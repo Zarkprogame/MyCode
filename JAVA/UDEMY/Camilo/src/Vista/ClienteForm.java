@@ -810,7 +810,6 @@ public class ClienteForm extends javax.swing.JInternalFrame {
             }else {
                 fila ++;
             }
-            
         }
         
         if (fila < MdiPrincipal.cant_users) {

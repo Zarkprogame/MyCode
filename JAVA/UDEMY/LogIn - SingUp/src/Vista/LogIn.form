@@ -224,6 +224,7 @@
     </Container>
     <Component class="javax.swing.JButton" name="btnLogIn">
       <Properties>
+        <Property name="mnemonic" type="int" value="108"/>
         <Property name="text" type="java.lang.String" value="Log In"/>
         <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
           <Border info="null"/>
@@ -235,6 +236,7 @@
     </Component>
     <Component class="javax.swing.JButton" name="btnSignUp">
       <Properties>
+        <Property name="mnemonic" type="int" value="115"/>
         <Property name="text" type="java.lang.String" value="Sign Up"/>
         <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
           <Border info="null"/>

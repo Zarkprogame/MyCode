@@ -15,14 +15,13 @@ public class SignUp extends javax.swing.JFrame {
 
     public static String [][]job = new String[5][3];
     public static int counter = 0;
+    public static int EmployeeCounter = 0;
     
     public SignUp() {
         initComponents();
         setLocationRelativeTo(null);
         setResizable(false);
         setTitle("Sign Up");
-        
-
     }
 
     
@@ -136,6 +135,7 @@ public class SignUp extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
+        btnSignUp.setMnemonic('s');
         btnSignUp.setText("Sign Up");
         btnSignUp.setBorder(null);
         btnSignUp.addActionListener(new java.awt.event.ActionListener() {
@@ -179,6 +179,7 @@ public class SignUp extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
+        btnLogIn.setMnemonic('l');
         btnLogIn.setText("Back to Log In");
         btnLogIn.setBorder(null);
         btnLogIn.addActionListener(new java.awt.event.ActionListener() {
@@ -270,7 +271,7 @@ public class SignUp extends javax.swing.JFrame {
     private void btnSignUpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSignUpActionPerformed
         
         boolean repetido = false;
-        
+
         if (txtUser.getText().equals("User name") || txtPassword.getText().equals("Password")) {
             JOptionPane.showMessageDialog(null, "You didnt Sign Up an User");
             txtUser.setText("User name");
@@ -292,26 +293,22 @@ public class SignUp extends javax.swing.JFrame {
             }else{
                 String password = "";
                 String com = (String)combo.getSelectedItem();
-                job[counter][0] = txtUser.getText();
-                char [] pass = txtPassword.getPassword();
-                for (int i = 0; i < pass.length; i++) {
-                    password += pass[i];
-                }
-                job[counter][1] = password;
-                if (com.equals("Admin")) {
-                    job[counter][2] = "Admin";
+                if (EmployeeCounter == 4 && com.equals("Employee")) {
+                    JOptionPane.showMessageDialog(null, "Mandatory Sign Up an Admin");
                 }else{
-                    job[counter][2] = "Employee";
-                }
-
-                counter ++;
-
-                for (int i = 0; i < job.length; i++) {
-                    for (int j = 0; j < 3; j++) {
-                        System.out.println(job[i][j]);
+                    job[counter][0] = txtUser.getText();
+                    char [] pass = txtPassword.getPassword();
+                    for (int i = 0; i < pass.length; i++) {
+                        password += pass[i];
                     }
-                }
-
+                    job[counter][1] = password;
+                    if (com.equals("Admin")) {
+                        job[counter][2] = "Admin";
+                    }else{
+                        job[counter][2] = "Employee";
+                        EmployeeCounter ++;
+                    }
+                counter ++;
                 JOptionPane.showMessageDialog(null, "User Sign Up Successfully");
                 if (counter == 5) {
                     JOptionPane.showMessageDialog(null, "You have Reached the maximum number of Users you could create");
@@ -319,6 +316,15 @@ public class SignUp extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(null, "Redirecting to LogIn");
                 dispose();
                 new LogIn().setVisible(true);
+                }
+                for (int i = 0; i < job.length; i++) {
+                    for (int j = 0; j < 3; j++) {
+                        System.out.println(job[i][j]);
+                    }
+                }
+
+                
+                
             }
         }
     }//GEN-LAST:event_btnSignUpActionPerformed
