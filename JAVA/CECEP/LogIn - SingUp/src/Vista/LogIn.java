@@ -304,9 +304,6 @@ public class LogIn extends javax.swing.JFrame {
                 }
             }
 
-            System.out.println(txtUser.getText());
-            System.out.println(password);
-
             if (encuentra == true) {
                 JOptionPane.showMessageDialog(null, "Usuario Valido");
                 new MdiMain().setVisible(true);

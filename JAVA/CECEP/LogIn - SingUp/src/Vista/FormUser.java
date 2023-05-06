@@ -15,13 +15,22 @@ public class FormUser extends javax.swing.JInternalFrame {
     
     public static Object job;
     public static Object choose;
-    public static int counter = 0;
     public static boolean findD = false;
     public static int fila = 0;
+    public static int asignNew;
     
     public FormUser() {
         initComponents();
         setTitle(String.format("Bienvenido %s", LogIn.UsuarioActivo));  
+        asignNew = 0;
+        for (int i = 0; i < SignUp.job.length; i++) {
+            if (SignUp.job[i][0] != null) {
+                asignNew ++;
+            }
+        }
+        if (asignNew == 5) {
+            btnAdd.setEnabled(false);
+        }
     }
     
     @SuppressWarnings("unchecked")
@@ -32,7 +41,7 @@ public class FormUser extends javax.swing.JInternalFrame {
         jTable1 = new javax.swing.JTable();
         btnAdd = new javax.swing.JButton();
         btnUpdate = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
+        btnDelete = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         btnModify = new javax.swing.JButton();
 
@@ -64,21 +73,21 @@ public class FormUser extends javax.swing.JInternalFrame {
             }
         });
 
-        jButton3.setBackground(new java.awt.Color(255, 102, 102));
-        jButton3.setMnemonic('d');
-        jButton3.setText("Delete");
-        jButton3.setBorder(null);
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
+        btnDelete.setBackground(new java.awt.Color(255, 102, 102));
+        btnDelete.setMnemonic('d');
+        btnDelete.setText("Delete");
+        btnDelete.setBorder(null);
+        btnDelete.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
+                btnDeleteActionPerformed(evt);
             }
         });
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/mini.jpg"))); // NOI18N
 
         btnModify.setBackground(new java.awt.Color(0, 204, 204));
-        btnModify.setMnemonic('m');
-        btnModify.setText("Modify");
+        btnModify.setMnemonic('e');
+        btnModify.setText("Edit");
         btnModify.setBorder(null);
         btnModify.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -99,7 +108,7 @@ public class FormUser extends javax.swing.JInternalFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(btnModify, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnDelete, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
             .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
         );
@@ -111,7 +120,7 @@ public class FormUser extends javax.swing.JInternalFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnAdd, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnUpdate, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnDelete, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnModify, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 209, Short.MAX_VALUE))
@@ -122,13 +131,18 @@ public class FormUser extends javax.swing.JInternalFrame {
 
     private void btnAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddActionPerformed
         
-        
+        for (int i = 0; i < SignUp.job.length; i++) {
+            if (SignUp.job[i][0] == null) {
+                SignUp.counter = i;
+                break;
+            }
+        }
         
         boolean repetido = false;
         String Username = JOptionPane.showInputDialog("User name: ");
         for (int i = 0; i < SignUp.job.length; i++) {
             if (Username.equals(SignUp.job[i][0])) {
-                    repetido = true;
+                repetido = true;
             }
         }
         if (repetido == true) {
@@ -146,7 +160,7 @@ public class FormUser extends javax.swing.JInternalFrame {
             LogIn.SignUpCounter--;
         }
         
-        if (SignUp.counter == 5) {
+        if (asignNew == 4) {
             JOptionPane.showMessageDialog(null, "You have reached the max Users");
             btnAdd.setEnabled(false);
         }
@@ -155,9 +169,6 @@ public class FormUser extends javax.swing.JInternalFrame {
 
     private void btnUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateActionPerformed
         
-        if (SignUp.counter == 5) {
-            btnAdd.setEnabled(false);
-        }
         dispose();
         if (User == null || User.isClosed()) {
                 User = new FormUser();
@@ -182,34 +193,17 @@ public class FormUser extends javax.swing.JInternalFrame {
         
         if (find == true) {
             choose = JOptionPane.showInputDialog(rootPane, "Choose an Option: ","Choose", JOptionPane.QUESTION_MESSAGE,null,
-            new Object[]{"User name", "Password", "Job"},"User name");
+            new Object[]{"User name", "Password"},"User name");
             String choosen = choose.toString();
             
             if (choosen.equals("User name")) {
                 String newUser = JOptionPane.showInputDialog("Choose the New User");
                 SignUp.job[fila][0] = newUser;
                 JOptionPane.showMessageDialog(null, "User name changed Succefully");
-            }else if (choosen.equals("Password")) {
+            }else{
                 String newPassword = JOptionPane.showInputDialog("Choose the New Password");
                 SignUp.job[fila][1] = newPassword;
                 JOptionPane.showMessageDialog(null, "Password changed Succefully");
-            }else{
-                job = JOptionPane.showInputDialog(rootPane, "User Job?","Job", JOptionPane.QUESTION_MESSAGE,null,
-                new Object[]{"Admin", "Employee"},"Admin");
-                String newJob = job.toString();
-
-                if (newJob.equals("Employee") && SignUp.job[LogIn.fila][2].equals("Admin")) {
-                    JOptionPane.showMessageDialog(null, "You cant Change an Admin");
-                }else {
-                    SignUp.job[fila][2] = newJob;
-                    JOptionPane.showMessageDialog(null, "Job changed Succefully");
-                    if (SignUp.job[LogIn.fila][2].equals("Employee")) {
-                        JOptionPane.showMessageDialog(null, "You dont have Access to the Manage Window");
-                        dispose();
-                        MdiMain.Employeed.setEnabled(false);
-                    }
-                }
-                
             }
         }else{
             JOptionPane.showMessageDialog(null, "There isnt Users with This Username");
@@ -219,9 +213,9 @@ public class FormUser extends javax.swing.JInternalFrame {
         
     }//GEN-LAST:event_btnModifyActionPerformed
 
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        String Username = JOptionPane.showInputDialog(rootPane,"Enter the Username to Delete: ","Delete",JOptionPane.PLAIN_MESSAGE);
+    private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed
         
+        String Username = JOptionPane.showInputDialog(rootPane,"Enter the Username to Delete: ","Delete",JOptionPane.PLAIN_MESSAGE);
         for (int i = 0; i < SignUp.job.length; i++) {
             if (Username.equals(SignUp.job[i][0])) {
                 findD = true;
@@ -230,21 +224,28 @@ public class FormUser extends javax.swing.JInternalFrame {
         }
         
         if (findD == true) {
-            SignUp.job[fila][0] = null;
-            SignUp.job[fila][1] = null;
-            SignUp.job[fila][2] = null;
-            JOptionPane.showMessageDialog(null, "User Deleted Succefully");
-            LogIn.SignUpCounter--;
+            if (SignUp.job[fila][2].equals("Admin")) {
+                JOptionPane.showMessageDialog(null, "You cant Delete Admin Users");
+            }else {
+                SignUp.job[fila][0] = null;
+                SignUp.job[fila][1] = null;
+                SignUp.job[fila][2] = null;
+                JOptionPane.showMessageDialog(null, "User Deleted Succefully");
+                SignUp.counter--;
+                LogIn.SignUpCounter--;
+            }   
+            findD = false;
+        }else{
+            JOptionPane.showMessageDialog(null, "There arent Users with this Username");
         }
-        
-    }//GEN-LAST:event_jButton3ActionPerformed
+    }//GEN-LAST:event_btnDeleteActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAdd;
+    private javax.swing.JButton btnDelete;
     private javax.swing.JButton btnModify;
     private javax.swing.JButton btnUpdate;
-    private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;

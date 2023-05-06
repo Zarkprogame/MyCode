@@ -14,7 +14,7 @@ import javax.swing.JOptionPane;
 public class SignUp extends javax.swing.JFrame {
 
     public static String [][]job = new String[5][3];
-    public static int counter = 0;
+    public static int counter;
     public static int EmployeeCounter = 0;
     
     public SignUp() {
@@ -22,6 +22,7 @@ public class SignUp extends javax.swing.JFrame {
         setLocationRelativeTo(null);
         setResizable(false);
         setTitle("Sign Up");
+        
     }
 
     
@@ -308,7 +309,7 @@ public class SignUp extends javax.swing.JFrame {
                         job[counter][2] = "Employee";
                         EmployeeCounter ++;
                     }
-                counter ++;
+                    counter ++;
                 JOptionPane.showMessageDialog(null, "User Sign Up Successfully");
                 if (counter == 5) {
                     JOptionPane.showMessageDialog(null, "You have Reached the maximum number of Users you could create");
@@ -316,15 +317,12 @@ public class SignUp extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(null, "Redirecting to LogIn");
                 dispose();
                 new LogIn().setVisible(true);
-                }
-                for (int i = 0; i < job.length; i++) {
-                    for (int j = 0; j < 3; j++) {
-                        System.out.println(job[i][j]);
+                    for (int i = 0; i < 5; i++) {
+                        for (int j = 0; j < 3; j++) {
+                            System.out.println(job[i][j]);
+                        }
                     }
                 }
-
-                
-                
             }
         }
     }//GEN-LAST:event_btnSignUpActionPerformed
