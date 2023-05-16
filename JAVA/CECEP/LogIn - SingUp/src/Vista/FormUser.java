@@ -13,7 +13,7 @@ import javax.swing.JOptionPane;
  */
 public class FormUser extends javax.swing.JInternalFrame {
     
-    public static Object job;
+    public static Object job; 
     public static Object choose;
     public static boolean findD = false;
     public static int fila = 0;
@@ -30,6 +30,7 @@ public class FormUser extends javax.swing.JInternalFrame {
         }
         if (asignNew == 5) {
             btnAdd.setEnabled(false);
+            //JOptionPane.showMessageDialog(null, "You have reached the max Users");
         }
     }
     
@@ -152,18 +153,24 @@ public class FormUser extends javax.swing.JInternalFrame {
             String Password = JOptionPane.showInputDialog("Password: ");
             SignUp.job[SignUp.counter][1] = Password;
             job = JOptionPane.showInputDialog(rootPane, "User Job?","Job", JOptionPane.QUESTION_MESSAGE,null,
-            new Object[]{"Admin", "Employee"},"Admin");
+            new Object[]{"Employee"},"Employee");
             String Job = job.toString();
             SignUp.job[SignUp.counter][2] = Job;
             JOptionPane.showMessageDialog(rootPane, "User Add Succesfully");
             SignUp.counter ++;
-            LogIn.SignUpCounter--;
+            if (asignNew == 4) {
+                JOptionPane.showMessageDialog(null, "You have reached the max Users");
+            }
+            dispose();
+            if (User == null || User.isClosed()) {
+                    User = new FormUser();
+                    MdiMain.desktopPane.add(User);
+            }
+            User.setVisible(true);
+            
         }
         
-        if (asignNew == 4) {
-            JOptionPane.showMessageDialog(null, "You have reached the max Users");
-            btnAdd.setEnabled(false);
-        }
+       
         
     }//GEN-LAST:event_btnAddActionPerformed
 
@@ -232,7 +239,6 @@ public class FormUser extends javax.swing.JInternalFrame {
                 SignUp.job[fila][2] = null;
                 JOptionPane.showMessageDialog(null, "User Deleted Succefully");
                 SignUp.counter--;
-                LogIn.SignUpCounter--;
             }   
             findD = false;
         }else{

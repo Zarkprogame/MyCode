@@ -16,6 +16,7 @@ public class SignUp extends javax.swing.JFrame {
     public static String [][]job = new String[5][3];
     public static int counter;
     public static int EmployeeCounter = 0;
+    public static boolean admin = false;
     
     public SignUp() {
         initComponents();
@@ -271,6 +272,13 @@ public class SignUp extends javax.swing.JFrame {
 
     private void btnSignUpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSignUpActionPerformed
         
+        for (int i = 0; i < SignUp.job.length; i++) {
+            if (SignUp.job[i][0] == null) {
+                SignUp.counter = i;
+                break;
+            }
+        }
+        
         boolean repetido = false;
 
         if (txtUser.getText().equals("User name") || txtPassword.getText().equals("Password")) {
@@ -294,7 +302,9 @@ public class SignUp extends javax.swing.JFrame {
             }else{
                 String password = "";
                 String com = (String)combo.getSelectedItem();
-                if (EmployeeCounter == 4 && com.equals("Employee")) {
+                if (com.equals("Admin") && admin == true) {
+                    JOptionPane.showMessageDialog(null, "You only SignUp 1 Admin");
+                }else if (EmployeeCounter == 4 && com.equals("Employee")) {
                     JOptionPane.showMessageDialog(null, "Mandatory Sign Up an Admin");
                 }else{
                     job[counter][0] = txtUser.getText();
@@ -305,6 +315,7 @@ public class SignUp extends javax.swing.JFrame {
                     job[counter][1] = password;
                     if (com.equals("Admin")) {
                         job[counter][2] = "Admin";
+                        admin = true;
                     }else{
                         job[counter][2] = "Employee";
                         EmployeeCounter ++;
@@ -328,7 +339,6 @@ public class SignUp extends javax.swing.JFrame {
     }//GEN-LAST:event_btnSignUpActionPerformed
 
     private void btnLogInActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLogInActionPerformed
-        LogIn.SignUpCounter++;
         new LogIn().setVisible(true);
     }//GEN-LAST:event_btnLogInActionPerformed
 

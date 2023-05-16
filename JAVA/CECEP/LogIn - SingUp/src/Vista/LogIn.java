@@ -14,7 +14,7 @@ import javax.swing.JOptionPane;
  */
 public class LogIn extends javax.swing.JFrame {
 
-    public static int SignUpCounter = 5;
+    public static int Counter;
     public static String UsuarioActivo;
     public static int fila = 0;
     /**
@@ -28,7 +28,12 @@ public class LogIn extends javax.swing.JFrame {
         if (SignUp.counter == 5) {
             btnSignUp.setEnabled(false);
         }
-        
+        Counter = 5;
+        for (int i = 0; i < SignUp.job.length; i++) {
+            if (SignUp.job[i][0] != null) {
+                Counter --;
+            }
+        }
     }
 
     /**
@@ -250,8 +255,7 @@ public class LogIn extends javax.swing.JFrame {
     }//GEN-LAST:event_txtPasswordFocusLost
 
     private void btnSignUpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSignUpActionPerformed
-        JOptionPane.showMessageDialog(null, String.format("Only can SignUp until %s Users",SignUpCounter));
-        SignUpCounter--;
+        JOptionPane.showMessageDialog(null, String.format("Only can SignUp until %s Users",Counter));
         dispose();
         new SignUp().setVisible(true);
     }//GEN-LAST:event_btnSignUpActionPerformed
