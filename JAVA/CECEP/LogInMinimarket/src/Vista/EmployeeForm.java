@@ -1,5 +1,6 @@
 package Vista;
 
+import java.awt.Color;
 import java.awt.Image;
 import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
@@ -102,10 +103,26 @@ public class EmployeeForm extends javax.swing.JInternalFrame {
         txtId.setFont(new java.awt.Font("Britannic Bold", 0, 18)); // NOI18N
         txtId.setForeground(new java.awt.Color(153, 153, 153));
         txtId.setText("Id");
+        txtId.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                txtIdFocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                txtIdFocusLost(evt);
+            }
+        });
 
         txtUsername.setFont(new java.awt.Font("Britannic Bold", 0, 18)); // NOI18N
         txtUsername.setForeground(new java.awt.Color(153, 153, 153));
         txtUsername.setText("Username");
+        txtUsername.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                txtUsernameFocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                txtUsernameFocusLost(evt);
+            }
+        });
         txtUsername.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtUsernameActionPerformed(evt);
@@ -115,6 +132,14 @@ public class EmployeeForm extends javax.swing.JInternalFrame {
         txtPassword.setFont(new java.awt.Font("Britannic Bold", 0, 18)); // NOI18N
         txtPassword.setForeground(new java.awt.Color(153, 153, 153));
         txtPassword.setText("Password");
+        txtPassword.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                txtPasswordFocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                txtPasswordFocusLost(evt);
+            }
+        });
 
         cbJob.setFont(new java.awt.Font("Britannic Bold", 0, 18)); // NOI18N
         cbJob.setForeground(new java.awt.Color(153, 153, 153));
@@ -463,6 +488,49 @@ public class EmployeeForm extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtUsernameActionPerformed
 
+    private void txtIdFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtIdFocusGained
+        if (txtId.getText().equals("Id")) {
+            txtId.setText("");
+            txtId.setForeground(Color.BLACK);
+        }
+    }//GEN-LAST:event_txtIdFocusGained
+
+    private void txtIdFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtIdFocusLost
+        if (txtId.getText().equals("")) {
+            txtId.setText("Id");
+            txtId.setForeground(Color.LIGHT_GRAY);
+        }
+    }//GEN-LAST:event_txtIdFocusLost
+
+    private void txtUsernameFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtUsernameFocusGained
+        if (txtUsername.getText().equals("Username")) {
+            txtUsername.setText("");
+            txtUsername.setForeground(Color.BLACK);
+        }
+    }//GEN-LAST:event_txtUsernameFocusGained
+
+    private void txtUsernameFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtUsernameFocusLost
+        if (txtUsername.getText().equals("")) {
+            txtUsername.setText("Username");
+            txtUsername.setForeground(Color.LIGHT_GRAY);
+        }
+    }//GEN-LAST:event_txtUsernameFocusLost
+
+    private void txtPasswordFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtPasswordFocusGained
+        if (txtPassword.getText().equals("Password")) {
+            txtPassword.setText("");
+            txtPassword.setForeground(Color.BLACK);
+        }
+    }//GEN-LAST:event_txtPasswordFocusGained
+
+    private void txtPasswordFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtPasswordFocusLost
+        if (txtPassword.getText().equals("")) {
+            txtPassword.setText("Password");
+            txtPassword.setForeground(Color.LIGHT_GRAY);
+        }
+    }//GEN-LAST:event_txtPasswordFocusLost
+
+    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JToggleButton btnAdd;
