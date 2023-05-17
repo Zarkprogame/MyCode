@@ -1,7 +1,5 @@
 package Vista;
 
-import com.mysql.jdbc.Connection;
-import com.mysql.jdbc.PreparedStatement;
 import java.sql.*;
 import java.awt.Color;
 import javax.swing.JOptionPane;
@@ -220,9 +218,9 @@ public class LogIn extends javax.swing.JFrame {
     }//GEN-LAST:event_txtPasswordKeyPressed
 
     public void ingresar(){
-        Connection con1 = null;
-        PreparedStatement pst = null;
-        ResultSet rs = null;
+        Connection con1;
+        PreparedStatement pst;
+        ResultSet rs;
         String Username = txtUser.getText();
         String Password = txtPassword.getText();
         if (Username.equals("") || Password.equals("")) {
@@ -238,6 +236,9 @@ public class LogIn extends javax.swing.JFrame {
                     new MdiMain().setVisible(true);
                 }else {
                     JOptionPane.showMessageDialog(this, "Try Again, Incorret User");
+                    txtUser.setText("");
+                    txtPassword.setText("Password");
+                    txtPassword.setForeground(Color.lightGray);
                 }
             } catch (SQLException e) {
                 JOptionPane.showMessageDialog(this, "Current Error");

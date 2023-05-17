@@ -1,22 +1,41 @@
 package Vista;
 
+import Modelo.DBConexion;
+import java.sql.*;
 import java.awt.Color;
 import java.awt.Image;
-import javax.swing.ImageIcon;
-import javax.swing.JFileChooser;
-import javax.swing.JOptionPane;
+import javax.swing.*;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
 public class EmployeeForm extends javax.swing.JInternalFrame {
 
     public static String ruta;
+    public static int counter;
+    public static int counterRow = 0;
+    
+    Connection conect;
+    Statement st;
+    ResultSet rs;
+    int idc;
     
     public EmployeeForm() {
         initComponents();
+        txtId.setEnabled(false);
+        Bloq();
     }
     
     private void Bloq(){
-        
+        txtUsername.setEnabled(false);
+        txtPassword.setEnabled(false);
+        btn_foto.setEnabled(false);
+        cbJob.setEnabled(false);
+    }
+    
+    private void Desbloq(){
+        txtUsername.setEnabled(true);
+        txtPassword.setEnabled(true);
+        btn_foto.setEnabled(true);
+        cbJob.setEnabled(true);
     }
 
     @SuppressWarnings("unchecked")
@@ -432,7 +451,36 @@ public class EmployeeForm extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_btnLastActionPerformed
 
     private void btnNextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNextActionPerformed
-        // TODO add your handling code here:
+        
+        new EmployeeForm().setVisible(true);
+        
+        counterRow ++;
+        
+        String[][] datos = new String[counterRow][5];
+        
+        String sql = "select * from employee";
+        
+        try {
+            conect = DBConexion.Conectar();
+            st = conect.createStatement();
+            rs = st.executeQuery(sql);
+            while (rs.next()) {
+                datos[counterRow][0] = rs.getString("id");
+                datos[counterRow][1] = rs.getString("Username");
+                datos[counterRow][2] = rs.getString("Password");
+                datos[counterRow][3] = rs.getString("Job");
+                datos[counterRow][4] = rs.getString("RutaImg");
+            }
+        }catch(SQLException e){
+        }
+        
+        txtId.setText(datos[counterRow][0]);
+        txtUsername.setText(datos[counterRow][1]);
+        txtPassword.setText(datos[counterRow][2]);
+        Image foto = new ImageIcon(datos[counterRow][4]).getImage();
+        ImageIcon icono = new ImageIcon(foto.getScaledInstance(lblFoto.getWidth(), lblFoto.getHeight(), Image.SCALE_SMOOTH));
+        lblFoto.setIcon(icono);
+        
     }//GEN-LAST:event_btnNextActionPerformed
 
     private void btnModifyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModifyActionPerformed
@@ -444,11 +492,27 @@ public class EmployeeForm extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_btnDeleteActionPerformed
 
     private void btnAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddActionPerformed
+        
+        counter++;
+        
+        if (counter % 2 == 0) {
+            btnAdd.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/añadir.png")));
+            Bloq();
+            Agregar();
+            txtId.setText("");
+            txtUsername.setText("");
+            txtPassword.setText("");
+            lblFoto.setIcon(null);
 
+        }else {            
+            Desbloq();
+            setTitle("Empleados");
+            btnAdd.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/guardar.png")));            
+        }
     }//GEN-LAST:event_btnAddActionPerformed
 
     private void btnSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchActionPerformed
-
+        new ShowEmployee().setVisible(true);
     }//GEN-LAST:event_btnSearchActionPerformed
 
     private void btnHelpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHelpActionPerformed
@@ -481,7 +545,7 @@ public class EmployeeForm extends javax.swing.JInternalFrame {
             ImageIcon icono = new ImageIcon(foto.getScaledInstance(lblFoto.getWidth(), lblFoto.getHeight(), Image.SCALE_SMOOTH));
             lblFoto.setIcon(icono);
         }
-
+        System.out.println(ruta);
     }//GEN-LAST:event_btn_fotoActionPerformed
 
     private void txtUsernameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtUsernameActionPerformed
@@ -530,7 +594,27 @@ public class EmployeeForm extends javax.swing.JInternalFrame {
         }
     }//GEN-LAST:event_txtPasswordFocusLost
 
+    public void Agregar(){
     
+        String Username = txtUsername.getText();
+        String Password = txtPassword.getText();
+        String Job = (String)cbJob.getSelectedItem();
+        String Ruta = ruta;
+        
+        try {
+            if (Username.equals("") || Password.equals("") || lblFoto.getIcon() == null) {
+                JOptionPane.showMessageDialog(null, "Missing data to be entered");
+            }else {
+                String sql = "insert into employee(Username,Password,Job,RutaImg) values ('"+Username+"','"+Password+"','"+Job+"','"+Ruta+"' )";
+                conect = DBConexion.Conectar();
+                st = conect.createStatement();
+                st.executeUpdate(sql);
+                JOptionPane.showMessageDialog(null, "New Employee SignUp Succesfully");
+            }
+        } catch (SQLException e) {
+        }
+        
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JToggleButton btnAdd;
