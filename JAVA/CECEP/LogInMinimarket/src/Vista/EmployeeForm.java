@@ -12,16 +12,27 @@ public class EmployeeForm extends javax.swing.JInternalFrame {
     public static String ruta;
     public static int counter;
     public static int counterRow = 0;
+    public static Object[] employee = new Object[5];;
+    public static int sqlRows;
     
-    Connection conect;
-    Statement st;
-    ResultSet rs;
-    int idc;
+    Connection conect = null;
+    Statement st = null;
+    ResultSet rs = null;
     
     public EmployeeForm() {
         initComponents();
         txtId.setEnabled(false);
         Bloq();
+        String sql = "select count(Username) as numRows from employee;";
+        try {
+            conect = DBConexion.Conectar();
+            st = conect.createStatement();
+            rs = st.executeQuery(sql);
+            rs.next();
+            sqlRows = rs.getInt("numRows");
+        } catch (Exception e) {
+        }
+        
     }
     
     private void Bloq(){
@@ -37,6 +48,7 @@ public class EmployeeForm extends javax.swing.JInternalFrame {
         btn_foto.setEnabled(true);
         cbJob.setEnabled(true);
     }
+    
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -439,45 +451,127 @@ public class EmployeeForm extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnPreviusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPreviusActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnPreviusActionPerformed
-
-    private void btnFirstActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFirstActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnFirstActionPerformed
-
-    private void btnLastActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLastActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnLastActionPerformed
-
-    private void btnNextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNextActionPerformed
         
-        new EmployeeForm().setVisible(true);
+        counterRow --;
         
-        counterRow ++;
+        if (counterRow == 1) {
+            btnPrevius.setEnabled(false);
+        }
         
-        String[][] datos = new String[counterRow][5];
+        if (counterRow == sqlRows) {
+            btnNext.setEnabled(false);
+        }else {
+            btnNext.setEnabled(true);
+        }
         
-        String sql = "select * from employee";
+        String sql = "Select * from employee where id = " + counterRow + ";";
         
         try {
             conect = DBConexion.Conectar();
             st = conect.createStatement();
             rs = st.executeQuery(sql);
             while (rs.next()) {
-                datos[counterRow][0] = rs.getString("id");
-                datos[counterRow][1] = rs.getString("Username");
-                datos[counterRow][2] = rs.getString("Password");
-                datos[counterRow][3] = rs.getString("Job");
-                datos[counterRow][4] = rs.getString("RutaImg");
+                employee[0] = rs.getInt("id");
+                employee[1] = rs.getString("Username");
+                employee[2] = rs.getString("Password");
+                employee[4] = rs.getString("RutaImg");
             }
-        }catch(SQLException e){
+        } catch (Exception e) {
         }
         
-        txtId.setText(datos[counterRow][0]);
-        txtUsername.setText(datos[counterRow][1]);
-        txtPassword.setText(datos[counterRow][2]);
-        Image foto = new ImageIcon(datos[counterRow][4]).getImage();
+        txtId.setText(employee[0].toString());
+        txtUsername.setText(employee[1].toString());
+        txtPassword.setText(employee[2].toString());
+        Image foto = new ImageIcon(employee[4].toString()).getImage();
+        ImageIcon icono = new ImageIcon(foto.getScaledInstance(lblFoto.getWidth(), lblFoto.getHeight(), Image.SCALE_SMOOTH));
+        lblFoto.setIcon(icono);
+    }//GEN-LAST:event_btnPreviusActionPerformed
+
+    private void btnFirstActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFirstActionPerformed
+        
+        String sql = "Select * from employee where id = " + 1 + ";";
+        
+        try {
+            conect = DBConexion.Conectar();
+            st = conect.createStatement();
+            rs = st.executeQuery(sql);
+            while (rs.next()) {
+                employee[0] = rs.getInt("id");
+                employee[1] = rs.getString("Username");
+                employee[2] = rs.getString("Password");
+                employee[4] = rs.getString("RutaImg");
+            }
+        } catch (Exception e) {
+        }
+        
+        txtId.setText(employee[0].toString());
+        txtUsername.setText(employee[1].toString());
+        txtPassword.setText(employee[2].toString());
+        Image foto = new ImageIcon(employee[4].toString()).getImage();
+        ImageIcon icono = new ImageIcon(foto.getScaledInstance(lblFoto.getWidth(), lblFoto.getHeight(), Image.SCALE_SMOOTH));
+        lblFoto.setIcon(icono);
+        
+    }//GEN-LAST:event_btnFirstActionPerformed
+
+    private void btnLastActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLastActionPerformed
+        
+        String sql = "Select * from employee where id = " + sqlRows + ";";
+        
+        try {
+            conect = DBConexion.Conectar();
+            st = conect.createStatement();
+            rs = st.executeQuery(sql);
+            while (rs.next()) {
+                employee[0] = rs.getInt("id");
+                employee[1] = rs.getString("Username");
+                employee[2] = rs.getString("Password");
+                employee[4] = rs.getString("RutaImg");
+            }
+        } catch (Exception e) {
+        }
+        
+        txtId.setText(employee[0].toString());
+        txtUsername.setText(employee[1].toString());
+        txtPassword.setText(employee[2].toString());
+        Image foto = new ImageIcon(employee[4].toString()).getImage();
+        ImageIcon icono = new ImageIcon(foto.getScaledInstance(lblFoto.getWidth(), lblFoto.getHeight(), Image.SCALE_SMOOTH));
+        lblFoto.setIcon(icono);
+        
+    }//GEN-LAST:event_btnLastActionPerformed
+
+    private void btnNextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNextActionPerformed
+        
+        counterRow ++;
+        
+        if (counterRow == sqlRows) {
+            btnNext.setEnabled(false);
+        }
+        
+        if (counterRow == 1) {
+            btnPrevius.setEnabled(false);
+        }else {
+            btnPrevius.setEnabled(true);
+        }
+        
+        String sql = "Select * from employee where id = " + counterRow + ";";
+        
+        try {
+            conect = DBConexion.Conectar();
+            st = conect.createStatement();
+            rs = st.executeQuery(sql);
+            while (rs.next()) {
+                employee[0] = rs.getInt("id");
+                employee[1] = rs.getString("Username");
+                employee[2] = rs.getString("Password");
+                employee[4] = rs.getString("RutaImg");
+            }
+        } catch (Exception e) {
+        }
+        
+        txtId.setText(employee[0].toString());
+        txtUsername.setText(employee[1].toString());
+        txtPassword.setText(employee[2].toString());
+        Image foto = new ImageIcon(employee[4].toString()).getImage();
         ImageIcon icono = new ImageIcon(foto.getScaledInstance(lblFoto.getWidth(), lblFoto.getHeight(), Image.SCALE_SMOOTH));
         lblFoto.setIcon(icono);
         
@@ -506,9 +600,13 @@ public class EmployeeForm extends javax.swing.JInternalFrame {
 
         }else {            
             Desbloq();
+            txtId.setText("");
+            txtUsername.setText("");
+            txtPassword.setText("");
             setTitle("Empleados");
             btnAdd.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/guardar.png")));            
         }
+        
     }//GEN-LAST:event_btnAddActionPerformed
 
     private void btnSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchActionPerformed
@@ -610,6 +708,8 @@ public class EmployeeForm extends javax.swing.JInternalFrame {
                 st = conect.createStatement();
                 st.executeUpdate(sql);
                 JOptionPane.showMessageDialog(null, "New Employee SignUp Succesfully");
+                JOptionPane.showMessageDialog(null, "The window will close to successfully save the changes");
+                this.dispose();
             }
         } catch (SQLException e) {
         }
