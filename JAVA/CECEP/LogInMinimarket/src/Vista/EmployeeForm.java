@@ -22,8 +22,15 @@ public class EmployeeForm extends javax.swing.JInternalFrame {
     
     public EmployeeForm() {
         initComponents();
+        setTitle("Employee Management");
         txtId.setEnabled(false);
+        btnFirst.setEnabled(false);
+        btnPrevius.setEnabled(false);
         Bloq();
+        dbRows();
+    }
+    
+    private void dbRows(){
         String sql = "select count(Username) as numRows from employee;";
         try {
             conect = DBConexion.Conectar();
@@ -33,7 +40,6 @@ public class EmployeeForm extends javax.swing.JInternalFrame {
             sqlRows = rs.getInt("numRows");
         } catch (Exception e) {
         }
-        
     }
     
     private void Bloq(){
@@ -51,6 +57,7 @@ public class EmployeeForm extends javax.swing.JInternalFrame {
     }
     
     private void NavP(){
+        setTitle(String.format("Employee %s of %s", counterRow,sqlRows));
         if (counterRow == 1) {
             btnPrevius.setEnabled(false);
             btnFirst.setEnabled(false);
@@ -66,6 +73,7 @@ public class EmployeeForm extends javax.swing.JInternalFrame {
     }
     
     private void NavN(){
+        setTitle(String.format("Employee %s of %s", counterRow,sqlRows));
         if (counterRow == sqlRows) {
             btnNext.setEnabled(false);
             btnLast.setEnabled(false);
@@ -495,6 +503,7 @@ public class EmployeeForm extends javax.swing.JInternalFrame {
                 employee[0] = rs.getInt("id");
                 employee[1] = rs.getString("Username");
                 employee[2] = rs.getString("Password");
+                employee[3] = rs.getString("Job");
                 employee[4] = rs.getString("RutaImg");
             }
         } catch (Exception e) {
@@ -503,6 +512,7 @@ public class EmployeeForm extends javax.swing.JInternalFrame {
         txtId.setText(employee[0].toString());
         txtUsername.setText(employee[1].toString());
         txtPassword.setText(employee[2].toString());
+        cbJob.setSelectedItem(employee[3]);
         Image foto = new ImageIcon(employee[4].toString()).getImage();
         ImageIcon icono = new ImageIcon(foto.getScaledInstance(lblFoto.getWidth(), lblFoto.getHeight(), Image.SCALE_SMOOTH));
         lblFoto.setIcon(icono);
@@ -523,6 +533,7 @@ public class EmployeeForm extends javax.swing.JInternalFrame {
                 employee[0] = rs.getInt("id");
                 employee[1] = rs.getString("Username");
                 employee[2] = rs.getString("Password");
+                employee[3] = rs.getString("Job");
                 employee[4] = rs.getString("RutaImg");
             }
         } catch (Exception e) {
@@ -531,6 +542,7 @@ public class EmployeeForm extends javax.swing.JInternalFrame {
         txtId.setText(employee[0].toString());
         txtUsername.setText(employee[1].toString());
         txtPassword.setText(employee[2].toString());
+        cbJob.setSelectedItem(employee[3]);
         Image foto = new ImageIcon(employee[4].toString()).getImage();
         ImageIcon icono = new ImageIcon(foto.getScaledInstance(lblFoto.getWidth(), lblFoto.getHeight(), Image.SCALE_SMOOTH));
         lblFoto.setIcon(icono);
@@ -552,6 +564,7 @@ public class EmployeeForm extends javax.swing.JInternalFrame {
                 employee[0] = rs.getInt("id");
                 employee[1] = rs.getString("Username");
                 employee[2] = rs.getString("Password");
+                employee[3] = rs.getString("Job");
                 employee[4] = rs.getString("RutaImg");
             }
         } catch (Exception e) {
@@ -560,6 +573,7 @@ public class EmployeeForm extends javax.swing.JInternalFrame {
         txtId.setText(employee[0].toString());
         txtUsername.setText(employee[1].toString());
         txtPassword.setText(employee[2].toString());
+        cbJob.setSelectedItem(employee[3]);
         Image foto = new ImageIcon(employee[4].toString()).getImage();
         ImageIcon icono = new ImageIcon(foto.getScaledInstance(lblFoto.getWidth(), lblFoto.getHeight(), Image.SCALE_SMOOTH));
         lblFoto.setIcon(icono);
@@ -581,6 +595,7 @@ public class EmployeeForm extends javax.swing.JInternalFrame {
                 employee[0] = rs.getInt("id");
                 employee[1] = rs.getString("Username");
                 employee[2] = rs.getString("Password");
+                employee[3] = rs.getString("Job");
                 employee[4] = rs.getString("RutaImg");
             }
         } catch (Exception e) {
@@ -589,6 +604,7 @@ public class EmployeeForm extends javax.swing.JInternalFrame {
         txtId.setText(employee[0].toString());
         txtUsername.setText(employee[1].toString());
         txtPassword.setText(employee[2].toString());
+        cbJob.setSelectedItem(employee[3]);
         Image foto = new ImageIcon(employee[4].toString()).getImage();
         ImageIcon icono = new ImageIcon(foto.getScaledInstance(lblFoto.getWidth(), lblFoto.getHeight(), Image.SCALE_SMOOTH));
         lblFoto.setIcon(icono);
@@ -612,12 +628,10 @@ public class EmployeeForm extends javax.swing.JInternalFrame {
             Bloq();
             Agregar();
             btnNext.setEnabled(true);
-            btnPrevius.setEnabled(true);
-            btnFirst.setEnabled(true);
             btnLast.setEnabled(true);
-            txtId.setText("");
-            txtUsername.setText("");
-            txtPassword.setText("");
+            txtId.setText("Id");
+            txtUsername.setText("Username");
+            txtPassword.setText("Password");
             lblFoto.setIcon(null);
 
         }else {            
@@ -671,7 +685,6 @@ public class EmployeeForm extends javax.swing.JInternalFrame {
             ImageIcon icono = new ImageIcon(foto.getScaledInstance(lblFoto.getWidth(), lblFoto.getHeight(), Image.SCALE_SMOOTH));
             lblFoto.setIcon(icono);
         }
-        System.out.println(ruta);
     }//GEN-LAST:event_btn_fotoActionPerformed
 
     private void txtUsernameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtUsernameActionPerformed
@@ -729,6 +742,8 @@ public class EmployeeForm extends javax.swing.JInternalFrame {
         try {
             if (Username.equals("") || Password.equals("") || lblFoto.getIcon() == null) {
                 JOptionPane.showMessageDialog(null, "Missing data to be entered");
+                setTitle("Employee Management");
+                counterRow = 0;
             }else {
                 String sql = "insert into employee(Username,Password,Job,RutaImg) values ('"+Username+"','"+Password+"','"+Job+"','"+Path+"' )";
                 conect = DBConexion.Conectar();
@@ -738,8 +753,12 @@ public class EmployeeForm extends javax.swing.JInternalFrame {
                 JOptionPane.showMessageDialog(null, "The window will close to successfully save the changes");
                 this.dispose();
             }
+            
         } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, "This Username already Exist");
         }
+        
+        
         
     }
 

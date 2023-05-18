@@ -112,6 +112,7 @@ public class MdiMain extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void exitMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exitMenuItemActionPerformed
+        EmployeeForm.counterRow = 0;
         dispose();
         User = null;
         new LogIn().setVisible(true);
