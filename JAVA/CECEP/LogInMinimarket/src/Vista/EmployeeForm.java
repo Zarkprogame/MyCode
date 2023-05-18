@@ -14,6 +14,7 @@ public class EmployeeForm extends javax.swing.JInternalFrame {
     public static int counterRow = 0;
     public static Object[] employee = new Object[5];;
     public static int sqlRows;
+    public static String Path;
     
     Connection conect = null;
     Statement st = null;
@@ -49,6 +50,35 @@ public class EmployeeForm extends javax.swing.JInternalFrame {
         cbJob.setEnabled(true);
     }
     
+    private void NavP(){
+        if (counterRow == 1) {
+            btnPrevius.setEnabled(false);
+            btnFirst.setEnabled(false);
+        }
+        
+        if (counterRow == sqlRows) {
+            btnNext.setEnabled(false);
+            btnLast.setEnabled(false);
+        }else{
+            btnNext.setEnabled(true);
+            btnLast.setEnabled(true);
+        }
+    }
+    
+    private void NavN(){
+        if (counterRow == sqlRows) {
+            btnNext.setEnabled(false);
+            btnLast.setEnabled(false);
+        }
+        
+        if (counterRow == 1) {
+            btnPrevius.setEnabled(false);
+            btnFirst.setEnabled(false);
+        }else{
+            btnPrevius.setEnabled(true);
+            btnFirst.setEnabled(true);
+        }
+    }
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -453,16 +483,7 @@ public class EmployeeForm extends javax.swing.JInternalFrame {
     private void btnPreviusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPreviusActionPerformed
         
         counterRow --;
-        
-        if (counterRow == 1) {
-            btnPrevius.setEnabled(false);
-        }
-        
-        if (counterRow == sqlRows) {
-            btnNext.setEnabled(false);
-        }else {
-            btnNext.setEnabled(true);
-        }
+        NavP();
         
         String sql = "Select * from employee where id = " + counterRow + ";";
         
@@ -489,6 +510,9 @@ public class EmployeeForm extends javax.swing.JInternalFrame {
 
     private void btnFirstActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFirstActionPerformed
         
+        counterRow = 1;
+        NavP();
+        
         String sql = "Select * from employee where id = " + 1 + ";";
         
         try {
@@ -514,6 +538,9 @@ public class EmployeeForm extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_btnFirstActionPerformed
 
     private void btnLastActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLastActionPerformed
+        
+        counterRow = sqlRows;
+        NavN();
         
         String sql = "Select * from employee where id = " + sqlRows + ";";
         
@@ -542,16 +569,7 @@ public class EmployeeForm extends javax.swing.JInternalFrame {
     private void btnNextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNextActionPerformed
         
         counterRow ++;
-        
-        if (counterRow == sqlRows) {
-            btnNext.setEnabled(false);
-        }
-        
-        if (counterRow == 1) {
-            btnPrevius.setEnabled(false);
-        }else {
-            btnPrevius.setEnabled(true);
-        }
+        NavN();
         
         String sql = "Select * from employee where id = " + counterRow + ";";
         
@@ -593,6 +611,10 @@ public class EmployeeForm extends javax.swing.JInternalFrame {
             btnAdd.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/añadir.png")));
             Bloq();
             Agregar();
+            btnNext.setEnabled(true);
+            btnPrevius.setEnabled(true);
+            btnFirst.setEnabled(true);
+            btnLast.setEnabled(true);
             txtId.setText("");
             txtUsername.setText("");
             txtPassword.setText("");
@@ -600,10 +622,15 @@ public class EmployeeForm extends javax.swing.JInternalFrame {
 
         }else {            
             Desbloq();
+            btnNext.setEnabled(false);
+            btnPrevius.setEnabled(false);
+            btnFirst.setEnabled(false);
+            btnLast.setEnabled(false);
             txtId.setText("");
             txtUsername.setText("");
             txtPassword.setText("");
-            setTitle("Empleados");
+            lblFoto.setIcon(null);
+            setTitle(String.format("Empleado %s de %s", counterRow,sqlRows));
             btnAdd.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/guardar.png")));            
         }
         
@@ -638,7 +665,8 @@ public class EmployeeForm extends javax.swing.JInternalFrame {
 
         if (respuesta == JFileChooser.APPROVE_OPTION) {
             ruta = jf.getSelectedFile().getPath();
-
+            Path = ruta.replace("\\", "/");
+            
             Image foto = new ImageIcon(ruta).getImage();
             ImageIcon icono = new ImageIcon(foto.getScaledInstance(lblFoto.getWidth(), lblFoto.getHeight(), Image.SCALE_SMOOTH));
             lblFoto.setIcon(icono);
@@ -697,13 +725,12 @@ public class EmployeeForm extends javax.swing.JInternalFrame {
         String Username = txtUsername.getText();
         String Password = txtPassword.getText();
         String Job = (String)cbJob.getSelectedItem();
-        String Ruta = ruta;
         
         try {
             if (Username.equals("") || Password.equals("") || lblFoto.getIcon() == null) {
                 JOptionPane.showMessageDialog(null, "Missing data to be entered");
             }else {
-                String sql = "insert into employee(Username,Password,Job,RutaImg) values ('"+Username+"','"+Password+"','"+Job+"','"+Ruta+"' )";
+                String sql = "insert into employee(Username,Password,Job,RutaImg) values ('"+Username+"','"+Password+"','"+Job+"','"+Path+"' )";
                 conect = DBConexion.Conectar();
                 st = conect.createStatement();
                 st.executeUpdate(sql);
