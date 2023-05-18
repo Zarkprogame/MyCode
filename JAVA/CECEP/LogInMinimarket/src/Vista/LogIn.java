@@ -6,6 +6,8 @@ import javax.swing.JOptionPane;
 
 public class LogIn extends javax.swing.JFrame {
     
+    public static String activeEmployee = "";
+    
     public LogIn() {
         initComponents();
         setLocationRelativeTo(null);
@@ -228,12 +230,14 @@ public class LogIn extends javax.swing.JFrame {
         }else {
             try {
                 con1 = Modelo.DBConexion.Conectar();
-                pst = (PreparedStatement) con1.prepareStatement("Select Username, Password from employee where Username = '" + Username 
+                pst = (PreparedStatement) con1.prepareStatement("Select Username, Password, Job from employee where Username = '" + Username 
                     + "' and Password = '"+ Password +"'  ");
                 rs = pst.executeQuery();
                 if (rs.next()) {
+                    activeEmployee = rs.getString("Job");
                     this.dispose();
                     new MdiMain().setVisible(true);
+                    
                 }else {
                     JOptionPane.showMessageDialog(this, "Try Again, Incorret User");
                     txtUser.setText("");
