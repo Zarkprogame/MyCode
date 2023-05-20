@@ -592,6 +592,7 @@ public class EmployeeForm extends javax.swing.JInternalFrame {
             txtUsername.setText("Username");
             txtPassword.setText("Password");
             lblFoto.setIcon(null);
+            counterRow = 0;
 
         }else {            
             Desbloq();
