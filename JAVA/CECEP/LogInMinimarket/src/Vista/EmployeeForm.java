@@ -11,10 +11,12 @@ public class EmployeeForm extends javax.swing.JInternalFrame {
 
     public static String ruta;
     public static int counter;
+    public static int counter1;
     public static int counterRow = 0;
-    public static Object[] employee = new Object[5];;
+    public static String User = "";
     public static int sqlRows;
     public static String Path;
+    public static boolean temp;
     
     Connection conect = null;
     Statement st = null;
@@ -38,7 +40,7 @@ public class EmployeeForm extends javax.swing.JInternalFrame {
             rs = st.executeQuery(sql);
             rs.next();
             sqlRows = rs.getInt("numRows");
-        } catch (Exception e) {
+        } catch (SQLException e) {
         }
     }
     
@@ -495,27 +497,8 @@ public class EmployeeForm extends javax.swing.JInternalFrame {
         
         String sql = "Select * from employee where id = " + counterRow + ";";
         
-        try {
-            conect = DBConexion.Conectar();
-            st = conect.createStatement();
-            rs = st.executeQuery(sql);
-            while (rs.next()) {
-                employee[0] = rs.getInt("id");
-                employee[1] = rs.getString("Username");
-                employee[2] = rs.getString("Password");
-                employee[3] = rs.getString("Job");
-                employee[4] = rs.getString("RutaImg");
-            }
-        } catch (Exception e) {
-        }
+        PonerDatos(sql);
         
-        txtId.setText(employee[0].toString());
-        txtUsername.setText(employee[1].toString());
-        txtPassword.setText(employee[2].toString());
-        cbJob.setSelectedItem(employee[3]);
-        Image foto = new ImageIcon(employee[4].toString()).getImage();
-        ImageIcon icono = new ImageIcon(foto.getScaledInstance(lblFoto.getWidth(), lblFoto.getHeight(), Image.SCALE_SMOOTH));
-        lblFoto.setIcon(icono);
     }//GEN-LAST:event_btnPreviusActionPerformed
 
     private void btnFirstActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFirstActionPerformed
@@ -523,29 +506,9 @@ public class EmployeeForm extends javax.swing.JInternalFrame {
         counterRow = 1;
         NavP();
         
-        String sql = "Select * from employee where id = " + 1 + ";";
+        String sql = "Select * from employee where id = " + counterRow + ";";
         
-        try {
-            conect = DBConexion.Conectar();
-            st = conect.createStatement();
-            rs = st.executeQuery(sql);
-            while (rs.next()) {
-                employee[0] = rs.getInt("id");
-                employee[1] = rs.getString("Username");
-                employee[2] = rs.getString("Password");
-                employee[3] = rs.getString("Job");
-                employee[4] = rs.getString("RutaImg");
-            }
-        } catch (Exception e) {
-        }
-        
-        txtId.setText(employee[0].toString());
-        txtUsername.setText(employee[1].toString());
-        txtPassword.setText(employee[2].toString());
-        cbJob.setSelectedItem(employee[3]);
-        Image foto = new ImageIcon(employee[4].toString()).getImage();
-        ImageIcon icono = new ImageIcon(foto.getScaledInstance(lblFoto.getWidth(), lblFoto.getHeight(), Image.SCALE_SMOOTH));
-        lblFoto.setIcon(icono);
+        PonerDatos(sql);
         
     }//GEN-LAST:event_btnFirstActionPerformed
 
@@ -556,28 +519,8 @@ public class EmployeeForm extends javax.swing.JInternalFrame {
         
         String sql = "Select * from employee where id = " + sqlRows + ";";
         
-        try {
-            conect = DBConexion.Conectar();
-            st = conect.createStatement();
-            rs = st.executeQuery(sql);
-            while (rs.next()) {
-                employee[0] = rs.getInt("id");
-                employee[1] = rs.getString("Username");
-                employee[2] = rs.getString("Password");
-                employee[3] = rs.getString("Job");
-                employee[4] = rs.getString("RutaImg");
-            }
-        } catch (Exception e) {
-        }
-        
-        txtId.setText(employee[0].toString());
-        txtUsername.setText(employee[1].toString());
-        txtPassword.setText(employee[2].toString());
-        cbJob.setSelectedItem(employee[3]);
-        Image foto = new ImageIcon(employee[4].toString()).getImage();
-        ImageIcon icono = new ImageIcon(foto.getScaledInstance(lblFoto.getWidth(), lblFoto.getHeight(), Image.SCALE_SMOOTH));
-        lblFoto.setIcon(icono);
-        
+        PonerDatos(sql);
+               
     }//GEN-LAST:event_btnLastActionPerformed
 
     private void btnNextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNextActionPerformed
@@ -587,32 +530,48 @@ public class EmployeeForm extends javax.swing.JInternalFrame {
         
         String sql = "Select * from employee where id = " + counterRow + ";";
         
-        try {
-            conect = DBConexion.Conectar();
-            st = conect.createStatement();
-            rs = st.executeQuery(sql);
-            while (rs.next()) {
-                employee[0] = rs.getInt("id");
-                employee[1] = rs.getString("Username");
-                employee[2] = rs.getString("Password");
-                employee[3] = rs.getString("Job");
-                employee[4] = rs.getString("RutaImg");
-            }
-        } catch (Exception e) {
-        }
-        
-        txtId.setText(employee[0].toString());
-        txtUsername.setText(employee[1].toString());
-        txtPassword.setText(employee[2].toString());
-        cbJob.setSelectedItem(employee[3]);
-        Image foto = new ImageIcon(employee[4].toString()).getImage();
-        ImageIcon icono = new ImageIcon(foto.getScaledInstance(lblFoto.getWidth(), lblFoto.getHeight(), Image.SCALE_SMOOTH));
-        lblFoto.setIcon(icono);
-        
+        PonerDatos(sql);
+                
     }//GEN-LAST:event_btnNextActionPerformed
 
     private void btnModifyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModifyActionPerformed
+        
+        counter1++;
+        
+        if (counter1 % 2 == 0) {
+            btnModify.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/mod.png")));
+            Bloq();
+            Modificar(User);
+            btnNext.setEnabled(true);
+            btnLast.setEnabled(true);
+            btnAdd.setEnabled(true);
+            txtId.setText("Id");
+            txtUsername.setText("Username");
+            txtPassword.setText("Password");
+            lblFoto.setIcon(null);
+            counterRow = 0;
 
+        }else {
+            
+            User = JOptionPane.showInputDialog("Enter the Username that you want Modify");
+            String sql = "select * from employee where Username = " + '"' + User + '"' + ";";
+            PonerDatos(sql);
+            if (temp) {
+                JOptionPane.showMessageDialog(null, "Employee Found");
+                Desbloq();
+                btnNext.setEnabled(false);
+                btnPrevius.setEnabled(false);
+                btnFirst.setEnabled(false);
+                btnLast.setEnabled(false);
+                btnAdd.setEnabled(false);
+                btnModify.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/guardar.png"))); 
+            }else {
+                counter1 --; 
+            }
+            //setTitle(String.format("Empleado %s de %s", counterRow,sqlRows));
+        }
+        temp = false;
+        counterRow = 0;
     }//GEN-LAST:event_btnModifyActionPerformed
 
     private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed
@@ -757,11 +716,64 @@ public class EmployeeForm extends javax.swing.JInternalFrame {
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(null, "This Username already Exist");
         }
+    }
+    
+    public void PonerDatos(String sql){
         
+        Object[] employee = new Object[5];
         
+        try {
+            conect = DBConexion.Conectar();
+            st = conect.createStatement();
+            rs = st.executeQuery(sql);
+            while (rs.next()) {
+                employee[0] = rs.getInt("id");
+                employee[1] = rs.getString("Username");
+                employee[2] = rs.getString("Password");
+                employee[3] = rs.getString("Job");
+                employee[4] = rs.getString("RutaImg");
+            }
+        } catch (SQLException e) {
+        }
         
+        if (employee[0] == null) {
+            JOptionPane.showMessageDialog(null, "This Username doesnt Exist");
+            temp = false;
+        }else{
+            txtId.setText(employee[0].toString());
+            txtUsername.setText(employee[1].toString());
+            txtPassword.setText(employee[2].toString());
+            cbJob.setSelectedItem(employee[3]);
+            Image foto = new ImageIcon(employee[4].toString()).getImage();
+            ImageIcon icono = new ImageIcon(foto.getScaledInstance(lblFoto.getWidth(), lblFoto.getHeight(), Image.SCALE_SMOOTH));
+            lblFoto.setIcon(icono);
+            Path = employee[4].toString();
+            temp = true;
+        }
     }
 
+    public void Modificar(String User){
+    
+        String Username = txtUsername.getText();
+        String Password = txtPassword.getText();
+        String Job = (String)cbJob.getSelectedItem();
+       
+        try {
+            if (Username.equals("") || Password.equals("") || lblFoto.getIcon() == null) {
+                JOptionPane.showMessageDialog(null, "Missing data to be entered");
+            }else {
+                String sql = "update employee set Username = '"+Username+"', Password = '"+Password+"', Job = '"+Job+"', RutaImg = '"+Path+"' where Username = " + '"' + User + '"' + ";";                                            
+                JOptionPane.showMessageDialog(null, sql);
+                conect = DBConexion.Conectar();
+                st = conect.createStatement();
+                st.executeUpdate(sql);
+                JOptionPane.showMessageDialog(null, "The Employee Modify Succesfully");
+            }
+            
+        } catch (SQLException e) {
+        }
+    }
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JToggleButton btnAdd;
     private javax.swing.JButton btnDelete;
