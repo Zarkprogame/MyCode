@@ -17,6 +17,7 @@ public class EmployeeForm extends javax.swing.JInternalFrame {
     public static int sqlRows;
     public static String Path;
     public static boolean temp;
+    public static boolean modify;
     
     Connection conect = null;
     Statement st = null;
@@ -536,15 +537,17 @@ public class EmployeeForm extends javax.swing.JInternalFrame {
 
     private void btnModifyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModifyActionPerformed
         
+        setTitle("Employee Management");
         counter1++;
         
         if (counter1 % 2 == 0) {
             btnModify.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/mod.png")));
+            JOptionPane.showMessageDialog(null, "You have been cancel the Operation");
+            btnAdd.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/añadir.png")));
+            counter = 0;
             Bloq();
-            Modificar(User);
             btnNext.setEnabled(true);
             btnLast.setEnabled(true);
-            btnAdd.setEnabled(true);
             txtId.setText("Id");
             txtUsername.setText("Username");
             txtPassword.setText("Password");
@@ -552,19 +555,20 @@ public class EmployeeForm extends javax.swing.JInternalFrame {
             counterRow = 0;
 
         }else {
-            
+            modify = true;
             User = JOptionPane.showInputDialog("Enter the Username that you want Modify");
             String sql = "select * from employee where Username = " + '"' + User + '"' + ";";
             PonerDatos(sql);
             if (temp) {
+                counter++;
                 JOptionPane.showMessageDialog(null, "Employee Found");
+                btnAdd.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/guardar.png")));
                 Desbloq();
                 btnNext.setEnabled(false);
                 btnPrevius.setEnabled(false);
                 btnFirst.setEnabled(false);
                 btnLast.setEnabled(false);
-                btnAdd.setEnabled(false);
-                btnModify.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/guardar.png"))); 
+                btnModify.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/desactivar.png"))); 
             }else {
                 counter1 --; 
             }
@@ -575,17 +579,29 @@ public class EmployeeForm extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_btnModifyActionPerformed
 
     private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed
-
+        
+        setTitle("Employee Management");
+        
     }//GEN-LAST:event_btnDeleteActionPerformed
 
     private void btnAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddActionPerformed
         
+        setTitle("Employee Management");
         counter++;
         
         if (counter % 2 == 0) {
             btnAdd.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/añadir.png")));
+            btnModify.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/mod.png")));
+            counter1 = 0;
             Bloq();
-            Agregar();
+            if (modify) {
+                Modificar(User);
+            }else {
+                Agregar();
+            }
+            
+            //Agregar();
+            //Modificar(User);
             btnNext.setEnabled(true);
             btnLast.setEnabled(true);
             txtId.setText("Id");
@@ -596,6 +612,8 @@ public class EmployeeForm extends javax.swing.JInternalFrame {
 
         }else {            
             Desbloq();
+            counter1++;
+            btnModify.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/desactivar.png"))); 
             btnNext.setEnabled(false);
             btnPrevius.setEnabled(false);
             btnFirst.setEnabled(false);
@@ -605,8 +623,10 @@ public class EmployeeForm extends javax.swing.JInternalFrame {
             txtPassword.setText("");
             lblFoto.setIcon(null);
             setTitle(String.format("Empleado %s de %s", counterRow,sqlRows));
-            btnAdd.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/guardar.png")));            
+            btnAdd.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/guardar.png")));         
         }
+        
+        modify = false;
         
     }//GEN-LAST:event_btnAddActionPerformed
 
