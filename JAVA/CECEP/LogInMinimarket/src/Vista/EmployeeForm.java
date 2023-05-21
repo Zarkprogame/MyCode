@@ -18,6 +18,7 @@ public class EmployeeForm extends javax.swing.JInternalFrame {
     public static String Path;
     public static boolean temp;
     public static boolean modify;
+    public static boolean repetido;
     
     Connection conect = null;
     Statement st = null;
@@ -271,7 +272,7 @@ public class EmployeeForm extends javax.swing.JInternalFrame {
         pnl_nav.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(187, 187, 187)), "Nav", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Dialog", 1, 14))); // NOI18N
 
         btnPrevius.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/anterior.png"))); // NOI18N
-        btnPrevius.setToolTipText("Previo");
+        btnPrevius.setToolTipText("Previus");
         btnPrevius.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnPreviusActionPerformed(evt);
@@ -279,7 +280,7 @@ public class EmployeeForm extends javax.swing.JInternalFrame {
         });
 
         btnFirst.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/primero.png"))); // NOI18N
-        btnFirst.setToolTipText("Primero");
+        btnFirst.setToolTipText("First");
         btnFirst.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnFirstActionPerformed(evt);
@@ -287,7 +288,7 @@ public class EmployeeForm extends javax.swing.JInternalFrame {
         });
 
         btnLast.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/ultimo.png"))); // NOI18N
-        btnLast.setToolTipText("Ultimo");
+        btnLast.setToolTipText("Last");
         btnLast.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnLastActionPerformed(evt);
@@ -295,7 +296,7 @@ public class EmployeeForm extends javax.swing.JInternalFrame {
         });
 
         btnNext.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/siguiente.png"))); // NOI18N
-        btnNext.setToolTipText("Siguiente");
+        btnNext.setToolTipText("Next");
         btnNext.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnNextActionPerformed(evt);
@@ -333,7 +334,7 @@ public class EmployeeForm extends javax.swing.JInternalFrame {
         pnl_mtto2.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(187, 187, 187)), "Mtto", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Dialog", 1, 14))); // NOI18N
 
         btnModify.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/mod.png"))); // NOI18N
-        btnModify.setToolTipText("Editar");
+        btnModify.setToolTipText("Edit / Cancel");
         btnModify.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnModifyActionPerformed(evt);
@@ -341,7 +342,7 @@ public class EmployeeForm extends javax.swing.JInternalFrame {
         });
 
         btnDelete.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/eliminar.png"))); // NOI18N
-        btnDelete.setToolTipText("Eliminar");
+        btnDelete.setToolTipText("Delete");
         btnDelete.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnDeleteActionPerformed(evt);
@@ -349,7 +350,7 @@ public class EmployeeForm extends javax.swing.JInternalFrame {
         });
 
         btnAdd.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/añadir.png"))); // NOI18N
-        btnAdd.setToolTipText("Añadir / Guardar");
+        btnAdd.setToolTipText("Add / Save");
         btnAdd.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnAddActionPerformed(evt);
@@ -384,7 +385,7 @@ public class EmployeeForm extends javax.swing.JInternalFrame {
         pnl_fnEspeciales.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(187, 187, 187)), "Fn Especiales", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Dialog", 1, 14))); // NOI18N
 
         btnSearch.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/consulta.png"))); // NOI18N
-        btnSearch.setToolTipText("Consultar");
+        btnSearch.setToolTipText("Search");
         btnSearch.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnSearchActionPerformed(evt);
@@ -392,7 +393,7 @@ public class EmployeeForm extends javax.swing.JInternalFrame {
         });
 
         btnHelp.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/ayuda.png"))); // NOI18N
-        btnHelp.setToolTipText("Ayuda");
+        btnHelp.setToolTipText("Help");
         btnHelp.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnHelpActionPerformed(evt);
@@ -408,7 +409,7 @@ public class EmployeeForm extends javax.swing.JInternalFrame {
         });
 
         btnPrint.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/impresora.png"))); // NOI18N
-        btnPrint.setToolTipText("Imprimir");
+        btnPrint.setToolTipText("Print");
         btnPrint.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnPrintActionPerformed(evt);
@@ -556,7 +557,7 @@ public class EmployeeForm extends javax.swing.JInternalFrame {
 
         }else {
             modify = true;
-            User = JOptionPane.showInputDialog("Enter the Username that you want Modify");
+            User = JOptionPane.showInputDialog("Enter the Username that you want to Modify");
             String sql = "select * from employee where Username = " + '"' + User + '"' + ";";
             PonerDatos(sql);
             if (temp) {
@@ -581,6 +582,7 @@ public class EmployeeForm extends javax.swing.JInternalFrame {
     private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed
         
         setTitle("Employee Management");
+        Eliminar();
         
     }//GEN-LAST:event_btnDeleteActionPerformed
 
@@ -730,7 +732,7 @@ public class EmployeeForm extends javax.swing.JInternalFrame {
                 st = conect.createStatement();
                 st.executeUpdate(sql);
                 JOptionPane.showMessageDialog(null, "New Employee SignUp Succesfully");
-                JOptionPane.showMessageDialog(null, "The window will close to successfully save the changes");
+                JOptionPane.showMessageDialog(null, "The window will close to save the changes");
                 this.dispose();
             }
             
@@ -784,13 +786,59 @@ public class EmployeeForm extends javax.swing.JInternalFrame {
                 JOptionPane.showMessageDialog(null, "Missing data to be entered");
             }else {
                 String sql = "update employee set Username = '"+Username+"', Password = '"+Password+"', Job = '"+Job+"', RutaImg = '"+Path+"' where Username = " + '"' + User + '"' + ";";                                            
-                JOptionPane.showMessageDialog(null, sql);
                 conect = DBConexion.Conectar();
                 st = conect.createStatement();
                 st.executeUpdate(sql);
                 JOptionPane.showMessageDialog(null, "The Employee Modify Succesfully");
             }
             
+        } catch (SQLException e) {
+        }
+    }
+    
+    public void Eliminar(){
+        
+        String User = JOptionPane.showInputDialog("Enter the Username that you want to Delete");
+        repetido(User);
+        
+        if (!repetido) {
+            JOptionPane.showMessageDialog(null, "This Username doesnt Exist");
+            counterRow = 0;
+        }else {
+            try {
+                if (User.equals("")) {
+                    JOptionPane.showMessageDialog(null, "Missing data to be entered");
+                }else {
+                    String sql = "delete from employee where Username = " + '"' + User + '"' + ";";                                            
+                    conect = DBConexion.Conectar();
+                    st = conect.createStatement();
+                    st.executeUpdate(sql);
+                    JOptionPane.showMessageDialog(null, "The Employee has been Deleted");
+                    JOptionPane.showMessageDialog(null, "The window will close to save the changes");
+                    this.dispose();
+                }   
+            } catch (Exception e) {
+            }
+        }
+    }
+    
+    void repetido(String User){
+        
+        String Users;
+        repetido = false;
+        
+        try {
+            String sql = "Select Username from employee;";
+            conect = DBConexion.Conectar();
+            st = conect.createStatement();
+            rs = st.executeQuery(sql);
+            
+            while (rs.next()) {
+                Users = rs.getString("Username");
+                if (Users.equals(User)) {
+                    repetido = true;
+                }
+            }
         } catch (SQLException e) {
         }
     }

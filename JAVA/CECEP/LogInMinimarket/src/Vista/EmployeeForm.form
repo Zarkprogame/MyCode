@@ -368,7 +368,7 @@
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
                   <Image iconType="3" name="/img/anterior.png"/>
                 </Property>
-                <Property name="toolTipText" type="java.lang.String" value="Previo"/>
+                <Property name="toolTipText" type="java.lang.String" value="Previus"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnPreviusActionPerformed"/>
@@ -379,7 +379,7 @@
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
                   <Image iconType="3" name="/img/primero.png"/>
                 </Property>
-                <Property name="toolTipText" type="java.lang.String" value="Primero"/>
+                <Property name="toolTipText" type="java.lang.String" value="First"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnFirstActionPerformed"/>
@@ -390,7 +390,7 @@
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
                   <Image iconType="3" name="/img/ultimo.png"/>
                 </Property>
-                <Property name="toolTipText" type="java.lang.String" value="Ultimo"/>
+                <Property name="toolTipText" type="java.lang.String" value="Last"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnLastActionPerformed"/>
@@ -401,7 +401,7 @@
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
                   <Image iconType="3" name="/img/siguiente.png"/>
                 </Property>
-                <Property name="toolTipText" type="java.lang.String" value="Siguiente"/>
+                <Property name="toolTipText" type="java.lang.String" value="Next"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnNextActionPerformed"/>
@@ -462,7 +462,7 @@
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
                   <Image iconType="3" name="/img/mod.png"/>
                 </Property>
-                <Property name="toolTipText" type="java.lang.String" value="Editar"/>
+                <Property name="toolTipText" type="java.lang.String" value="Edit / Cancel"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnModifyActionPerformed"/>
@@ -473,7 +473,7 @@
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
                   <Image iconType="3" name="/img/eliminar.png"/>
                 </Property>
-                <Property name="toolTipText" type="java.lang.String" value="Eliminar"/>
+                <Property name="toolTipText" type="java.lang.String" value="Delete"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnDeleteActionPerformed"/>
@@ -484,7 +484,7 @@
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
                   <Image iconType="3" name="/img/a&#xf1;adir.png"/>
                 </Property>
-                <Property name="toolTipText" type="java.lang.String" value="A&#xf1;adir / Guardar"/>
+                <Property name="toolTipText" type="java.lang.String" value="Add / Save"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnAddActionPerformed"/>
@@ -548,7 +548,7 @@
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
                   <Image iconType="3" name="/img/consulta.png"/>
                 </Property>
-                <Property name="toolTipText" type="java.lang.String" value="Consultar"/>
+                <Property name="toolTipText" type="java.lang.String" value="Search"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnSearchActionPerformed"/>
@@ -559,7 +559,7 @@
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
                   <Image iconType="3" name="/img/ayuda.png"/>
                 </Property>
-                <Property name="toolTipText" type="java.lang.String" value="Ayuda"/>
+                <Property name="toolTipText" type="java.lang.String" value="Help"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnHelpActionPerformed"/>
@@ -581,7 +581,7 @@
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
                   <Image iconType="3" name="/img/impresora.png"/>
                 </Property>
-                <Property name="toolTipText" type="java.lang.String" value="Imprimir"/>
+                <Property name="toolTipText" type="java.lang.String" value="Print"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnPrintActionPerformed"/>
