@@ -497,7 +497,7 @@ public class EmployeeForm extends javax.swing.JInternalFrame {
         counterRow --;
         NavP();
         
-        String sql = "Select * from employee where id = " + counterRow + ";";
+        String sql = "SELECT * from ( select *,row_number()over(order by id)as rownum from employee ) as consulta where consulta.rownum = " + counterRow + ";";
         
         PonerDatos(sql);
         
@@ -508,7 +508,7 @@ public class EmployeeForm extends javax.swing.JInternalFrame {
         counterRow = 1;
         NavP();
         
-        String sql = "Select * from employee where id = " + counterRow + ";";
+        String sql = "SELECT * from ( select *,row_number()over(order by id)as rownum from employee ) as consulta where consulta.rownum = " + counterRow + ";";
         
         PonerDatos(sql);
         
@@ -519,7 +519,7 @@ public class EmployeeForm extends javax.swing.JInternalFrame {
         counterRow = sqlRows;
         NavN();
         
-        String sql = "Select * from employee where id = " + sqlRows + ";";
+        String sql = "SELECT * from ( select *,row_number()over(order by id)as rownum from employee ) as consulta where consulta.rownum = " + counterRow + ";";
         
         PonerDatos(sql);
                
@@ -530,7 +530,7 @@ public class EmployeeForm extends javax.swing.JInternalFrame {
         counterRow ++;
         NavN();
         
-        String sql = "Select * from employee where id = " + counterRow + ";";
+        String sql = "SELECT * from ( select *,row_number()over(order by id)as rownum from employee ) as consulta where consulta.rownum = " + counterRow + ";";
         
         PonerDatos(sql);
                 
