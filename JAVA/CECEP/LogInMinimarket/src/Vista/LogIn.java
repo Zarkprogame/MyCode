@@ -236,7 +236,7 @@ public class LogIn extends javax.swing.JFrame {
                 if (rs.next()) {
                     activeEmployee = rs.getString("Job");
                     this.dispose();
-                    new MdiMain().setVisible(true);
+                    new Splash().setVisible(true);
                     
                 }else {
                     JOptionPane.showMessageDialog(this, "Try Again, Incorret User");
