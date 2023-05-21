@@ -4,18 +4,19 @@
  */
 package Vista;
 
-import javax.swing.JOptionPane;
+import java.awt.Color;
 
 /**
  *
  * @author zarkprogame
  */
-public class Splash extends javax.swing.JFrame {
+public class SplashIn extends javax.swing.JFrame {
     
-    public static Splash sp;
+    public static SplashIn sp;
     
-    public Splash() {
+    public SplashIn() {
         initComponents();
+        pbLoading.setForeground(Color.BLUE);
         Bar();
     }
 
@@ -162,6 +163,6 @@ public class Splash extends javax.swing.JFrame {
     public static javax.swing.JLabel lblLoading;
     public static javax.swing.JLabel lblLoadingValue;
     public static javax.swing.JProgressBar pbLoading;
-    private javax.swing.JPanel pnlBackground;
+    public javax.swing.JPanel pnlBackground;
     // End of variables declaration//GEN-END:variables
 }

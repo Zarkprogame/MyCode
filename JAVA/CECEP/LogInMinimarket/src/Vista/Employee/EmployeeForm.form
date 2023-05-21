@@ -114,7 +114,7 @@
             </Property>
             <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
               <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
-                <TitledBorder title="Foto">
+                <TitledBorder title="Photo">
                   <Border PropertyName="innerBorder" info="org.netbeans.modules.form.compat2.border.LineBorderInfo">
                     <LineBorder>
                       <Color PropertyName="color" blue="bb" green="bb" red="bb" type="rgb"/>
@@ -570,7 +570,7 @@
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
                   <Image iconType="3" name="/img/cerrar.png"/>
                 </Property>
-                <Property name="toolTipText" type="java.lang.String" value="&lt;html&gt;&#xa;&lt;body&gt;&#xa;&lt;div&gt;&#xa;&lt;img src =  &quot;file:C:/Users/Usuario/MyCode/JAVA/UDEMY/Camilo/src/img/loco.jpg&quot; /&gt;&#xa;&lt;/div&gt;&#xa;&lt;/body&gt;&#xa; &lt;/html&gt;"/>
+                <Property name="toolTipText" type="java.lang.String" value="&lt;html&gt;&#xa;&lt;body&gt;&#xa;&lt;div&gt;&#xa;&lt;img src =  &quot;file:C:/Users/zarkprogame/MyCode/JAVA/CECEP/LogInMinimarket/src/img/loco.jpg&quot; /&gt;&#xa;&lt;/div&gt;&#xa;&lt;/body&gt;&#xa; &lt;/html&gt;"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnExitActionPerformed"/>

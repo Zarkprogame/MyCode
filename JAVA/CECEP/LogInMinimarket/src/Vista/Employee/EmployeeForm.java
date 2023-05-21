@@ -1,9 +1,14 @@
-package Vista;
+package Vista.Employee;
 
 import Modelo.DBConexion;
+import Vista.MdiMain;
 import java.sql.*;
 import java.awt.Color;
+import java.awt.Desktop;
+import java.awt.HeadlessException;
 import java.awt.Image;
+import java.io.File;
+import java.io.IOException;
 import javax.swing.*;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
@@ -130,7 +135,7 @@ public class EmployeeForm extends javax.swing.JInternalFrame {
         pnlForm.setBackground(new java.awt.Color(255, 255, 255));
 
         pnl_foto.setBackground(new java.awt.Color(255, 255, 255));
-        pnl_foto.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(187, 187, 187)), "Foto", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Dialog", 1, 18))); // NOI18N
+        pnl_foto.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(187, 187, 187)), "Photo", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Dialog", 1, 18))); // NOI18N
 
         btn_foto.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/camara.png"))); // NOI18N
         btn_foto.addActionListener(new java.awt.event.ActionListener() {
@@ -401,7 +406,7 @@ public class EmployeeForm extends javax.swing.JInternalFrame {
         });
 
         btnExit.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/cerrar.png"))); // NOI18N
-        btnExit.setToolTipText("<html>\n<body>\n<div>\n<img src =  \"file:C:/Users/Usuario/MyCode/JAVA/UDEMY/Camilo/src/img/loco.jpg\" />\n</div>\n</body>\n </html>");
+        btnExit.setToolTipText("<html>\n<body>\n<div>\n<img src =  \"file:C:/Users/zarkprogame/MyCode/JAVA/CECEP/LogInMinimarket/src/img/loco.jpg\" />\n</div>\n</body>\n </html>");
         btnExit.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnExitActionPerformed(evt);
@@ -633,20 +638,40 @@ public class EmployeeForm extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_btnAddActionPerformed
 
     private void btnSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchActionPerformed
+        
+        this.dispose();
         new ShowEmployee().setVisible(true);
+        
     }//GEN-LAST:event_btnSearchActionPerformed
 
     private void btnHelpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHelpActionPerformed
-
+        
+        try {
+            File file = new File("C:\\Users\\zarkprogame\\MyCode\\JAVA\\CECEP\\LogInMinimarket\\src\\img\\poo.pdf");
+            if (file.exists()) {
+                if (Desktop.isDesktopSupported()) {
+                    Desktop.getDesktop().open(file);
+                }else{
+                    JOptionPane.showMessageDialog(null, "Not supported");
+                }
+            }else {
+                JOptionPane.showMessageDialog(null, "File not Exist");
+            }
+            
+        } catch (HeadlessException | IOException e) {
+        }
+        
+        
     }//GEN-LAST:event_btnHelpActionPerformed
 
     private void btnExitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExitActionPerformed
-        JOptionPane.showMessageDialog(null, "Hasta la Proxima");
-        System.exit(0);
+        JOptionPane.showMessageDialog(null, "See you Soon");
+        dispose();
+        //new SplashOut().setVisible(true);
     }//GEN-LAST:event_btnExitActionPerformed
 
     private void btnPrintActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPrintActionPerformed
-        JOptionPane.showMessageDialog(null, "Imprimiendo ...");
+        JOptionPane.showMessageDialog(null, "This Option is not available for the moment");
     }//GEN-LAST:event_btnPrintActionPerformed
 
     private void btn_fotoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_fotoActionPerformed

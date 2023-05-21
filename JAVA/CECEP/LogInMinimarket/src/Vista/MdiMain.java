@@ -1,5 +1,6 @@
 package Vista;
 
+import Vista.Employee.EmployeeForm;
 import java.awt.Dimension;
 
 public class MdiMain extends javax.swing.JFrame {
@@ -112,7 +113,7 @@ public class MdiMain extends javax.swing.JFrame {
         EmployeeForm.counterRow = 0;
         dispose();
         User = null;
-        new LogIn().setVisible(true);
+        new SplashOut().setVisible(true);
     }//GEN-LAST:event_exitMenuItemActionPerformed
 
     private void cutMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cutMenuItemActionPerformed
