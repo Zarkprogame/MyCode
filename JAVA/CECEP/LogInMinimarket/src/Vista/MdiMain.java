@@ -1,11 +1,13 @@
 package Vista;
 
+import Vista.Clients.ClientForm;
 import Vista.Employee.EmployeeForm;
 import java.awt.Dimension;
 
 public class MdiMain extends javax.swing.JFrame {
     
     public static EmployeeForm User = null;
+    public static ClientForm client = null;
     
     public MdiMain() {
         initComponents();
@@ -27,7 +29,7 @@ public class MdiMain extends javax.swing.JFrame {
         Employeed = new javax.swing.JMenuItem();
         exitMenuItem = new javax.swing.JMenuItem();
         editMenu = new javax.swing.JMenu();
-        cutMenuItem = new javax.swing.JMenuItem();
+        ClientMenu = new javax.swing.JMenuItem();
         copyMenuItem = new javax.swing.JMenuItem();
         pasteMenuItem = new javax.swing.JMenuItem();
         deleteMenuItem = new javax.swing.JMenuItem();
@@ -57,17 +59,17 @@ public class MdiMain extends javax.swing.JFrame {
 
         menuBar.add(AdminMenu);
 
-        editMenu.setMnemonic('e');
+        editMenu.setMnemonic('t');
         editMenu.setText("Tables");
 
-        cutMenuItem.setMnemonic('t');
-        cutMenuItem.setText("Clients");
-        cutMenuItem.addActionListener(new java.awt.event.ActionListener() {
+        ClientMenu.setMnemonic('c');
+        ClientMenu.setText("Clients");
+        ClientMenu.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cutMenuItemActionPerformed(evt);
+                ClientMenuActionPerformed(evt);
             }
         });
-        editMenu.add(cutMenuItem);
+        editMenu.add(ClientMenu);
 
         copyMenuItem.setMnemonic('y');
         copyMenuItem.setText("Products");
@@ -116,16 +118,34 @@ public class MdiMain extends javax.swing.JFrame {
         new SplashOut().setVisible(true);
     }//GEN-LAST:event_exitMenuItemActionPerformed
 
-    private void cutMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cutMenuItemActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_cutMenuItemActionPerformed
+    private void ClientMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ClientMenuActionPerformed
+        
+        if (User != null) {
+            User.dispose();
+        }
+        
+        if (client == null || client.isClosed()) {
+                client = new ClientForm();
+                MdiMain.desktopPane.add(client);
+                Dimension desktopSize = desktopPane.getSize();
+                Dimension FrameSize = client.getSize();
+                client.setLocation((desktopSize.width - FrameSize.width)/2, (desktopSize.height- FrameSize.height)/2);
+        }
+        client.setVisible(true);  
+    }//GEN-LAST:event_ClientMenuActionPerformed
 
     private void pasteMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pasteMenuItemActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_pasteMenuItemActionPerformed
 
     private void EmployeedActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EmployeedActionPerformed
+        
+        if (client != null) {
+            client.dispose();
+        }
+        
         if (User == null || User.isClosed()) {
+                //client.dispose();
                 User = new EmployeeForm();
                 MdiMain.desktopPane.add(User);
                 Dimension desktopSize = desktopPane.getSize();
@@ -142,9 +162,9 @@ public class MdiMain extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenu AdminMenu;
+    private javax.swing.JMenuItem ClientMenu;
     public static javax.swing.JMenuItem Employeed;
     private javax.swing.JMenuItem copyMenuItem;
-    private javax.swing.JMenuItem cutMenuItem;
     private javax.swing.JMenuItem deleteMenuItem;
     public static javax.swing.JDesktopPane desktopPane;
     private javax.swing.JMenu editMenu;

@@ -1,9 +1,10 @@
-package Vista.Employee;
+package Vista.Clients;
 
+import Vista.Employee.*;
 import Modelo.DBConexion;
-import Vista.MdiMain;
 import java.sql.*;
 import java.awt.Color;
+import java.awt.Component;
 import java.awt.Desktop;
 import java.awt.HeadlessException;
 import java.awt.Image;
@@ -12,7 +13,7 @@ import java.io.IOException;
 import javax.swing.*;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
-public class EmployeeForm extends javax.swing.JInternalFrame {
+public class ClientForm extends javax.swing.JInternalFrame {
 
     public static String ruta;
     public static int counter;
@@ -29,9 +30,11 @@ public class EmployeeForm extends javax.swing.JInternalFrame {
     Statement st = null;
     ResultSet rs = null;
     
-    public EmployeeForm() {
+    public ClientForm() {
         initComponents();
-        setTitle("Employee Management");
+        setTitle("Client Management");
+        btnsGender.add(f);
+        btnsGender.add(m);
         txtId.setEnabled(false);
         btnFirst.setEnabled(false);
         btnPrevius.setEnabled(false);
@@ -40,7 +43,7 @@ public class EmployeeForm extends javax.swing.JInternalFrame {
     }
     
     private void dbRows(){
-        String sql = "select count(Username) as numRows from employee;";
+        String sql = "select count(Document) as numRows from client;";
         try {
             conect = DBConexion.Conectar();
             st = conect.createStatement();
@@ -52,21 +55,28 @@ public class EmployeeForm extends javax.swing.JInternalFrame {
     }
     
     private void Bloq(){
-        txtUsername.setEnabled(false);
-        txtPassword.setEnabled(false);
+        for (Component a : pnlForm.getComponents()) {
+            a.setEnabled(false);
+        }
+        for (Component a : pnl_genero.getComponents()) {
+            a.setEnabled(false);
+        }
         btn_foto.setEnabled(false);
-        cbJob.setEnabled(false);
     }
     
     private void Desbloq(){
-        txtUsername.setEnabled(true);
-        txtPassword.setEnabled(true);
+        for (Component a : pnlForm.getComponents()) {
+            a.setEnabled(true);
+        }
+        for (Component a : pnl_genero.getComponents()) {
+            a.setEnabled(true);
+        }
         btn_foto.setEnabled(true);
-        cbJob.setEnabled(true);
+        txtId.setEnabled(false);
     }
     
     private void NavP(){
-        setTitle(String.format("Employee %s of %s", counterRow,sqlRows));
+        setTitle(String.format("Client %s of %s", counterRow,sqlRows));
         if (counterRow == 1) {
             btnPrevius.setEnabled(false);
             btnFirst.setEnabled(false);
@@ -82,7 +92,7 @@ public class EmployeeForm extends javax.swing.JInternalFrame {
     }
     
     private void NavN(){
-        setTitle(String.format("Employee %s of %s", counterRow,sqlRows));
+        setTitle(String.format("Client %s of %s", counterRow,sqlRows));
         if (counterRow == sqlRows) {
             btnNext.setEnabled(false);
             btnLast.setEnabled(false);
@@ -101,18 +111,28 @@ public class EmployeeForm extends javax.swing.JInternalFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        btnsGender = new javax.swing.ButtonGroup();
         pnlForm = new javax.swing.JPanel();
         pnl_foto = new javax.swing.JPanel();
         btn_foto = new javax.swing.JButton();
         lblFoto = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         txtId = new javax.swing.JTextField();
-        txtUsername = new javax.swing.JTextField();
-        txtPassword = new javax.swing.JTextField();
-        cbJob = new javax.swing.JComboBox<>();
+        txtName = new javax.swing.JTextField();
+        txtLastname = new javax.swing.JTextField();
+        jLabel5 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        pnl_genero = new javax.swing.JPanel();
+        m = new javax.swing.JRadioButton();
+        f = new javax.swing.JRadioButton();
+        jLabel6 = new javax.swing.JLabel();
+        txtAddress = new javax.swing.JTextField();
+        jLabel7 = new javax.swing.JLabel();
+        txtPhone = new javax.swing.JTextField();
+        spEdad = new javax.swing.JSpinner();
+        txtDocument = new javax.swing.JTextField();
         pnlTools = new javax.swing.JPanel();
         pnl_nav = new javax.swing.JPanel();
         btnPrevius = new javax.swing.JButton();
@@ -170,13 +190,10 @@ public class EmployeeForm extends javax.swing.JInternalFrame {
         jLabel1.setText("Id:");
 
         jLabel2.setFont(new java.awt.Font("Britannic Bold", 0, 24)); // NOI18N
-        jLabel2.setText("Username:");
-
-        jLabel3.setFont(new java.awt.Font("Britannic Bold", 0, 24)); // NOI18N
-        jLabel3.setText("Job:");
+        jLabel2.setText("Name:");
 
         jLabel4.setFont(new java.awt.Font("Britannic Bold", 0, 24)); // NOI18N
-        jLabel4.setText("Password:");
+        jLabel4.setText("Lastname:");
 
         txtId.setFont(new java.awt.Font("Britannic Bold", 0, 18)); // NOI18N
         txtId.setForeground(new java.awt.Color(153, 153, 153));
@@ -190,85 +207,194 @@ public class EmployeeForm extends javax.swing.JInternalFrame {
             }
         });
 
-        txtUsername.setFont(new java.awt.Font("Britannic Bold", 0, 18)); // NOI18N
-        txtUsername.setForeground(new java.awt.Color(153, 153, 153));
-        txtUsername.setText("Username");
-        txtUsername.addFocusListener(new java.awt.event.FocusAdapter() {
+        txtName.setFont(new java.awt.Font("Britannic Bold", 0, 18)); // NOI18N
+        txtName.setForeground(new java.awt.Color(153, 153, 153));
+        txtName.setText("Name");
+        txtName.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
-                txtUsernameFocusGained(evt);
+                txtNameFocusGained(evt);
             }
             public void focusLost(java.awt.event.FocusEvent evt) {
-                txtUsernameFocusLost(evt);
+                txtNameFocusLost(evt);
             }
         });
-        txtUsername.addActionListener(new java.awt.event.ActionListener() {
+        txtName.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtUsernameActionPerformed(evt);
+                txtNameActionPerformed(evt);
             }
         });
 
-        txtPassword.setFont(new java.awt.Font("Britannic Bold", 0, 18)); // NOI18N
-        txtPassword.setForeground(new java.awt.Color(153, 153, 153));
-        txtPassword.setText("Password");
-        txtPassword.addFocusListener(new java.awt.event.FocusAdapter() {
+        txtLastname.setFont(new java.awt.Font("Britannic Bold", 0, 18)); // NOI18N
+        txtLastname.setForeground(new java.awt.Color(153, 153, 153));
+        txtLastname.setText("Lastname");
+        txtLastname.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
-                txtPasswordFocusGained(evt);
+                txtLastnameFocusGained(evt);
             }
             public void focusLost(java.awt.event.FocusEvent evt) {
-                txtPasswordFocusLost(evt);
+                txtLastnameFocusLost(evt);
             }
         });
 
-        cbJob.setFont(new java.awt.Font("Britannic Bold", 0, 18)); // NOI18N
-        cbJob.setForeground(new java.awt.Color(153, 153, 153));
-        cbJob.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Admin", "Employee" }));
+        jLabel5.setFont(new java.awt.Font("Britannic Bold", 0, 24)); // NOI18N
+        jLabel5.setText("Document:");
+
+        jLabel3.setFont(new java.awt.Font("Britannic Bold", 0, 24)); // NOI18N
+        jLabel3.setText("Age:");
+
+        pnl_genero.setBackground(new java.awt.Color(255, 255, 255));
+        pnl_genero.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(187, 187, 187)), "Gender", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Dialog", 1, 18))); // NOI18N
+
+        m.setText("Masculino");
+        m.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mActionPerformed(evt);
+            }
+        });
+
+        f.setText("Femenino");
+        f.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                fActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout pnl_generoLayout = new javax.swing.GroupLayout(pnl_genero);
+        pnl_genero.setLayout(pnl_generoLayout);
+        pnl_generoLayout.setHorizontalGroup(
+            pnl_generoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnl_generoLayout.createSequentialGroup()
+                .addComponent(m)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(f)
+                .addGap(0, 0, Short.MAX_VALUE))
+        );
+        pnl_generoLayout.setVerticalGroup(
+            pnl_generoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnl_generoLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(pnl_generoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(m)
+                    .addComponent(f))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        jLabel6.setFont(new java.awt.Font("Britannic Bold", 0, 24)); // NOI18N
+        jLabel6.setText("Address:");
+
+        txtAddress.setFont(new java.awt.Font("Britannic Bold", 0, 18)); // NOI18N
+        txtAddress.setForeground(new java.awt.Color(153, 153, 153));
+        txtAddress.setText("Address");
+        txtAddress.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                txtAddressFocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                txtAddressFocusLost(evt);
+            }
+        });
+
+        jLabel7.setFont(new java.awt.Font("Britannic Bold", 0, 24)); // NOI18N
+        jLabel7.setText("Phone:");
+
+        txtPhone.setFont(new java.awt.Font("Britannic Bold", 0, 18)); // NOI18N
+        txtPhone.setForeground(new java.awt.Color(153, 153, 153));
+        txtPhone.setText("Phone");
+        txtPhone.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                txtPhoneFocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                txtPhoneFocusLost(evt);
+            }
+        });
+
+        txtDocument.setFont(new java.awt.Font("Britannic Bold", 0, 18)); // NOI18N
+        txtDocument.setForeground(new java.awt.Color(153, 153, 153));
+        txtDocument.setText("Document");
+        txtDocument.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                txtDocumentFocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                txtDocumentFocusLost(evt);
+            }
+        });
 
         javax.swing.GroupLayout pnlFormLayout = new javax.swing.GroupLayout(pnlForm);
         pnlForm.setLayout(pnlFormLayout);
         pnlFormLayout.setHorizontalGroup(
             pnlFormLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlFormLayout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
+            .addGroup(pnlFormLayout.createSequentialGroup()
+                .addGap(23, 23, 23)
                 .addGroup(pnlFormLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabel3)
-                    .addComponent(jLabel2)
+                    .addComponent(jLabel5)
                     .addComponent(jLabel1)
-                    .addComponent(jLabel4))
-                .addGap(18, 18, 18)
+                    .addComponent(jLabel2)
+                    .addComponent(jLabel4)
+                    .addComponent(jLabel6)
+                    .addComponent(jLabel7)
+                    .addComponent(jLabel3))
                 .addGroup(pnlFormLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(txtUsername, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtId, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(cbJob, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(27, 27, 27)
-                .addComponent(pnl_foto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(108, 108, 108))
+                    .addGroup(pnlFormLayout.createSequentialGroup()
+                        .addGap(18, 18, 18)
+                        .addGroup(pnlFormLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(txtAddress)
+                            .addComponent(txtLastname)
+                            .addComponent(txtName)
+                            .addComponent(txtDocument, javax.swing.GroupLayout.DEFAULT_SIZE, 230, Short.MAX_VALUE)
+                            .addComponent(txtId)))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlFormLayout.createSequentialGroup()
+                        .addGap(18, 18, 18)
+                        .addGroup(pnlFormLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(spEdad, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtPhone, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(pnlFormLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(pnl_foto, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(pnl_genero, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(77, 77, 77))
         );
         pnlFormLayout.setVerticalGroup(
             pnlFormLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlFormLayout.createSequentialGroup()
                 .addGroup(pnlFormLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(pnlFormLayout.createSequentialGroup()
-                        .addGap(39, 39, 39)
+                        .addGap(25, 25, 25)
                         .addGroup(pnlFormLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(txtId, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtId, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(pnlFormLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtDocument, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(pnlFormLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(txtName, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(pnlFormLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtUsername, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(16, 16, 16)
+                            .addComponent(txtLastname, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(pnlFormLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
+                            .addComponent(txtAddress, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(pnlFormLayout.createSequentialGroup()
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(pnl_foto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(pnlFormLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(pnlFormLayout.createSequentialGroup()
+                        .addGroup(pnlFormLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(txtPhone, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(pnlFormLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(cbJob, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(pnlFormLayout.createSequentialGroup()
-                        .addGap(16, 16, 16)
-                        .addComponent(pnl_foto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(20, Short.MAX_VALUE))
+                            .addComponent(spEdad, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(pnl_genero, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(19, 19, 19))
         );
 
         pnlTools.setBackground(new java.awt.Color(255, 255, 255));
@@ -457,7 +583,7 @@ public class EmployeeForm extends javax.swing.JInternalFrame {
                 .addGroup(pnlToolsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(pnlToolsLayout.createSequentialGroup()
                         .addComponent(lblFecha, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(508, Short.MAX_VALUE))
+                        .addContainerGap(503, Short.MAX_VALUE))
                     .addGroup(pnlToolsLayout.createSequentialGroup()
                         .addComponent(pnl_nav, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(16, 16, 16)
@@ -469,7 +595,7 @@ public class EmployeeForm extends javax.swing.JInternalFrame {
         pnlToolsLayout.setVerticalGroup(
             pnlToolsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlToolsLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap(19, Short.MAX_VALUE)
                 .addGroup(pnlToolsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(pnl_fnEspeciales, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(pnl_nav, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -502,7 +628,7 @@ public class EmployeeForm extends javax.swing.JInternalFrame {
         counterRow --;
         NavP();
         
-        String sql = "SELECT * from ( select *,row_number()over(order by id)as rownum from employee ) as consulta where consulta.rownum = " + counterRow + ";";
+        String sql = "SELECT * from ( select *,row_number()over(order by id)as rownum from client ) as consulta where consulta.rownum = " + counterRow + ";";
         
         PonerDatos(sql);
         
@@ -513,7 +639,7 @@ public class EmployeeForm extends javax.swing.JInternalFrame {
         counterRow = 1;
         NavP();
         
-        String sql = "SELECT * from ( select *,row_number()over(order by id)as rownum from employee ) as consulta where consulta.rownum = " + counterRow + ";";
+        String sql = "SELECT * from ( select *,row_number()over(order by id)as rownum from client ) as consulta where consulta.rownum = " + counterRow + ";";
         
         PonerDatos(sql);
         
@@ -524,7 +650,7 @@ public class EmployeeForm extends javax.swing.JInternalFrame {
         counterRow = sqlRows;
         NavN();
         
-        String sql = "SELECT * from ( select *,row_number()over(order by id)as rownum from employee ) as consulta where consulta.rownum = " + counterRow + ";";
+        String sql = "SELECT * from ( select *,row_number()over(order by id)as rownum from client ) as consulta where consulta.rownum = " + counterRow + ";";
         
         PonerDatos(sql);
                
@@ -535,7 +661,7 @@ public class EmployeeForm extends javax.swing.JInternalFrame {
         counterRow ++;
         NavN();
         
-        String sql = "SELECT * from ( select *,row_number()over(order by id)as rownum from employee ) as consulta where consulta.rownum = " + counterRow + ";";
+        String sql = "SELECT * from ( select *,row_number()over(order by id)as rownum from client ) as consulta where consulta.rownum = " + counterRow + ";";
         
         PonerDatos(sql);
                 
@@ -543,7 +669,7 @@ public class EmployeeForm extends javax.swing.JInternalFrame {
 
     private void btnModifyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModifyActionPerformed
         
-        setTitle("Employee Management");
+        setTitle("Client Management");
         counter1++;
         
         if (counter1 % 2 == 0) {
@@ -555,20 +681,25 @@ public class EmployeeForm extends javax.swing.JInternalFrame {
             btnNext.setEnabled(true);
             btnLast.setEnabled(true);
             btnDelete.setEnabled(true);
+            spEdad.setValue(0);
+            btnsGender.clearSelection();
             txtId.setText("Id");
-            txtUsername.setText("Username");
-            txtPassword.setText("Password");
+            txtName.setText("Username");
+            txtLastname.setText("Password");
+            txtAddress.setText("Addres");
+            txtPhone.setText("Phone");
+            txtDocument.setText("Document");
             lblFoto.setIcon(null);
             counterRow = 0;
 
         }else {
             modify = true;
-            User = JOptionPane.showInputDialog("Enter the Username that you want to Modify");
-            String sql = "select * from employee where Username = " + '"' + User + '"' + ";";
+            User = JOptionPane.showInputDialog("Enter the name that you want to Modify");
+            String sql = "select * from client where Name = " + '"' + User + '"' + ";";
             PonerDatos(sql);
             if (temp) {
                 counter++;
-                JOptionPane.showMessageDialog(null, "Employee Found");
+                JOptionPane.showMessageDialog(null, "Client Found");
                 btnAdd.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/guardar.png")));
                 Desbloq();
                 btnNext.setEnabled(false);
@@ -588,14 +719,14 @@ public class EmployeeForm extends javax.swing.JInternalFrame {
 
     private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed
         
-        setTitle("Employee Management");
+        setTitle("Client Management");
         Eliminar();
         
     }//GEN-LAST:event_btnDeleteActionPerformed
 
     private void btnAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddActionPerformed
         
-        setTitle("Employee Management");
+        setTitle("Client Management");
         counter++;
         
         if (counter % 2 == 0) {
@@ -608,20 +739,22 @@ public class EmployeeForm extends javax.swing.JInternalFrame {
             }else {
                 Agregar();
             }
-            
-            //Agregar();
-            //Modificar(User);
             btnNext.setEnabled(true);
             btnLast.setEnabled(true);
             btnDelete.setEnabled(true);
             txtId.setText("Id");
-            txtUsername.setText("Username");
-            txtPassword.setText("Password");
+            txtName.setText("Username");
+            txtLastname.setText("Password");
+            txtAddress.setText("Addres");
+            txtPhone.setText("Phone");
+            txtDocument.setText("Document");
             lblFoto.setIcon(null);
             counterRow = 0;
 
         }else {            
             Desbloq();
+            spEdad.setValue(0);
+            btnsGender.clearSelection();
             counter1++;
             btnModify.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/desactivar.png"))); 
             btnNext.setEnabled(false);
@@ -630,10 +763,13 @@ public class EmployeeForm extends javax.swing.JInternalFrame {
             btnLast.setEnabled(false);
             btnDelete.setEnabled(false);
             txtId.setText("");
-            txtUsername.setText("");
-            txtPassword.setText("");
+            txtName.setText("");
+            txtLastname.setText("");
+            txtAddress.setText("");
+            txtPhone.setText("");
+            txtDocument.setText("");
             lblFoto.setIcon(null);
-            setTitle(String.format("Empleado %s de %s", counterRow,sqlRows));
+            setTitle(String.format("Client %s de %s", counterRow,sqlRows));
             btnAdd.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/guardar.png")));         
         }
         
@@ -644,7 +780,7 @@ public class EmployeeForm extends javax.swing.JInternalFrame {
     private void btnSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchActionPerformed
         
         this.dispose();
-        new ShowEmployee().setVisible(true);
+        new ShowClients().setVisible(true);
         
     }//GEN-LAST:event_btnSearchActionPerformed
 
@@ -672,7 +808,6 @@ public class EmployeeForm extends javax.swing.JInternalFrame {
         JOptionPane.showMessageDialog(null, "See you Soon");
         dispose();
         counterRow = 0;
-        //new SplashOut().setVisible(true);
     }//GEN-LAST:event_btnExitActionPerformed
 
     private void btnPrintActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPrintActionPerformed
@@ -699,9 +834,9 @@ public class EmployeeForm extends javax.swing.JInternalFrame {
         }
     }//GEN-LAST:event_btn_fotoActionPerformed
 
-    private void txtUsernameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtUsernameActionPerformed
+    private void txtNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNameActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_txtUsernameActionPerformed
+    }//GEN-LAST:event_txtNameActionPerformed
 
     private void txtIdFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtIdFocusGained
         if (txtId.getText().equals("Id")) {
@@ -717,87 +852,146 @@ public class EmployeeForm extends javax.swing.JInternalFrame {
         }
     }//GEN-LAST:event_txtIdFocusLost
 
-    private void txtUsernameFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtUsernameFocusGained
-        if (txtUsername.getText().equals("Username")) {
-            txtUsername.setText("");
-            txtUsername.setForeground(Color.BLACK);
+    private void txtNameFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtNameFocusGained
+        if (txtName.getText().equals("Username")) {
+            txtName.setText("");
+            txtName.setForeground(Color.BLACK);
         }
-    }//GEN-LAST:event_txtUsernameFocusGained
+    }//GEN-LAST:event_txtNameFocusGained
 
-    private void txtUsernameFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtUsernameFocusLost
-        if (txtUsername.getText().equals("")) {
-            txtUsername.setText("Username");
-            txtUsername.setForeground(Color.LIGHT_GRAY);
+    private void txtNameFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtNameFocusLost
+        if (txtName.getText().equals("")) {
+            txtName.setText("Username");
+            txtName.setForeground(Color.LIGHT_GRAY);
         }
-    }//GEN-LAST:event_txtUsernameFocusLost
+    }//GEN-LAST:event_txtNameFocusLost
 
-    private void txtPasswordFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtPasswordFocusGained
-        if (txtPassword.getText().equals("Password")) {
-            txtPassword.setText("");
-            txtPassword.setForeground(Color.BLACK);
+    private void txtLastnameFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtLastnameFocusGained
+        if (txtLastname.getText().equals("Password")) {
+            txtLastname.setText("");
+            txtLastname.setForeground(Color.BLACK);
         }
-    }//GEN-LAST:event_txtPasswordFocusGained
+    }//GEN-LAST:event_txtLastnameFocusGained
 
-    private void txtPasswordFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtPasswordFocusLost
-        if (txtPassword.getText().equals("")) {
-            txtPassword.setText("Password");
-            txtPassword.setForeground(Color.LIGHT_GRAY);
+    private void txtLastnameFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtLastnameFocusLost
+        if (txtLastname.getText().equals("")) {
+            txtLastname.setText("Password");
+            txtLastname.setForeground(Color.LIGHT_GRAY);
         }
-    }//GEN-LAST:event_txtPasswordFocusLost
+    }//GEN-LAST:event_txtLastnameFocusLost
+
+    private void mActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mActionPerformed
+        if (m.isSelected()) {
+            JOptionPane.showMessageDialog(null, "Masculino");
+        }
+    }//GEN-LAST:event_mActionPerformed
+
+    private void fActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_fActionPerformed
+        if (f.isSelected()) {
+            JOptionPane.showMessageDialog(null, "Femenino");
+        }
+    }//GEN-LAST:event_fActionPerformed
+
+    private void txtAddressFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtAddressFocusGained
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtAddressFocusGained
+
+    private void txtAddressFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtAddressFocusLost
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtAddressFocusLost
+
+    private void txtPhoneFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtPhoneFocusGained
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtPhoneFocusGained
+
+    private void txtPhoneFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtPhoneFocusLost
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtPhoneFocusLost
+
+    private void txtDocumentFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtDocumentFocusGained
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtDocumentFocusGained
+
+    private void txtDocumentFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtDocumentFocusLost
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtDocumentFocusLost
 
     public void Agregar(){
     
-        String Username = txtUsername.getText();
-        String Password = txtPassword.getText();
-        String Job = (String)cbJob.getSelectedItem();
+        String document = txtDocument.getText();
+        String name = txtName.getText();
+        String lastname = txtLastname.getText();
+        String gender;
+        if (m.isSelected()) {
+                gender = "Masculino";
+            } else if (f.isSelected()) {
+                gender = "Femenino";
+            } else {
+                gender = "No se selecciono";
+            }
+        String age = spEdad.getValue().toString();
+        String address = txtAddress.getText();
+        String phone = txtPhone.getText();
         
         try {
-            if (Username.equals("") || Password.equals("") || lblFoto.getIcon() == null) {
+            if (document.equals("") || name.equals("") || lastname.equals("") || gender.equals("No se selecciono") || age.equals("0") || address.equals("") || phone.equals("") || lblFoto.getIcon() == null) {
                 JOptionPane.showMessageDialog(null, "Missing data to be entered");
-                setTitle("Employee Management");
+                setTitle("Client Management");
                 counterRow = 0;
             }else {
-                String sql = "insert into employee(Username,Password,Job,RutaImg) values ('"+Username+"','"+Password+"','"+Job+"','"+Path+"' )";
+                String sql = "insert into client(Document,Name,Lastname,Gender,Age,Address,Phone,RutaImg) values ('"+document+"','"+name+"','"+lastname+"','"+gender+"','"+age+"','"+address+"','"+phone+"','"+Path+"' )";
                 conect = DBConexion.Conectar();
                 st = conect.createStatement();
                 st.executeUpdate(sql);
-                JOptionPane.showMessageDialog(null, "New Employee SignUp Succesfully");
+                JOptionPane.showMessageDialog(null, "New Client SignUp Succesfully");
                 JOptionPane.showMessageDialog(null, "The window will close to save the changes");
                 this.dispose();
             }
             
         } catch (SQLException e) {
-            JOptionPane.showMessageDialog(null, "This Username already Exist");
+            //JOptionPane.showMessageDialog(null, "This Client already Exist");
         }
     }
     
     public void PonerDatos(String sql){
         
-        Object[] employee = new Object[5];
+        Object[] employee = new Object[9];
         
         try {
             conect = DBConexion.Conectar();
             st = conect.createStatement();
             rs = st.executeQuery(sql);
             while (rs.next()) {
-                employee[0] = rs.getInt("id");
-                employee[1] = rs.getString("Username");
-                employee[2] = rs.getString("Password");
-                employee[3] = rs.getString("Job");
-                employee[4] = rs.getString("RutaImg");
+                employee[0] = rs.getInt("Id");
+                employee[1] = rs.getString("Document");
+                employee[2] = rs.getString("Name");
+                employee[3] = rs.getString("Lastname");
+                employee[4] = rs.getString("Gender");
+                employee[5] = rs.getInt("Age");
+                employee[6] = rs.getString("Address");
+                employee[7] = rs.getString("Phone");
+                employee[8] = rs.getString("RutaImg");
             }
         } catch (SQLException e) {
         }
         
         if (employee[0] == null) {
-            JOptionPane.showMessageDialog(null, "This Username doesnt Exist");
+            JOptionPane.showMessageDialog(null, "This Client doesnt Exist");
             temp = false;
         }else{
             txtId.setText(employee[0].toString());
-            txtUsername.setText(employee[1].toString());
-            txtPassword.setText(employee[2].toString());
-            cbJob.setSelectedItem(employee[3]);
-            Image foto = new ImageIcon(employee[4].toString()).getImage();
+            txtDocument.setText(employee[1].toString());
+            txtName.setText(employee[2].toString());
+            txtLastname.setText(employee[3].toString());
+            if (employee[4].toString().equals("Femenino")) {
+                f.setSelected(true);
+            }else{
+                m.setSelected(true);
+            }
+            spEdad.setValue(employee[5]);
+            txtAddress.setText(employee[6].toString());
+            txtPhone.setText(employee[7].toString());
+            Image foto = new ImageIcon(employee[8].toString()).getImage();
             ImageIcon icono = new ImageIcon(foto.getScaledInstance(lblFoto.getWidth(), lblFoto.getHeight(), Image.SCALE_SMOOTH));
             lblFoto.setIcon(icono);
             Path = employee[4].toString();
@@ -807,15 +1001,26 @@ public class EmployeeForm extends javax.swing.JInternalFrame {
 
     public void Modificar(String User){
     
-        String Username = txtUsername.getText();
-        String Password = txtPassword.getText();
-        String Job = (String)cbJob.getSelectedItem();
+        String document = txtDocument.getText();
+        String name = txtName.getText();
+        String lastname = txtLastname.getText();
+        String gender;
+        if (m.isSelected()) {
+                gender = "Masculino";
+            } else if (f.isSelected()) {
+                gender = "Femenino";
+            } else {
+                gender = "No se selecciono";
+            }
+        String age = spEdad.getValue().toString();
+        String address = txtAddress.getText();
+        String phone = txtPhone.getText();
        
         try {
-            if (Username.equals("") || Password.equals("") || lblFoto.getIcon() == null) {
+            if (document.equals("") || name.equals("") || lastname.equals("") || gender.equals("No se selecciono") || age.equals("0") || address.equals("") || phone.equals("") || lblFoto.getIcon() == null) {
                 JOptionPane.showMessageDialog(null, "Missing data to be entered");
             }else {
-                String sql = "update employee set Username = '"+Username+"', Password = '"+Password+"', Job = '"+Job+"', RutaImg = '"+Path+"' where Username = " + '"' + User + '"' + ";";                                            
+                String sql = "update client set Document = '"+document+"', Name = '"+name+"', Lastname = '"+lastname+"',Gender = '"+gender+"',Age = '"+age+"',Address = '"+address+"',Phone = '"+phone+"', RutaImg = '"+Path+"' where Name = " + '"' + User + '"' + ";";                                            
                 conect = DBConexion.Conectar();
                 st = conect.createStatement();
                 st.executeUpdate(sql);
@@ -828,28 +1033,29 @@ public class EmployeeForm extends javax.swing.JInternalFrame {
     
     public void Eliminar(){
         
-        String User = JOptionPane.showInputDialog("Enter the Username that you want to Delete");
+        String User = JOptionPane.showInputDialog("Enter the Name that you want to Delete");
         repetido(User);
         
         if (!repetido) {
-            JOptionPane.showMessageDialog(null, "This Username doesnt Exist");
+            JOptionPane.showMessageDialog(null, "This client doesnt Exist");
             counterRow = 0;
         }else {
             try {
                 if (User.equals("")) {
                     JOptionPane.showMessageDialog(null, "Missing data to be entered");
                 }else {
-                    String sql = "delete from employee where Username = " + '"' + User + '"' + ";";                                            
+                    String sql = "delete from client where Name = " + '"' + User + '"' + ";";                                            
                     conect = DBConexion.Conectar();
                     st = conect.createStatement();
                     st.executeUpdate(sql);
-                    JOptionPane.showMessageDialog(null, "The Employee has been Deleted");
+                    JOptionPane.showMessageDialog(null, "The Client has been Deleted");
                     JOptionPane.showMessageDialog(null, "The window will close to save the changes");
                     this.dispose();
                 }   
             } catch (Exception e) {
             }
         }
+        counterRow = 0;
     }
     
     void repetido(String User){
@@ -858,13 +1064,13 @@ public class EmployeeForm extends javax.swing.JInternalFrame {
         repetido = false;
         
         try {
-            String sql = "Select Username from employee;";
+            String sql = "Select Name from client;";
             conect = DBConexion.Conectar();
             st = conect.createStatement();
             rs = st.executeQuery(sql);
             
             while (rs.next()) {
-                Users = rs.getString("Username");
+                Users = rs.getString("Name");
                 if (Users.equals(User)) {
                     repetido = true;
                 }
@@ -886,21 +1092,31 @@ public class EmployeeForm extends javax.swing.JInternalFrame {
     private javax.swing.JButton btnPrint;
     private javax.swing.JButton btnSearch;
     private javax.swing.JButton btn_foto;
-    private javax.swing.JComboBox<String> cbJob;
+    private javax.swing.ButtonGroup btnsGender;
+    private javax.swing.JRadioButton f;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel lblFecha;
     private javax.swing.JLabel lblFoto;
+    private javax.swing.JRadioButton m;
     private javax.swing.JPanel pnlForm;
     private javax.swing.JPanel pnlTools;
     private javax.swing.JPanel pnl_fnEspeciales;
     private javax.swing.JPanel pnl_foto;
+    private javax.swing.JPanel pnl_genero;
     private javax.swing.JPanel pnl_mtto2;
     private javax.swing.JPanel pnl_nav;
+    private javax.swing.JSpinner spEdad;
+    private javax.swing.JTextField txtAddress;
+    private javax.swing.JTextField txtDocument;
     private javax.swing.JTextField txtId;
-    private javax.swing.JTextField txtPassword;
-    private javax.swing.JTextField txtUsername;
+    private javax.swing.JTextField txtLastname;
+    private javax.swing.JTextField txtName;
+    private javax.swing.JTextField txtPhone;
     // End of variables declaration//GEN-END:variables
 }
