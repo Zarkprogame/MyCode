@@ -1,6 +1,6 @@
-package Vista.Clients;
+package Vista.Products;
 
-import Vista.Employee.*;
+import Vista.Clients.*;
 import Modelo.DBConexion;
 import java.sql.*;
 import java.awt.Color;
@@ -13,7 +13,7 @@ import java.io.IOException;
 import javax.swing.*;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
-public class ClientForm extends javax.swing.JInternalFrame {
+public class ProductsForm extends javax.swing.JInternalFrame {
 
     public static String ruta;
     public static int counter;
@@ -30,12 +30,9 @@ public class ClientForm extends javax.swing.JInternalFrame {
     Statement st = null;
     ResultSet rs = null;
     
-    public ClientForm() {
+    public ProductsForm() {
         initComponents();
-        setTitle("Client Management");
-        btnsGender.add(f);
-        btnsGender.add(m);
-        txtId.setEnabled(false);
+        setTitle("Products Management");
         btnFirst.setEnabled(false);
         btnPrevius.setEnabled(false);
         Bloq();
@@ -43,7 +40,7 @@ public class ClientForm extends javax.swing.JInternalFrame {
     }
     
     private void dbRows(){
-        String sql = "select count(Document) as numRows from client;";
+        String sql = "select count(Name) as numRows from products;";
         try {
             conect = DBConexion.Conectar();
             st = conect.createStatement();
@@ -58,9 +55,6 @@ public class ClientForm extends javax.swing.JInternalFrame {
         for (Component a : pnlForm.getComponents()) {
             a.setEnabled(false);
         }
-        for (Component a : pnl_genero.getComponents()) {
-            a.setEnabled(false);
-        }
         btn_foto.setEnabled(false);
     }
     
@@ -68,15 +62,11 @@ public class ClientForm extends javax.swing.JInternalFrame {
         for (Component a : pnlForm.getComponents()) {
             a.setEnabled(true);
         }
-        for (Component a : pnl_genero.getComponents()) {
-            a.setEnabled(true);
-        }
         btn_foto.setEnabled(true);
-        txtId.setEnabled(false);
     }
     
     private void NavP(){
-        setTitle(String.format("Client %s of %s", counterRow,sqlRows));
+        setTitle(String.format("Product %s of %s", counterRow,sqlRows));
         if (counterRow == 1) {
             btnPrevius.setEnabled(false);
             btnFirst.setEnabled(false);
@@ -92,7 +82,7 @@ public class ClientForm extends javax.swing.JInternalFrame {
     }
     
     private void NavN(){
-        setTitle(String.format("Client %s of %s", counterRow,sqlRows));
+        setTitle(String.format("Product %s of %s", counterRow,sqlRows));
         if (counterRow == sqlRows) {
             btnNext.setEnabled(false);
             btnLast.setEnabled(false);
@@ -111,7 +101,6 @@ public class ClientForm extends javax.swing.JInternalFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        btnsGender = new javax.swing.ButtonGroup();
         pnlForm = new javax.swing.JPanel();
         pnl_foto = new javax.swing.JPanel();
         btn_foto = new javax.swing.JButton();
@@ -121,18 +110,9 @@ public class ClientForm extends javax.swing.JInternalFrame {
         jLabel4 = new javax.swing.JLabel();
         txtId = new javax.swing.JTextField();
         txtName = new javax.swing.JTextField();
-        txtLastname = new javax.swing.JTextField();
+        txtBrand = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
-        pnl_genero = new javax.swing.JPanel();
-        m = new javax.swing.JRadioButton();
-        f = new javax.swing.JRadioButton();
-        jLabel6 = new javax.swing.JLabel();
-        txtAddress = new javax.swing.JTextField();
-        jLabel7 = new javax.swing.JLabel();
-        txtPhone = new javax.swing.JTextField();
-        spEdad = new javax.swing.JSpinner();
-        txtDocument = new javax.swing.JTextField();
+        txtPrice = new javax.swing.JTextField();
         pnlTools = new javax.swing.JPanel();
         pnl_nav = new javax.swing.JPanel();
         btnPrevius = new javax.swing.JButton();
@@ -193,7 +173,7 @@ public class ClientForm extends javax.swing.JInternalFrame {
         jLabel2.setText("Name:");
 
         jLabel4.setFont(new java.awt.Font("Britannic Bold", 0, 24)); // NOI18N
-        jLabel4.setText("Lastname:");
+        jLabel4.setText("Brand:");
 
         txtId.setFont(new java.awt.Font("Britannic Bold", 0, 18)); // NOI18N
         txtId.setForeground(new java.awt.Color(153, 153, 153));
@@ -224,105 +204,30 @@ public class ClientForm extends javax.swing.JInternalFrame {
             }
         });
 
-        txtLastname.setFont(new java.awt.Font("Britannic Bold", 0, 18)); // NOI18N
-        txtLastname.setForeground(new java.awt.Color(153, 153, 153));
-        txtLastname.setText("Lastname");
-        txtLastname.addFocusListener(new java.awt.event.FocusAdapter() {
+        txtBrand.setFont(new java.awt.Font("Britannic Bold", 0, 18)); // NOI18N
+        txtBrand.setForeground(new java.awt.Color(153, 153, 153));
+        txtBrand.setText("Brand");
+        txtBrand.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
-                txtLastnameFocusGained(evt);
+                txtBrandFocusGained(evt);
             }
             public void focusLost(java.awt.event.FocusEvent evt) {
-                txtLastnameFocusLost(evt);
+                txtBrandFocusLost(evt);
             }
         });
 
         jLabel5.setFont(new java.awt.Font("Britannic Bold", 0, 24)); // NOI18N
-        jLabel5.setText("Document:");
+        jLabel5.setText("Price:");
 
-        jLabel3.setFont(new java.awt.Font("Britannic Bold", 0, 24)); // NOI18N
-        jLabel3.setText("Age:");
-
-        pnl_genero.setBackground(new java.awt.Color(255, 255, 255));
-        pnl_genero.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(187, 187, 187)), "Gender", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Dialog", 1, 18))); // NOI18N
-
-        m.setText("Masculino");
-        m.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                mActionPerformed(evt);
-            }
-        });
-
-        f.setText("Femenino");
-        f.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                fActionPerformed(evt);
-            }
-        });
-
-        javax.swing.GroupLayout pnl_generoLayout = new javax.swing.GroupLayout(pnl_genero);
-        pnl_genero.setLayout(pnl_generoLayout);
-        pnl_generoLayout.setHorizontalGroup(
-            pnl_generoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pnl_generoLayout.createSequentialGroup()
-                .addComponent(m)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(f)
-                .addGap(0, 0, Short.MAX_VALUE))
-        );
-        pnl_generoLayout.setVerticalGroup(
-            pnl_generoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pnl_generoLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(pnl_generoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(m)
-                    .addComponent(f))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-
-        jLabel6.setFont(new java.awt.Font("Britannic Bold", 0, 24)); // NOI18N
-        jLabel6.setText("Address:");
-
-        txtAddress.setFont(new java.awt.Font("Britannic Bold", 0, 18)); // NOI18N
-        txtAddress.setForeground(new java.awt.Color(153, 153, 153));
-        txtAddress.setText("Address");
-        txtAddress.addFocusListener(new java.awt.event.FocusAdapter() {
+        txtPrice.setFont(new java.awt.Font("Britannic Bold", 0, 18)); // NOI18N
+        txtPrice.setForeground(new java.awt.Color(153, 153, 153));
+        txtPrice.setText("Price");
+        txtPrice.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
-                txtAddressFocusGained(evt);
+                txtPriceFocusGained(evt);
             }
             public void focusLost(java.awt.event.FocusEvent evt) {
-                txtAddressFocusLost(evt);
-            }
-        });
-        txtAddress.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtAddressActionPerformed(evt);
-            }
-        });
-
-        jLabel7.setFont(new java.awt.Font("Britannic Bold", 0, 24)); // NOI18N
-        jLabel7.setText("Phone:");
-
-        txtPhone.setFont(new java.awt.Font("Britannic Bold", 0, 18)); // NOI18N
-        txtPhone.setForeground(new java.awt.Color(153, 153, 153));
-        txtPhone.setText("Phone");
-        txtPhone.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusGained(java.awt.event.FocusEvent evt) {
-                txtPhoneFocusGained(evt);
-            }
-            public void focusLost(java.awt.event.FocusEvent evt) {
-                txtPhoneFocusLost(evt);
-            }
-        });
-
-        txtDocument.setFont(new java.awt.Font("Britannic Bold", 0, 18)); // NOI18N
-        txtDocument.setForeground(new java.awt.Color(153, 153, 153));
-        txtDocument.setText("Document");
-        txtDocument.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusGained(java.awt.event.FocusEvent evt) {
-                txtDocumentFocusGained(evt);
-            }
-            public void focusLost(java.awt.event.FocusEvent evt) {
-                txtDocumentFocusLost(evt);
+                txtPriceFocusLost(evt);
             }
         });
 
@@ -331,30 +236,27 @@ public class ClientForm extends javax.swing.JInternalFrame {
         pnlFormLayout.setHorizontalGroup(
             pnlFormLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlFormLayout.createSequentialGroup()
-                .addGap(23, 23, 23)
-                .addGroup(pnlFormLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabel5)
-                    .addComponent(jLabel1)
-                    .addComponent(jLabel2)
-                    .addComponent(jLabel4)
-                    .addComponent(jLabel6)
-                    .addComponent(jLabel7)
-                    .addComponent(jLabel3))
-                .addGap(18, 18, 18)
-                .addGroup(pnlFormLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(pnlFormLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(txtAddress)
-                        .addComponent(txtLastname)
-                        .addComponent(txtName)
-                        .addComponent(txtDocument, javax.swing.GroupLayout.DEFAULT_SIZE, 230, Short.MAX_VALUE)
-                        .addComponent(txtId))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlFormLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(spEdad, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(txtPhone, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(pnlFormLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(pnl_foto, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(pnl_genero, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(pnlFormLayout.createSequentialGroup()
+                        .addGap(38, 38, 38)
+                        .addGroup(pnlFormLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabel4)
+                            .addComponent(jLabel5))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(pnlFormLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(txtPrice, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtBrand, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(pnlFormLayout.createSequentialGroup()
+                        .addGap(44, 44, 44)
+                        .addGroup(pnlFormLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabel2)
+                            .addComponent(jLabel1))
+                        .addGap(28, 28, 28)
+                        .addGroup(pnlFormLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(txtName, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtId, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(pnl_foto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(77, 77, 77))
         );
         pnlFormLayout.setVerticalGroup(
@@ -362,41 +264,27 @@ public class ClientForm extends javax.swing.JInternalFrame {
             .addGroup(pnlFormLayout.createSequentialGroup()
                 .addGroup(pnlFormLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(pnlFormLayout.createSequentialGroup()
-                        .addGap(25, 25, 25)
+                        .addGap(45, 45, 45)
                         .addGroup(pnlFormLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtId, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(pnlFormLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtDocument, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(txtId, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
                         .addGroup(pnlFormLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(txtName, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGap(18, 18, 18)
                         .addGroup(pnlFormLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(txtLastname, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtBrand, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGap(18, 18, 18)
                         .addGroup(pnlFormLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(txtAddress, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(txtPrice, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(pnlFormLayout.createSequentialGroup()
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(pnl_foto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(pnlFormLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(pnlFormLayout.createSequentialGroup()
-                        .addGroup(pnlFormLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(txtPhone, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(pnlFormLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(spEdad, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addComponent(pnl_genero, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(19, 19, 19))
+                .addGap(30, 30, 30))
         );
 
         pnlTools.setBackground(new java.awt.Color(255, 255, 255));
@@ -597,7 +485,7 @@ public class ClientForm extends javax.swing.JInternalFrame {
         pnlToolsLayout.setVerticalGroup(
             pnlToolsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlToolsLayout.createSequentialGroup()
-                .addContainerGap(19, Short.MAX_VALUE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(pnlToolsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(pnl_fnEspeciales, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(pnl_nav, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -630,7 +518,7 @@ public class ClientForm extends javax.swing.JInternalFrame {
         counterRow --;
         NavP();
         
-        String sql = "SELECT * from ( select *,row_number()over(order by id)as rownum from client ) as consulta where consulta.rownum = " + counterRow + ";";
+        String sql = "SELECT * from ( select *,row_number()over(order by id)as rownum from products ) as consulta where consulta.rownum = " + counterRow + ";";
         
         PonerDatos(sql);
         
@@ -641,7 +529,7 @@ public class ClientForm extends javax.swing.JInternalFrame {
         counterRow = 1;
         NavP();
         
-        String sql = "SELECT * from ( select *,row_number()over(order by id)as rownum from client ) as consulta where consulta.rownum = " + counterRow + ";";
+        String sql = "SELECT * from ( select *,row_number()over(order by id)as rownum from products ) as consulta where consulta.rownum = " + counterRow + ";";
         
         PonerDatos(sql);
         
@@ -652,7 +540,7 @@ public class ClientForm extends javax.swing.JInternalFrame {
         counterRow = sqlRows;
         NavN();
         
-        String sql = "SELECT * from ( select *,row_number()over(order by id)as rownum from client ) as consulta where consulta.rownum = " + counterRow + ";";
+        String sql = "SELECT * from ( select *,row_number()over(order by id)as rownum from products ) as consulta where consulta.rownum = " + counterRow + ";";
         
         PonerDatos(sql);
                
@@ -663,7 +551,7 @@ public class ClientForm extends javax.swing.JInternalFrame {
         counterRow ++;
         NavN();
         
-        String sql = "SELECT * from ( select *,row_number()over(order by id)as rownum from client ) as consulta where consulta.rownum = " + counterRow + ";";
+        String sql = "SELECT * from ( select *,row_number()over(order by id)as rownum from products ) as consulta where consulta.rownum = " + counterRow + ";";
         
         PonerDatos(sql);
                 
@@ -671,7 +559,7 @@ public class ClientForm extends javax.swing.JInternalFrame {
 
     private void btnModifyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModifyActionPerformed
         
-        setTitle("Client Management");
+        setTitle("Products Management");
         counter1++;
         
         if (counter1 % 2 == 0) {
@@ -683,25 +571,21 @@ public class ClientForm extends javax.swing.JInternalFrame {
             btnNext.setEnabled(true);
             btnLast.setEnabled(true);
             btnDelete.setEnabled(true);
-            spEdad.setValue(0);
-            btnsGender.clearSelection();
             txtId.setText("Id");
             txtName.setText("Username");
-            txtLastname.setText("Password");
-            txtAddress.setText("Addres");
-            txtPhone.setText("Phone");
-            txtDocument.setText("Document");
+            txtBrand.setText("Brand");
+            txtPrice.setText("Price");
             lblFoto.setIcon(null);
             counterRow = 0;
 
         }else {
             modify = true;
-            User = JOptionPane.showInputDialog("Enter the User Document that you want to Modify");
-            String sql = "select * from client where Document = "  + User  + ";";
+            User = JOptionPane.showInputDialog("Enter the Id Product that you want to Modify");
+            String sql = "select * from products where Id = "  + User  + ";";
             PonerDatos(sql);
             if (temp) {
                 counter++;
-                JOptionPane.showMessageDialog(null, "Client Found");
+                JOptionPane.showMessageDialog(null, "Product Found");
                 btnAdd.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/guardar.png")));
                 Desbloq();
                 btnNext.setEnabled(false);
@@ -721,14 +605,14 @@ public class ClientForm extends javax.swing.JInternalFrame {
 
     private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed
         counterRow = 0;
-        setTitle("Client Management");
+        setTitle("Products Management");
         Eliminar();
         
     }//GEN-LAST:event_btnDeleteActionPerformed
 
     private void btnAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddActionPerformed
         
-        setTitle("Client Management");
+        setTitle("Products Management");
         counter++;
         
         if (counter % 2 == 0) {
@@ -745,18 +629,14 @@ public class ClientForm extends javax.swing.JInternalFrame {
             btnLast.setEnabled(true);
             btnDelete.setEnabled(true);
             txtId.setText("Id");
-            txtName.setText("Username");
-            txtLastname.setText("Password");
-            txtAddress.setText("Addres");
-            txtPhone.setText("Phone");
-            txtDocument.setText("Document");
+            txtName.setText("Name");
+            txtBrand.setText("Brand");
+            txtPrice.setText("price");
             lblFoto.setIcon(null);
             counterRow = 0;
 
         }else {            
             Desbloq();
-            spEdad.setValue(0);
-            btnsGender.clearSelection();
             counter1++;
             btnModify.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/desactivar.png"))); 
             btnNext.setEnabled(false);
@@ -766,12 +646,10 @@ public class ClientForm extends javax.swing.JInternalFrame {
             btnDelete.setEnabled(false);
             txtId.setText("");
             txtName.setText("");
-            txtLastname.setText("");
-            txtAddress.setText("");
-            txtPhone.setText("");
-            txtDocument.setText("");
+            txtBrand.setText("");
+            txtPrice.setText("");
             lblFoto.setIcon(null);
-            setTitle(String.format("Client %s de %s", counterRow,sqlRows));
+            setTitle(String.format("Product %s de %s", counterRow,sqlRows));
             btnAdd.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/guardar.png")));         
         }
         
@@ -855,7 +733,7 @@ public class ClientForm extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_txtIdFocusLost
 
     private void txtNameFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtNameFocusGained
-        if (txtName.getText().equals("Username")) {
+        if (txtName.getText().equals("Name")) {
             txtName.setText("");
             txtName.setForeground(Color.BLACK);
         }
@@ -863,93 +741,52 @@ public class ClientForm extends javax.swing.JInternalFrame {
 
     private void txtNameFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtNameFocusLost
         if (txtName.getText().equals("")) {
-            txtName.setText("Username");
+            txtName.setText("Name");
             txtName.setForeground(Color.LIGHT_GRAY);
         }
     }//GEN-LAST:event_txtNameFocusLost
 
-    private void txtLastnameFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtLastnameFocusGained
-        if (txtLastname.getText().equals("Password")) {
-            txtLastname.setText("");
-            txtLastname.setForeground(Color.BLACK);
+    private void txtBrandFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtBrandFocusGained
+        if (txtBrand.getText().equals("Brand")) {
+            txtBrand.setText("");
+            txtBrand.setForeground(Color.BLACK);
         }
-    }//GEN-LAST:event_txtLastnameFocusGained
+    }//GEN-LAST:event_txtBrandFocusGained
 
-    private void txtLastnameFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtLastnameFocusLost
-        if (txtLastname.getText().equals("")) {
-            txtLastname.setText("Password");
-            txtLastname.setForeground(Color.LIGHT_GRAY);
+    private void txtBrandFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtBrandFocusLost
+        if (txtBrand.getText().equals("")) {
+            txtBrand.setText("Brand");
+            txtBrand.setForeground(Color.LIGHT_GRAY);
         }
-    }//GEN-LAST:event_txtLastnameFocusLost
+    }//GEN-LAST:event_txtBrandFocusLost
 
-    private void mActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mActionPerformed
-        if (m.isSelected()) {
-            JOptionPane.showMessageDialog(null, "Masculino");
-        }
-    }//GEN-LAST:event_mActionPerformed
-
-    private void fActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_fActionPerformed
-        if (f.isSelected()) {
-            JOptionPane.showMessageDialog(null, "Femenino");
-        }
-    }//GEN-LAST:event_fActionPerformed
-
-    private void txtAddressFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtAddressFocusGained
+    private void txtPriceFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtPriceFocusGained
         // TODO add your handling code here:
-    }//GEN-LAST:event_txtAddressFocusGained
+    }//GEN-LAST:event_txtPriceFocusGained
 
-    private void txtAddressFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtAddressFocusLost
+    private void txtPriceFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtPriceFocusLost
         // TODO add your handling code here:
-    }//GEN-LAST:event_txtAddressFocusLost
-
-    private void txtPhoneFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtPhoneFocusGained
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtPhoneFocusGained
-
-    private void txtPhoneFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtPhoneFocusLost
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtPhoneFocusLost
-
-    private void txtDocumentFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtDocumentFocusGained
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtDocumentFocusGained
-
-    private void txtDocumentFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtDocumentFocusLost
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtDocumentFocusLost
-
-    private void txtAddressActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtAddressActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtAddressActionPerformed
+    }//GEN-LAST:event_txtPriceFocusLost
 
     public void Agregar(){
     
-        String document = txtDocument.getText();
+        String id = txtId.getText();
         String name = txtName.getText();
-        String lastname = txtLastname.getText();
-        String gender;
-        if (m.isSelected()) {
-                gender = "Masculino";
-            } else if (f.isSelected()) {
-                gender = "Femenino";
-            } else {
-                gender = "No se selecciono";
-            }
-        String age = spEdad.getValue().toString();
-        String address = txtAddress.getText();
-        String phone = txtPhone.getText();
+        String brand = txtBrand.getText();
+        String price = txtPrice.getText();
         
         try {
-            if (document.equals("") || name.equals("") || lastname.equals("") || gender.equals("No se selecciono") || age.equals("0") || address.equals("") || phone.equals("") || lblFoto.getIcon() == null) {
+            if (id.equals("") || name.equals("") || brand.equals("") || price.equals("") || lblFoto.getIcon() == null) {
                 JOptionPane.showMessageDialog(null, "Missing data to be entered");
-                setTitle("Client Management");
+                setTitle("Product Management");
                 counterRow = 0;
             }else {
-                String sql = "insert into client(Document,Name,Lastname,Gender,Age,Address,Phone,RutaImg) values ('"+document+"','"+name+"','"+lastname+"','"+gender+"','"+age+"','"+address+"','"+phone+"','"+Path+"' )";
+                String sql = "insert into products(Id,Name,Brand,Price, RutaImg) values (" + id + ",'"+name+"','"+brand+"',"+ price +",'"+Path+"' );";
+                JOptionPane.showMessageDialog(null, sql);
                 conect = DBConexion.Conectar();
                 st = conect.createStatement();
                 st.executeUpdate(sql);
-                JOptionPane.showMessageDialog(null, "New Client SignUp Succesfully");
+                JOptionPane.showMessageDialog(null, "New Product SignUp Succesfully");
                 JOptionPane.showMessageDialog(null, "The window will close to save the changes");
                 this.dispose();
             }
@@ -961,7 +798,7 @@ public class ClientForm extends javax.swing.JInternalFrame {
     
     public void PonerDatos(String sql){
         
-        Object[] employee = new Object[9];
+        Object[] employee = new Object[5];
         
         try {
             conect = DBConexion.Conectar();
@@ -969,68 +806,46 @@ public class ClientForm extends javax.swing.JInternalFrame {
             rs = st.executeQuery(sql);
             while (rs.next()) {
                 employee[0] = rs.getInt("Id");
-                employee[1] = rs.getString("Document");
-                employee[2] = rs.getString("Name");
-                employee[3] = rs.getString("Lastname");
-                employee[4] = rs.getString("Gender");
-                employee[5] = rs.getInt("Age");
-                employee[6] = rs.getString("Address");
-                employee[7] = rs.getString("Phone");
-                employee[8] = rs.getString("RutaImg");
+                employee[1] = rs.getString("Name");
+                employee[2] = rs.getString("Brand");
+                employee[3] = rs.getInt("Price");
+                employee[4] = rs.getString("RutaImg");
             }
         } catch (SQLException e) {
         }
         
         if (employee[0] == null) {
-            JOptionPane.showMessageDialog(null, "This Client doesnt Exist");
+            JOptionPane.showMessageDialog(null, "This Product doesnt Exist");
             temp = false;
         }else{
             txtId.setText(employee[0].toString());
-            txtDocument.setText(employee[1].toString());
-            txtName.setText(employee[2].toString());
-            txtLastname.setText(employee[3].toString());
-            if (employee[4].toString().equals("Femenino")) {
-                f.setSelected(true);
-            }else{
-                m.setSelected(true);
-            }
-            spEdad.setValue(employee[5]);
-            txtAddress.setText(employee[6].toString());
-            txtPhone.setText(employee[7].toString());
-            Image foto = new ImageIcon(employee[8].toString()).getImage();
+            txtName.setText(employee[1].toString());
+            txtBrand.setText(employee[2].toString());
+            txtPrice.setText(employee[3].toString());
+            Image foto = new ImageIcon(employee[4].toString()).getImage();
             ImageIcon icono = new ImageIcon(foto.getScaledInstance(lblFoto.getWidth(), lblFoto.getHeight(), Image.SCALE_SMOOTH));
             lblFoto.setIcon(icono);
-            Path = employee[8].toString();
+            Path = employee[4].toString();
             temp = true;
         }
     }
 
     public void Modificar(String User){
     
-        String document = txtDocument.getText();
+        String id = txtId.getText();
         String name = txtName.getText();
-        String lastname = txtLastname.getText();
-        String gender;
-        if (m.isSelected()) {
-                gender = "Masculino";
-            } else if (f.isSelected()) {
-                gender = "Femenino";
-            } else {
-                gender = "No se selecciono";
-            }
-        String age = spEdad.getValue().toString();
-        String address = txtAddress.getText();
-        String phone = txtPhone.getText();
+        String brand = txtBrand.getText();
+        String price = txtPrice.getText();
        
         try {
-            if (document.equals("") || name.equals("") || lastname.equals("") || gender.equals("No se selecciono") || age.equals("0") || address.equals("") || phone.equals("") || lblFoto.getIcon() == null) {
+            if (id.equals("") || name.equals("") || brand.equals("") || price.equals("") || lblFoto.getIcon() == null) {
                 JOptionPane.showMessageDialog(null, "Missing data to be entered");
             }else {
-                String sql = "update client set Document = '"+document+"', Name = '"+name+"', Lastname = '"+lastname+"',Gender = '"+gender+"',Age = '"+age+"',Address = '"+address+"',Phone = '"+phone+"', RutaImg = '"+Path+"' where Document = " + User + ";";                                            
+                String sql = "update products set id = "+id+", Name = '"+name+"', brand = '"+brand+"',Price = "+price+", RutaImg = '"+Path+"' where Id = " + User + ";";                                            
                 conect = DBConexion.Conectar();
                 st = conect.createStatement();
                 st.executeUpdate(sql);
-                JOptionPane.showMessageDialog(null, "The Employee Modify Succesfully");
+                JOptionPane.showMessageDialog(null, "The Product Modify Succesfully");
             }
             
         } catch (SQLException e) {
@@ -1039,22 +854,22 @@ public class ClientForm extends javax.swing.JInternalFrame {
     
     public void Eliminar(){
         
-        String User = JOptionPane.showInputDialog("Enter the Name that you want to Delete");
+        String User = JOptionPane.showInputDialog("Enter the Id Product that you want to Delete");
         repetido(User);
         
         if (!repetido) {
-            JOptionPane.showMessageDialog(null, "This client doesnt Exist");
+            JOptionPane.showMessageDialog(null, "This Product doesnt Exist");
             counterRow = 0;
         }else {
             try {
                 if (User.equals("")) {
                     JOptionPane.showMessageDialog(null, "Missing data to be entered");
                 }else {
-                    String sql = "delete from client where Name = " + '"' + User + '"' + ";";                                            
+                    String sql = "delete from products where Name = " + User + ";";                                            
                     conect = DBConexion.Conectar();
                     st = conect.createStatement();
                     st.executeUpdate(sql);
-                    JOptionPane.showMessageDialog(null, "The Client has been Deleted");
+                    JOptionPane.showMessageDialog(null, "The Product has been Deleted");
                     JOptionPane.showMessageDialog(null, "The window will close to save the changes");
                     this.dispose();
                 }   
@@ -1070,13 +885,13 @@ public class ClientForm extends javax.swing.JInternalFrame {
         repetido = false;
         
         try {
-            String sql = "Select Name from client;";
+            String sql = "Select Id from products;";
             conect = DBConexion.Conectar();
             st = conect.createStatement();
             rs = st.executeQuery(sql);
             
             while (rs.next()) {
-                Users = rs.getString("Name");
+                Users = rs.getString("Id");
                 if (Users.equals(User)) {
                     repetido = true;
                 }
@@ -1098,31 +913,21 @@ public class ClientForm extends javax.swing.JInternalFrame {
     private javax.swing.JButton btnPrint;
     private javax.swing.JButton btnSearch;
     private javax.swing.JButton btn_foto;
-    private javax.swing.ButtonGroup btnsGender;
-    private javax.swing.JRadioButton f;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel lblFecha;
     private javax.swing.JLabel lblFoto;
-    private javax.swing.JRadioButton m;
     private javax.swing.JPanel pnlForm;
     private javax.swing.JPanel pnlTools;
     private javax.swing.JPanel pnl_fnEspeciales;
     private javax.swing.JPanel pnl_foto;
-    private javax.swing.JPanel pnl_genero;
     private javax.swing.JPanel pnl_mtto2;
     private javax.swing.JPanel pnl_nav;
-    private javax.swing.JSpinner spEdad;
-    private javax.swing.JTextField txtAddress;
-    private javax.swing.JTextField txtDocument;
+    private javax.swing.JTextField txtBrand;
     private javax.swing.JTextField txtId;
-    private javax.swing.JTextField txtLastname;
     private javax.swing.JTextField txtName;
-    private javax.swing.JTextField txtPhone;
+    private javax.swing.JTextField txtPrice;
     // End of variables declaration//GEN-END:variables
 }

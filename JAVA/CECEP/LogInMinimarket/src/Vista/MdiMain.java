@@ -2,12 +2,14 @@ package Vista;
 
 import Vista.Clients.ClientForm;
 import Vista.Employee.EmployeeForm;
+import Vista.Products.ProductsForm;
 import java.awt.Dimension;
 
 public class MdiMain extends javax.swing.JFrame {
     
     public static EmployeeForm User = null;
     public static ClientForm client = null;
+    public static ProductsForm product = null;
     
     public MdiMain() {
         initComponents();
@@ -30,7 +32,7 @@ public class MdiMain extends javax.swing.JFrame {
         exitMenuItem = new javax.swing.JMenuItem();
         editMenu = new javax.swing.JMenu();
         ClientMenu = new javax.swing.JMenuItem();
-        copyMenuItem = new javax.swing.JMenuItem();
+        ProductsMenu = new javax.swing.JMenuItem();
         pasteMenuItem = new javax.swing.JMenuItem();
         deleteMenuItem = new javax.swing.JMenuItem();
 
@@ -71,14 +73,14 @@ public class MdiMain extends javax.swing.JFrame {
         });
         editMenu.add(ClientMenu);
 
-        copyMenuItem.setMnemonic('y');
-        copyMenuItem.setText("Products");
-        copyMenuItem.addActionListener(new java.awt.event.ActionListener() {
+        ProductsMenu.setMnemonic('y');
+        ProductsMenu.setText("Products");
+        ProductsMenu.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                copyMenuItemActionPerformed(evt);
+                ProductsMenuActionPerformed(evt);
             }
         });
-        editMenu.add(copyMenuItem);
+        editMenu.add(ProductsMenu);
 
         pasteMenuItem.setMnemonic('p');
         pasteMenuItem.setText("Company");
@@ -115,6 +117,8 @@ public class MdiMain extends javax.swing.JFrame {
         EmployeeForm.counterRow = 0;
         dispose();
         User = null;
+        client = null;
+        product = null;
         new SplashOut().setVisible(true);
     }//GEN-LAST:event_exitMenuItemActionPerformed
 
@@ -122,6 +126,10 @@ public class MdiMain extends javax.swing.JFrame {
         
         if (User != null) {
             User.dispose();
+        }
+        
+        if (product != null) {
+            product.dispose();
         }
         
         if (client == null || client.isClosed()) {
@@ -144,6 +152,10 @@ public class MdiMain extends javax.swing.JFrame {
             client.dispose();
         }
         
+        if (product != null) {
+            product.dispose();
+        }
+        
         if (User == null || User.isClosed()) {
                 //client.dispose();
                 User = new EmployeeForm();
@@ -155,16 +167,34 @@ public class MdiMain extends javax.swing.JFrame {
         User.setVisible(true);    
     }//GEN-LAST:event_EmployeedActionPerformed
 
-    private void copyMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_copyMenuItemActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_copyMenuItemActionPerformed
+    private void ProductsMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ProductsMenuActionPerformed
+        
+        if (client != null) {
+            client.dispose();
+        }
+        
+        if (User != null) {
+            User.dispose();
+        }
+        
+        if (product == null || product.isClosed()) {
+                //client.dispose();
+                product = new ProductsForm();
+                MdiMain.desktopPane.add(product);
+                Dimension desktopSize = desktopPane.getSize();
+                Dimension FrameSize = product.getSize();
+                product.setLocation((desktopSize.width - FrameSize.width)/2, (desktopSize.height- FrameSize.height)/2);
+        }
+        product.setVisible(true); 
+        
+    }//GEN-LAST:event_ProductsMenuActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenu AdminMenu;
     private javax.swing.JMenuItem ClientMenu;
     public static javax.swing.JMenuItem Employeed;
-    private javax.swing.JMenuItem copyMenuItem;
+    private javax.swing.JMenuItem ProductsMenu;
     private javax.swing.JMenuItem deleteMenuItem;
     public static javax.swing.JDesktopPane desktopPane;
     private javax.swing.JMenu editMenu;
