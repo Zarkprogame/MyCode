@@ -1,9 +1,7 @@
 package Vista.Clients;
 
-import Vista.Employee.*;
 import Modelo.DBConexion;
 import java.sql.*;
-import java.awt.Color;
 import java.awt.Component;
 import java.awt.Desktop;
 import java.awt.HeadlessException;
@@ -40,6 +38,10 @@ public class ClientForm extends javax.swing.JInternalFrame {
         btnPrevius.setEnabled(false);
         Bloq();
         dbRows();
+        if (sqlRows == 0) {
+            btnNext.setEnabled(false);
+            btnLast.setEnabled(false);
+        }
     }
     
     private void dbRows(){
@@ -196,45 +198,16 @@ public class ClientForm extends javax.swing.JInternalFrame {
         jLabel4.setText("Lastname:");
 
         txtId.setFont(new java.awt.Font("Britannic Bold", 0, 18)); // NOI18N
-        txtId.setForeground(new java.awt.Color(153, 153, 153));
+        txtId.setForeground(new java.awt.Color(51, 51, 51));
         txtId.setText("Id");
-        txtId.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusGained(java.awt.event.FocusEvent evt) {
-                txtIdFocusGained(evt);
-            }
-            public void focusLost(java.awt.event.FocusEvent evt) {
-                txtIdFocusLost(evt);
-            }
-        });
 
         txtName.setFont(new java.awt.Font("Britannic Bold", 0, 18)); // NOI18N
-        txtName.setForeground(new java.awt.Color(153, 153, 153));
+        txtName.setForeground(new java.awt.Color(51, 51, 51));
         txtName.setText("Name");
-        txtName.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusGained(java.awt.event.FocusEvent evt) {
-                txtNameFocusGained(evt);
-            }
-            public void focusLost(java.awt.event.FocusEvent evt) {
-                txtNameFocusLost(evt);
-            }
-        });
-        txtName.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtNameActionPerformed(evt);
-            }
-        });
 
         txtLastname.setFont(new java.awt.Font("Britannic Bold", 0, 18)); // NOI18N
-        txtLastname.setForeground(new java.awt.Color(153, 153, 153));
+        txtLastname.setForeground(new java.awt.Color(51, 51, 51));
         txtLastname.setText("Lastname");
-        txtLastname.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusGained(java.awt.event.FocusEvent evt) {
-                txtLastnameFocusGained(evt);
-            }
-            public void focusLost(java.awt.event.FocusEvent evt) {
-                txtLastnameFocusLost(evt);
-            }
-        });
 
         jLabel5.setFont(new java.awt.Font("Britannic Bold", 0, 24)); // NOI18N
         jLabel5.setText("Document:");
@@ -276,55 +249,26 @@ public class ClientForm extends javax.swing.JInternalFrame {
                 .addGroup(pnl_generoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(m)
                     .addComponent(f))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(14, Short.MAX_VALUE))
         );
 
         jLabel6.setFont(new java.awt.Font("Britannic Bold", 0, 24)); // NOI18N
         jLabel6.setText("Address:");
 
         txtAddress.setFont(new java.awt.Font("Britannic Bold", 0, 18)); // NOI18N
-        txtAddress.setForeground(new java.awt.Color(153, 153, 153));
+        txtAddress.setForeground(new java.awt.Color(51, 51, 51));
         txtAddress.setText("Address");
-        txtAddress.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusGained(java.awt.event.FocusEvent evt) {
-                txtAddressFocusGained(evt);
-            }
-            public void focusLost(java.awt.event.FocusEvent evt) {
-                txtAddressFocusLost(evt);
-            }
-        });
-        txtAddress.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtAddressActionPerformed(evt);
-            }
-        });
 
         jLabel7.setFont(new java.awt.Font("Britannic Bold", 0, 24)); // NOI18N
         jLabel7.setText("Phone:");
 
         txtPhone.setFont(new java.awt.Font("Britannic Bold", 0, 18)); // NOI18N
-        txtPhone.setForeground(new java.awt.Color(153, 153, 153));
+        txtPhone.setForeground(new java.awt.Color(51, 51, 51));
         txtPhone.setText("Phone");
-        txtPhone.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusGained(java.awt.event.FocusEvent evt) {
-                txtPhoneFocusGained(evt);
-            }
-            public void focusLost(java.awt.event.FocusEvent evt) {
-                txtPhoneFocusLost(evt);
-            }
-        });
 
         txtDocument.setFont(new java.awt.Font("Britannic Bold", 0, 18)); // NOI18N
-        txtDocument.setForeground(new java.awt.Color(153, 153, 153));
+        txtDocument.setForeground(new java.awt.Color(51, 51, 51));
         txtDocument.setText("Document");
-        txtDocument.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusGained(java.awt.event.FocusEvent evt) {
-                txtDocumentFocusGained(evt);
-            }
-            public void focusLost(java.awt.event.FocusEvent evt) {
-                txtDocumentFocusLost(evt);
-            }
-        });
 
         javax.swing.GroupLayout pnlFormLayout = new javax.swing.GroupLayout(pnlForm);
         pnlForm.setLayout(pnlFormLayout);
@@ -534,7 +478,7 @@ public class ClientForm extends javax.swing.JInternalFrame {
         });
 
         btnExit.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/cerrar.png"))); // NOI18N
-        btnExit.setToolTipText("<html>\n<body>\n<div>\n<img src =  \"file:C:/Users/zarkprogame/MyCode/JAVA/CECEP/LogInMinimarket/src/img/loco.jpg\" />\n</div>\n</body>\n </html>");
+        btnExit.setToolTipText("<html>\n<body>\n<div>\n<img src =  \"file:C:/Users/Usuario/MyCode/JAVA/CECEP/LogInMinimarket/src/img/loco.jpg\" />\n</div>\n</body>\n </html>");
         btnExit.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnExitActionPerformed(evt);
@@ -771,7 +715,6 @@ public class ClientForm extends javax.swing.JInternalFrame {
             txtPhone.setText("");
             txtDocument.setText("");
             lblFoto.setIcon(null);
-            setTitle(String.format("Client %s de %s", counterRow,sqlRows));
             btnAdd.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/guardar.png")));         
         }
         
@@ -789,7 +732,7 @@ public class ClientForm extends javax.swing.JInternalFrame {
     private void btnHelpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHelpActionPerformed
         
         try {
-            File file = new File("C:\\Users\\zarkprogame\\MyCode\\JAVA\\CECEP\\LogInMinimarket\\src\\img\\poo.pdf");
+            File file = new File("C:\\Users\\Usuario\\MyCode\\JAVA\\CECEP\\LogInMinimarket\\src\\img\\poo.pdf");
             if (file.exists()) {
                 if (Desktop.isDesktopSupported()) {
                     Desktop.getDesktop().open(file);
@@ -836,52 +779,6 @@ public class ClientForm extends javax.swing.JInternalFrame {
         }
     }//GEN-LAST:event_btn_fotoActionPerformed
 
-    private void txtNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNameActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtNameActionPerformed
-
-    private void txtIdFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtIdFocusGained
-        if (txtId.getText().equals("Id")) {
-            txtId.setText("");
-            txtId.setForeground(Color.BLACK);
-        }
-    }//GEN-LAST:event_txtIdFocusGained
-
-    private void txtIdFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtIdFocusLost
-        if (txtId.getText().equals("")) {
-            txtId.setText("Id");
-            txtId.setForeground(Color.LIGHT_GRAY);
-        }
-    }//GEN-LAST:event_txtIdFocusLost
-
-    private void txtNameFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtNameFocusGained
-        if (txtName.getText().equals("Username")) {
-            txtName.setText("");
-            txtName.setForeground(Color.BLACK);
-        }
-    }//GEN-LAST:event_txtNameFocusGained
-
-    private void txtNameFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtNameFocusLost
-        if (txtName.getText().equals("")) {
-            txtName.setText("Username");
-            txtName.setForeground(Color.LIGHT_GRAY);
-        }
-    }//GEN-LAST:event_txtNameFocusLost
-
-    private void txtLastnameFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtLastnameFocusGained
-        if (txtLastname.getText().equals("Password")) {
-            txtLastname.setText("");
-            txtLastname.setForeground(Color.BLACK);
-        }
-    }//GEN-LAST:event_txtLastnameFocusGained
-
-    private void txtLastnameFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtLastnameFocusLost
-        if (txtLastname.getText().equals("")) {
-            txtLastname.setText("Password");
-            txtLastname.setForeground(Color.LIGHT_GRAY);
-        }
-    }//GEN-LAST:event_txtLastnameFocusLost
-
     private void mActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mActionPerformed
         if (m.isSelected()) {
             JOptionPane.showMessageDialog(null, "Masculino");
@@ -893,34 +790,6 @@ public class ClientForm extends javax.swing.JInternalFrame {
             JOptionPane.showMessageDialog(null, "Femenino");
         }
     }//GEN-LAST:event_fActionPerformed
-
-    private void txtAddressFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtAddressFocusGained
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtAddressFocusGained
-
-    private void txtAddressFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtAddressFocusLost
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtAddressFocusLost
-
-    private void txtPhoneFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtPhoneFocusGained
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtPhoneFocusGained
-
-    private void txtPhoneFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtPhoneFocusLost
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtPhoneFocusLost
-
-    private void txtDocumentFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtDocumentFocusGained
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtDocumentFocusGained
-
-    private void txtDocumentFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtDocumentFocusLost
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtDocumentFocusLost
-
-    private void txtAddressActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtAddressActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtAddressActionPerformed
 
     public void Agregar(){
     

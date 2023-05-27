@@ -294,6 +294,7 @@ public class ShowClients extends javax.swing.JFrame {
     }//GEN-LAST:event_btnConsultActionPerformed
 
     private void btnShowAllActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnShowAllActionPerformed
+        btnsQueries.clearSelection();
         limpiarTabla();
         Consultar();
         txtQuery.setText("Enter the Letter or Word that you want to Search");

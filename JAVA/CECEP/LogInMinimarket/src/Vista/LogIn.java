@@ -197,6 +197,7 @@ public class LogIn extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_txtUserFocusLost
 
+    @SuppressWarnings("deprecation")
     private void txtPasswordFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtPasswordFocusGained
         if (txtPassword.getText().equals("Password")) {
             txtPassword.setText("");
@@ -204,6 +205,7 @@ public class LogIn extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_txtPasswordFocusGained
 
+    @SuppressWarnings("deprecation")
     private void txtPasswordFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtPasswordFocusLost
         if (txtPassword.getText().equals("")) {
             txtPassword.setText("Password");
@@ -224,6 +226,7 @@ public class LogIn extends javax.swing.JFrame {
         PreparedStatement pst;
         ResultSet rs;
         String Username = txtUser.getText();
+        @SuppressWarnings("deprecation")
         String Password = txtPassword.getText();
         if (Username.equals("") || Password.equals("")) {
             JOptionPane.showMessageDialog(this, "There are Empty fields");

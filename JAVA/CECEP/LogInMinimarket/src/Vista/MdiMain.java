@@ -1,6 +1,7 @@
 package Vista;
 
 import Vista.Clients.ClientForm;
+import Vista.Company.CompanyForm;
 import Vista.Employee.EmployeeForm;
 import Vista.Products.ProductsForm;
 import java.awt.Dimension;
@@ -10,6 +11,7 @@ public class MdiMain extends javax.swing.JFrame {
     public static EmployeeForm User = null;
     public static ClientForm client = null;
     public static ProductsForm product = null;
+    public static CompanyForm company = null;
     
     public MdiMain() {
         initComponents();
@@ -18,6 +20,7 @@ public class MdiMain extends javax.swing.JFrame {
         setTitle("MINIMARKET");
         if (LogIn.activeEmployee.equals("Employee")) {
             Employeed.setEnabled(false);
+            Company.setEnabled(false);
         }
     }
     
@@ -29,12 +32,11 @@ public class MdiMain extends javax.swing.JFrame {
         menuBar = new javax.swing.JMenuBar();
         AdminMenu = new javax.swing.JMenu();
         Employeed = new javax.swing.JMenuItem();
+        Company = new javax.swing.JMenuItem();
         exitMenuItem = new javax.swing.JMenuItem();
         editMenu = new javax.swing.JMenu();
         ClientMenu = new javax.swing.JMenuItem();
         ProductsMenu = new javax.swing.JMenuItem();
-        pasteMenuItem = new javax.swing.JMenuItem();
-        deleteMenuItem = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
 
@@ -49,6 +51,15 @@ public class MdiMain extends javax.swing.JFrame {
             }
         });
         AdminMenu.add(Employeed);
+
+        Company.setMnemonic('c');
+        Company.setText("Company");
+        Company.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                CompanyActionPerformed(evt);
+            }
+        });
+        AdminMenu.add(Company);
 
         exitMenuItem.setMnemonic('x');
         exitMenuItem.setText("Exit");
@@ -73,27 +84,15 @@ public class MdiMain extends javax.swing.JFrame {
         });
         editMenu.add(ClientMenu);
 
-        ProductsMenu.setMnemonic('y');
+        ProductsMenu.setMnemonic('p');
         ProductsMenu.setText("Products");
+        ProductsMenu.setToolTipText("");
         ProductsMenu.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 ProductsMenuActionPerformed(evt);
             }
         });
         editMenu.add(ProductsMenu);
-
-        pasteMenuItem.setMnemonic('p');
-        pasteMenuItem.setText("Company");
-        pasteMenuItem.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                pasteMenuItemActionPerformed(evt);
-            }
-        });
-        editMenu.add(pasteMenuItem);
-
-        deleteMenuItem.setMnemonic('d');
-        deleteMenuItem.setText("Cash");
-        editMenu.add(deleteMenuItem);
 
         menuBar.add(editMenu);
 
@@ -114,23 +113,19 @@ public class MdiMain extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void exitMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exitMenuItemActionPerformed
+        ClientForm.counterRow = 0;
         EmployeeForm.counterRow = 0;
-        dispose();
+        ProductsForm.counterRow = 0;
         User = null;
         client = null;
         product = null;
+        dispose();
         new SplashOut().setVisible(true);
     }//GEN-LAST:event_exitMenuItemActionPerformed
 
     private void ClientMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ClientMenuActionPerformed
-        
-        if (User != null) {
-            User.dispose();
-        }
-        
-        if (product != null) {
-            product.dispose();
-        }
+
+        Unique();
         
         if (client == null || client.isClosed()) {
                 client = new ClientForm();
@@ -142,19 +137,9 @@ public class MdiMain extends javax.swing.JFrame {
         client.setVisible(true);  
     }//GEN-LAST:event_ClientMenuActionPerformed
 
-    private void pasteMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pasteMenuItemActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_pasteMenuItemActionPerformed
-
     private void EmployeedActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EmployeedActionPerformed
         
-        if (client != null) {
-            client.dispose();
-        }
-        
-        if (product != null) {
-            product.dispose();
-        }
+        Unique();
         
         if (User == null || User.isClosed()) {
                 //client.dispose();
@@ -169,13 +154,7 @@ public class MdiMain extends javax.swing.JFrame {
 
     private void ProductsMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ProductsMenuActionPerformed
         
-        if (client != null) {
-            client.dispose();
-        }
-        
-        if (User != null) {
-            User.dispose();
-        }
+        Unique();
         
         if (product == null || product.isClosed()) {
                 //client.dispose();
@@ -189,18 +168,56 @@ public class MdiMain extends javax.swing.JFrame {
         
     }//GEN-LAST:event_ProductsMenuActionPerformed
 
+    private void CompanyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CompanyActionPerformed
+        
+        Unique();
+        
+        if (company == null || company.isClosed()) {
+                //client.dispose();
+                company = new CompanyForm();
+                MdiMain.desktopPane.add(company);
+                Dimension desktopSize = desktopPane.getSize();
+                Dimension FrameSize = company.getSize();
+                company.setLocation((desktopSize.width - FrameSize.width)/2, (desktopSize.height- FrameSize.height)/2);
+        }
+        company.setVisible(true); 
+        
+    }//GEN-LAST:event_CompanyActionPerformed
+
+    private void Unique(){
+        
+        ClientForm.counterRow = 0;
+        EmployeeForm.counterRow = 0;
+        ProductsForm.counterRow = 0;
+        
+        if (User != null) {
+            User.dispose();
+        }
+        
+        if (product != null) {
+            product.dispose();
+        }
+        
+        if (client != null) {
+            client.dispose();
+        }
+        
+        if (company != null) {
+            company.dispose();
+        }
+        
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenu AdminMenu;
     private javax.swing.JMenuItem ClientMenu;
+    public static javax.swing.JMenuItem Company;
     public static javax.swing.JMenuItem Employeed;
     private javax.swing.JMenuItem ProductsMenu;
-    private javax.swing.JMenuItem deleteMenuItem;
     public static javax.swing.JDesktopPane desktopPane;
     private javax.swing.JMenu editMenu;
     private javax.swing.JMenuItem exitMenuItem;
     private javax.swing.JMenuBar menuBar;
-    private javax.swing.JMenuItem pasteMenuItem;
     // End of variables declaration//GEN-END:variables
 
 }

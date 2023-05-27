@@ -1,9 +1,7 @@
 package Vista.Employee;
 
 import Modelo.DBConexion;
-import Vista.MdiMain;
 import java.sql.*;
-import java.awt.Color;
 import java.awt.Desktop;
 import java.awt.HeadlessException;
 import java.awt.Image;
@@ -37,6 +35,10 @@ public class EmployeeForm extends javax.swing.JInternalFrame {
         btnPrevius.setEnabled(false);
         Bloq();
         dbRows();
+        if (sqlRows == 0) {
+            btnNext.setEnabled(false);
+            btnLast.setEnabled(false);
+        }
     }
     
     private void dbRows(){
@@ -179,48 +181,19 @@ public class EmployeeForm extends javax.swing.JInternalFrame {
         jLabel4.setText("Password:");
 
         txtId.setFont(new java.awt.Font("Britannic Bold", 0, 18)); // NOI18N
-        txtId.setForeground(new java.awt.Color(153, 153, 153));
+        txtId.setForeground(new java.awt.Color(51, 51, 51));
         txtId.setText("Id");
-        txtId.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusGained(java.awt.event.FocusEvent evt) {
-                txtIdFocusGained(evt);
-            }
-            public void focusLost(java.awt.event.FocusEvent evt) {
-                txtIdFocusLost(evt);
-            }
-        });
 
         txtUsername.setFont(new java.awt.Font("Britannic Bold", 0, 18)); // NOI18N
-        txtUsername.setForeground(new java.awt.Color(153, 153, 153));
+        txtUsername.setForeground(new java.awt.Color(51, 51, 51));
         txtUsername.setText("Username");
-        txtUsername.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusGained(java.awt.event.FocusEvent evt) {
-                txtUsernameFocusGained(evt);
-            }
-            public void focusLost(java.awt.event.FocusEvent evt) {
-                txtUsernameFocusLost(evt);
-            }
-        });
-        txtUsername.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtUsernameActionPerformed(evt);
-            }
-        });
 
         txtPassword.setFont(new java.awt.Font("Britannic Bold", 0, 18)); // NOI18N
-        txtPassword.setForeground(new java.awt.Color(153, 153, 153));
+        txtPassword.setForeground(new java.awt.Color(51, 51, 51));
         txtPassword.setText("Password");
-        txtPassword.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusGained(java.awt.event.FocusEvent evt) {
-                txtPasswordFocusGained(evt);
-            }
-            public void focusLost(java.awt.event.FocusEvent evt) {
-                txtPasswordFocusLost(evt);
-            }
-        });
 
         cbJob.setFont(new java.awt.Font("Britannic Bold", 0, 18)); // NOI18N
-        cbJob.setForeground(new java.awt.Color(153, 153, 153));
+        cbJob.setForeground(new java.awt.Color(51, 51, 51));
         cbJob.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Admin", "Employee" }));
 
         javax.swing.GroupLayout pnlFormLayout = new javax.swing.GroupLayout(pnlForm);
@@ -406,7 +379,7 @@ public class EmployeeForm extends javax.swing.JInternalFrame {
         });
 
         btnExit.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/cerrar.png"))); // NOI18N
-        btnExit.setToolTipText("<html>\n<body>\n<div>\n<img src =  \"file:C:/Users/zarkprogame/MyCode/JAVA/CECEP/LogInMinimarket/src/img/loco.jpg\" />\n</div>\n</body>\n </html>");
+        btnExit.setToolTipText("<html>\n<body>\n<div>\n<img src =  \"file:C:/Users/Usuario/MyCode/JAVA/CECEP/LogInMinimarket/src/img/loco.jpg\" />\n</div>\n</body>\n </html>");
         btnExit.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnExitActionPerformed(evt);
@@ -608,9 +581,6 @@ public class EmployeeForm extends javax.swing.JInternalFrame {
             }else {
                 Agregar();
             }
-            
-            //Agregar();
-            //Modificar(User);
             btnNext.setEnabled(true);
             btnLast.setEnabled(true);
             btnDelete.setEnabled(true);
@@ -633,7 +603,6 @@ public class EmployeeForm extends javax.swing.JInternalFrame {
             txtUsername.setText("");
             txtPassword.setText("");
             lblFoto.setIcon(null);
-            setTitle(String.format("Empleado %s de %s", counterRow,sqlRows));
             btnAdd.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/guardar.png")));         
         }
         
@@ -651,7 +620,7 @@ public class EmployeeForm extends javax.swing.JInternalFrame {
     private void btnHelpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHelpActionPerformed
         
         try {
-            File file = new File("C:\\Users\\zarkprogame\\MyCode\\JAVA\\CECEP\\LogInMinimarket\\src\\img\\poo.pdf");
+            File file = new File("C:\\Users\\Usuario\\MyCode\\JAVA\\CECEP\\LogInMinimarket\\src\\img\\poo.pdf");
             if (file.exists()) {
                 if (Desktop.isDesktopSupported()) {
                     Desktop.getDesktop().open(file);
@@ -698,52 +667,6 @@ public class EmployeeForm extends javax.swing.JInternalFrame {
             lblFoto.setIcon(icono);
         }
     }//GEN-LAST:event_btn_fotoActionPerformed
-
-    private void txtUsernameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtUsernameActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtUsernameActionPerformed
-
-    private void txtIdFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtIdFocusGained
-        if (txtId.getText().equals("Id")) {
-            txtId.setText("");
-            txtId.setForeground(Color.BLACK);
-        }
-    }//GEN-LAST:event_txtIdFocusGained
-
-    private void txtIdFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtIdFocusLost
-        if (txtId.getText().equals("")) {
-            txtId.setText("Id");
-            txtId.setForeground(Color.LIGHT_GRAY);
-        }
-    }//GEN-LAST:event_txtIdFocusLost
-
-    private void txtUsernameFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtUsernameFocusGained
-        if (txtUsername.getText().equals("Username")) {
-            txtUsername.setText("");
-            txtUsername.setForeground(Color.BLACK);
-        }
-    }//GEN-LAST:event_txtUsernameFocusGained
-
-    private void txtUsernameFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtUsernameFocusLost
-        if (txtUsername.getText().equals("")) {
-            txtUsername.setText("Username");
-            txtUsername.setForeground(Color.LIGHT_GRAY);
-        }
-    }//GEN-LAST:event_txtUsernameFocusLost
-
-    private void txtPasswordFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtPasswordFocusGained
-        if (txtPassword.getText().equals("Password")) {
-            txtPassword.setText("");
-            txtPassword.setForeground(Color.BLACK);
-        }
-    }//GEN-LAST:event_txtPasswordFocusGained
-
-    private void txtPasswordFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtPasswordFocusLost
-        if (txtPassword.getText().equals("")) {
-            txtPassword.setText("Password");
-            txtPassword.setForeground(Color.LIGHT_GRAY);
-        }
-    }//GEN-LAST:event_txtPasswordFocusLost
 
     public void Agregar(){
     

@@ -3,7 +3,6 @@ package Vista.Products;
 import Vista.Clients.*;
 import Modelo.DBConexion;
 import java.sql.*;
-import java.awt.Color;
 import java.awt.Component;
 import java.awt.Desktop;
 import java.awt.HeadlessException;
@@ -37,6 +36,10 @@ public class ProductsForm extends javax.swing.JInternalFrame {
         btnPrevius.setEnabled(false);
         Bloq();
         dbRows();
+        if (sqlRows == 0) {
+            btnNext.setEnabled(false);
+            btnLast.setEnabled(false);
+        }
     }
     
     private void dbRows(){
@@ -176,60 +179,23 @@ public class ProductsForm extends javax.swing.JInternalFrame {
         jLabel4.setText("Brand:");
 
         txtId.setFont(new java.awt.Font("Britannic Bold", 0, 18)); // NOI18N
-        txtId.setForeground(new java.awt.Color(153, 153, 153));
+        txtId.setForeground(new java.awt.Color(51, 51, 51));
         txtId.setText("Id");
-        txtId.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusGained(java.awt.event.FocusEvent evt) {
-                txtIdFocusGained(evt);
-            }
-            public void focusLost(java.awt.event.FocusEvent evt) {
-                txtIdFocusLost(evt);
-            }
-        });
 
         txtName.setFont(new java.awt.Font("Britannic Bold", 0, 18)); // NOI18N
-        txtName.setForeground(new java.awt.Color(153, 153, 153));
+        txtName.setForeground(new java.awt.Color(51, 51, 51));
         txtName.setText("Name");
-        txtName.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusGained(java.awt.event.FocusEvent evt) {
-                txtNameFocusGained(evt);
-            }
-            public void focusLost(java.awt.event.FocusEvent evt) {
-                txtNameFocusLost(evt);
-            }
-        });
-        txtName.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtNameActionPerformed(evt);
-            }
-        });
 
         txtBrand.setFont(new java.awt.Font("Britannic Bold", 0, 18)); // NOI18N
-        txtBrand.setForeground(new java.awt.Color(153, 153, 153));
+        txtBrand.setForeground(new java.awt.Color(51, 51, 51));
         txtBrand.setText("Brand");
-        txtBrand.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusGained(java.awt.event.FocusEvent evt) {
-                txtBrandFocusGained(evt);
-            }
-            public void focusLost(java.awt.event.FocusEvent evt) {
-                txtBrandFocusLost(evt);
-            }
-        });
 
         jLabel5.setFont(new java.awt.Font("Britannic Bold", 0, 24)); // NOI18N
         jLabel5.setText("Price:");
 
         txtPrice.setFont(new java.awt.Font("Britannic Bold", 0, 18)); // NOI18N
-        txtPrice.setForeground(new java.awt.Color(153, 153, 153));
+        txtPrice.setForeground(new java.awt.Color(51, 51, 51));
         txtPrice.setText("Price");
-        txtPrice.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusGained(java.awt.event.FocusEvent evt) {
-                txtPriceFocusGained(evt);
-            }
-            public void focusLost(java.awt.event.FocusEvent evt) {
-                txtPriceFocusLost(evt);
-            }
-        });
 
         javax.swing.GroupLayout pnlFormLayout = new javax.swing.GroupLayout(pnlForm);
         pnlForm.setLayout(pnlFormLayout);
@@ -422,7 +388,7 @@ public class ProductsForm extends javax.swing.JInternalFrame {
         });
 
         btnExit.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/cerrar.png"))); // NOI18N
-        btnExit.setToolTipText("<html>\n<body>\n<div>\n<img src =  \"file:C:/Users/zarkprogame/MyCode/JAVA/CECEP/LogInMinimarket/src/img/loco.jpg\" />\n</div>\n</body>\n </html>");
+        btnExit.setToolTipText("<html>\n<body>\n<div>\n<img src =  \"file:C:/Users/Usuario/MyCode/JAVA/CECEP/LogInMinimarket/src/img/loco.jpg\" />\n</div>\n</body>\n </html>");
         btnExit.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnExitActionPerformed(evt);
@@ -649,7 +615,6 @@ public class ProductsForm extends javax.swing.JInternalFrame {
             txtBrand.setText("");
             txtPrice.setText("");
             lblFoto.setIcon(null);
-            setTitle(String.format("Product %s de %s", counterRow,sqlRows));
             btnAdd.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/guardar.png")));         
         }
         
@@ -660,14 +625,14 @@ public class ProductsForm extends javax.swing.JInternalFrame {
     private void btnSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchActionPerformed
         counterRow = 0;
         this.dispose();
-        new ShowClients().setVisible(true);
+        new ShowProduct().setVisible(true);
         
     }//GEN-LAST:event_btnSearchActionPerformed
 
     private void btnHelpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHelpActionPerformed
         
         try {
-            File file = new File("C:\\Users\\zarkprogame\\MyCode\\JAVA\\CECEP\\LogInMinimarket\\src\\img\\poo.pdf");
+            File file = new File("C:\\Users\\Usuario\\MyCode\\JAVA\\CECEP\\LogInMinimarket\\src\\img\\poo.pdf");
             if (file.exists()) {
                 if (Desktop.isDesktopSupported()) {
                     Desktop.getDesktop().open(file);
@@ -713,60 +678,6 @@ public class ProductsForm extends javax.swing.JInternalFrame {
             lblFoto.setIcon(icono);
         }
     }//GEN-LAST:event_btn_fotoActionPerformed
-
-    private void txtNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNameActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtNameActionPerformed
-
-    private void txtIdFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtIdFocusGained
-        if (txtId.getText().equals("Id")) {
-            txtId.setText("");
-            txtId.setForeground(Color.BLACK);
-        }
-    }//GEN-LAST:event_txtIdFocusGained
-
-    private void txtIdFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtIdFocusLost
-        if (txtId.getText().equals("")) {
-            txtId.setText("Id");
-            txtId.setForeground(Color.LIGHT_GRAY);
-        }
-    }//GEN-LAST:event_txtIdFocusLost
-
-    private void txtNameFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtNameFocusGained
-        if (txtName.getText().equals("Name")) {
-            txtName.setText("");
-            txtName.setForeground(Color.BLACK);
-        }
-    }//GEN-LAST:event_txtNameFocusGained
-
-    private void txtNameFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtNameFocusLost
-        if (txtName.getText().equals("")) {
-            txtName.setText("Name");
-            txtName.setForeground(Color.LIGHT_GRAY);
-        }
-    }//GEN-LAST:event_txtNameFocusLost
-
-    private void txtBrandFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtBrandFocusGained
-        if (txtBrand.getText().equals("Brand")) {
-            txtBrand.setText("");
-            txtBrand.setForeground(Color.BLACK);
-        }
-    }//GEN-LAST:event_txtBrandFocusGained
-
-    private void txtBrandFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtBrandFocusLost
-        if (txtBrand.getText().equals("")) {
-            txtBrand.setText("Brand");
-            txtBrand.setForeground(Color.LIGHT_GRAY);
-        }
-    }//GEN-LAST:event_txtBrandFocusLost
-
-    private void txtPriceFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtPriceFocusGained
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtPriceFocusGained
-
-    private void txtPriceFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtPriceFocusLost
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtPriceFocusLost
 
     public void Agregar(){
     
