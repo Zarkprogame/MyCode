@@ -1,6 +1,7 @@
 package Vista.Products;
 
 import Modelo.DBConexion;
+import Vista.Invoice.BillForm;
 import Vista.MdiMain;
 import static Vista.MdiMain.product;
 import static Vista.MdiMain.desktopPane;
@@ -19,6 +20,11 @@ public class ShowProduct extends javax.swing.JFrame {
     
     public ShowProduct() {
         initComponents();
+        btnSearch.setVisible(false);
+        if (BillForm.Search2 == true) {
+            btnExit.setVisible(false);
+            btnSearch.setVisible(true);
+        }
         btnsQueries.add(id);
         btnsQueries.add(name);
         btnsQueries.add(brand);
@@ -47,6 +53,7 @@ public class ShowProduct extends javax.swing.JFrame {
         btnConsult = new javax.swing.JButton();
         btnExit = new javax.swing.JButton();
         btnShowAll = new javax.swing.JButton();
+        btnSearch = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
 
@@ -147,6 +154,14 @@ public class ShowProduct extends javax.swing.JFrame {
             }
         });
 
+        btnSearch.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        btnSearch.setText("Search");
+        btnSearch.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSearchActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -167,8 +182,10 @@ public class ShowProduct extends javax.swing.JFrame {
                                 .addComponent(btnExit))
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(btnConsult)
-                                .addGap(45, 45, 45)
+                                .addGap(28, 28, 28)
                                 .addComponent(btnShowAll)
+                                .addGap(28, 28, 28)
+                                .addComponent(btnSearch)
                                 .addGap(0, 0, Short.MAX_VALUE)))
                         .addContainerGap())
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
@@ -195,7 +212,8 @@ public class ShowProduct extends javax.swing.JFrame {
                         .addGap(26, 26, 26)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(btnConsult)
-                            .addComponent(btnShowAll)))
+                            .addComponent(btnShowAll)
+                            .addComponent(btnSearch)))
                     .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 29, Short.MAX_VALUE)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 227, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -256,6 +274,22 @@ public class ShowProduct extends javax.swing.JFrame {
         Consultar();
         txtQuery.setText("Enter the Letter or Word that you want to Search");
     }//GEN-LAST:event_btnShowAllActionPerformed
+
+    private void btnSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchActionPerformed
+        int fila = tabla.getSelectedRow();
+        if (fila == -1) {
+            JOptionPane.showMessageDialog(null, "You didnt Select any Row");
+        }else{
+            BillForm.productId = (String) tabla.getValueAt(fila, 0).toString();
+            BillForm.productName = (String) tabla.getValueAt(fila, 1).toString();
+            BillForm.productBrand = (String) tabla.getValueAt(fila, 2).toString();
+            
+            BillForm.txtIdProduct.setText(BillForm.productId);
+            BillForm.txtNameProduct.setText(BillForm.productName + " " + BillForm.productBrand);
+        }
+        BillForm.Search2 = false;
+        this.dispose();
+    }//GEN-LAST:event_btnSearchActionPerformed
 
     void btnConsultar(String word,String Query){
         
@@ -318,6 +352,7 @@ public class ShowProduct extends javax.swing.JFrame {
     private javax.swing.JRadioButton brand;
     private javax.swing.JButton btnConsult;
     private javax.swing.JButton btnExit;
+    private javax.swing.JButton btnSearch;
     private javax.swing.JButton btnShowAll;
     private javax.swing.ButtonGroup btnsQueries;
     private javax.swing.JRadioButton id;

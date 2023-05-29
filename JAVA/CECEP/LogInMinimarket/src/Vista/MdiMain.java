@@ -3,6 +3,7 @@ package Vista;
 import Vista.Clients.ClientForm;
 import Vista.Company.CompanyForm;
 import Vista.Employee.EmployeeForm;
+import Vista.Invoice.BillForm;
 import Vista.Products.ProductsForm;
 import java.awt.Dimension;
 
@@ -12,12 +13,14 @@ public class MdiMain extends javax.swing.JFrame {
     public static ClientForm client = null;
     public static ProductsForm product = null;
     public static CompanyForm company = null;
+    public static BillForm bill = null;
+    
     
     public MdiMain() {
         initComponents();
         setExtendedState(MAXIMIZED_BOTH);
         setResizable(false);
-        setTitle("MINIMARKET");
+        setTitle("  Bienvenido  " + LogIn.Employee );
         if (LogIn.activeEmployee.equals("Employee")) {
             Employeed.setEnabled(false);
             Company.setEnabled(false);
@@ -34,9 +37,11 @@ public class MdiMain extends javax.swing.JFrame {
         Employeed = new javax.swing.JMenuItem();
         Company = new javax.swing.JMenuItem();
         exitMenuItem = new javax.swing.JMenuItem();
-        editMenu = new javax.swing.JMenu();
+        TablesMenu = new javax.swing.JMenu();
         ClientMenu = new javax.swing.JMenuItem();
         ProductsMenu = new javax.swing.JMenuItem();
+        InvoiceMenu = new javax.swing.JMenu();
+        BillMenu = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
 
@@ -72,8 +77,8 @@ public class MdiMain extends javax.swing.JFrame {
 
         menuBar.add(AdminMenu);
 
-        editMenu.setMnemonic('t');
-        editMenu.setText("Tables");
+        TablesMenu.setMnemonic('t');
+        TablesMenu.setText("Tables");
 
         ClientMenu.setMnemonic('c');
         ClientMenu.setText("Clients");
@@ -82,7 +87,7 @@ public class MdiMain extends javax.swing.JFrame {
                 ClientMenuActionPerformed(evt);
             }
         });
-        editMenu.add(ClientMenu);
+        TablesMenu.add(ClientMenu);
 
         ProductsMenu.setMnemonic('p');
         ProductsMenu.setText("Products");
@@ -92,9 +97,23 @@ public class MdiMain extends javax.swing.JFrame {
                 ProductsMenuActionPerformed(evt);
             }
         });
-        editMenu.add(ProductsMenu);
+        TablesMenu.add(ProductsMenu);
 
-        menuBar.add(editMenu);
+        menuBar.add(TablesMenu);
+
+        InvoiceMenu.setMnemonic('i');
+        InvoiceMenu.setText("Invoice");
+
+        BillMenu.setMnemonic('b');
+        BillMenu.setText("Bill");
+        BillMenu.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BillMenuActionPerformed(evt);
+            }
+        });
+        InvoiceMenu.add(BillMenu);
+
+        menuBar.add(InvoiceMenu);
 
         setJMenuBar(menuBar);
 
@@ -184,6 +203,19 @@ public class MdiMain extends javax.swing.JFrame {
         
     }//GEN-LAST:event_CompanyActionPerformed
 
+    private void BillMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BillMenuActionPerformed
+        Unique();
+        
+        if (bill == null || bill.isClosed()) {
+                bill = new BillForm();
+                MdiMain.desktopPane.add(bill);
+                int alto = (int)desktopPane.getHeight();
+                int ancho = (int)desktopPane.getWidth();
+                bill.setSize(ancho, alto);
+        }
+        bill.setVisible(true);  
+    }//GEN-LAST:event_BillMenuActionPerformed
+
     private void Unique(){
         
         ClientForm.counterRow = 0;
@@ -206,16 +238,22 @@ public class MdiMain extends javax.swing.JFrame {
             company.dispose();
         }
         
+        if (bill != null) {
+            bill.dispose();
+        }
+        
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenu AdminMenu;
+    private javax.swing.JMenuItem BillMenu;
     private javax.swing.JMenuItem ClientMenu;
     public static javax.swing.JMenuItem Company;
     public static javax.swing.JMenuItem Employeed;
+    private javax.swing.JMenu InvoiceMenu;
     private javax.swing.JMenuItem ProductsMenu;
+    private javax.swing.JMenu TablesMenu;
     public static javax.swing.JDesktopPane desktopPane;
-    private javax.swing.JMenu editMenu;
     private javax.swing.JMenuItem exitMenuItem;
     private javax.swing.JMenuBar menuBar;
     // End of variables declaration//GEN-END:variables

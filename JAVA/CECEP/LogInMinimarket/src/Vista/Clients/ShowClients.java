@@ -1,6 +1,7 @@
 package Vista.Clients;
 
 import Modelo.DBConexion;
+import Vista.Invoice.BillForm;
 import Vista.MdiMain;
 import static Vista.MdiMain.client;
 import static Vista.MdiMain.desktopPane;
@@ -19,6 +20,11 @@ public class ShowClients extends javax.swing.JFrame {
     
     public ShowClients() {
         initComponents();
+        btnSearch.setVisible(false);
+        if (BillForm.Search == true) {
+            btnExit.setVisible(false);
+            btnSearch.setVisible(true);
+        }
         btnsQueries.add(id);
         btnsQueries.add(document);
         btnsQueries.add(name);
@@ -53,8 +59,9 @@ public class ShowClients extends javax.swing.JFrame {
         phone = new javax.swing.JRadioButton();
         jLabel3 = new javax.swing.JLabel();
         btnConsult = new javax.swing.JButton();
-        btnConsult1 = new javax.swing.JButton();
+        btnExit = new javax.swing.JButton();
         btnShowAll = new javax.swing.JButton();
+        btnSearch = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
 
@@ -160,14 +167,14 @@ public class ShowClients extends javax.swing.JFrame {
             }
         });
 
-        btnConsult1.setBackground(new java.awt.Color(255, 204, 204));
-        btnConsult1.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        btnConsult1.setMnemonic('e');
-        btnConsult1.setText("Exit");
-        btnConsult1.setToolTipText("Exit");
-        btnConsult1.addActionListener(new java.awt.event.ActionListener() {
+        btnExit.setBackground(new java.awt.Color(255, 204, 204));
+        btnExit.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        btnExit.setMnemonic('e');
+        btnExit.setText("Exit");
+        btnExit.setToolTipText("Exit");
+        btnExit.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnConsult1ActionPerformed(evt);
+                btnExitActionPerformed(evt);
             }
         });
 
@@ -176,6 +183,14 @@ public class ShowClients extends javax.swing.JFrame {
         btnShowAll.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnShowAllActionPerformed(evt);
+            }
+        });
+
+        btnSearch.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        btnSearch.setText("Search");
+        btnSearch.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSearchActionPerformed(evt);
             }
         });
 
@@ -200,13 +215,15 @@ public class ShowClients extends javax.swing.JFrame {
                                 .addGap(0, 0, Short.MAX_VALUE)
                                 .addComponent(jLabel1)
                                 .addGap(256, 256, 256)
-                                .addComponent(btnConsult1))
+                                .addComponent(btnExit))
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(layout.createSequentialGroup()
                                         .addComponent(btnConsult)
                                         .addGap(45, 45, 45)
-                                        .addComponent(btnShowAll))
+                                        .addComponent(btnShowAll)
+                                        .addGap(38, 38, 38)
+                                        .addComponent(btnSearch))
                                     .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addGap(0, 0, Short.MAX_VALUE)))
                         .addContainerGap())))
@@ -217,7 +234,7 @@ public class ShowClients extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel1)
-                    .addComponent(btnConsult1))
+                    .addComponent(btnExit))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
@@ -229,7 +246,8 @@ public class ShowClients extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(btnConsult)
-                            .addComponent(btnShowAll)))
+                            .addComponent(btnShowAll)
+                            .addComponent(btnSearch)))
                     .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 11, Short.MAX_VALUE)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 227, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -252,7 +270,7 @@ public class ShowClients extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_txtQueryFocusLost
 
-    private void btnConsult1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConsult1ActionPerformed
+    private void btnExitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExitActionPerformed
         dispose();
         if (client == null || client.isClosed()) {
                 client = new ClientForm();
@@ -262,7 +280,7 @@ public class ShowClients extends javax.swing.JFrame {
                 client.setLocation((desktopSize.width - FrameSize.width)/2, (desktopSize.height- FrameSize.height)/2);
         }
         client.setVisible(true); 
-    }//GEN-LAST:event_btnConsult1ActionPerformed
+    }//GEN-LAST:event_btnExitActionPerformed
 
     private void btnConsultActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConsultActionPerformed
         
@@ -299,6 +317,22 @@ public class ShowClients extends javax.swing.JFrame {
         Consultar();
         txtQuery.setText("Enter the Letter or Word that you want to Search");
     }//GEN-LAST:event_btnShowAllActionPerformed
+
+    private void btnSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchActionPerformed
+        int fila = tabla.getSelectedRow();
+        if (fila == -1) {
+            JOptionPane.showMessageDialog(null, "You didnt Select any Row");
+        }else{
+            BillForm.clientDocument = (String) tabla.getValueAt(fila, 1).toString();
+            BillForm.clientName = (String) tabla.getValueAt(fila, 2).toString();
+            BillForm.clientLastame = (String) tabla.getValueAt(fila, 3).toString();
+            
+            BillForm.txtDocument.setText(BillForm.clientDocument);
+            BillForm.txtClient.setText(BillForm.clientName + " " + BillForm.clientLastame);
+        }
+        BillForm.Search = false;
+        this.dispose();
+    }//GEN-LAST:event_btnSearchActionPerformed
 
     /**
      * @param args the command line arguments5
@@ -406,7 +440,8 @@ public class ShowClients extends javax.swing.JFrame {
     private javax.swing.JRadioButton address;
     private javax.swing.JRadioButton age;
     private javax.swing.JButton btnConsult;
-    private javax.swing.JButton btnConsult1;
+    private javax.swing.JButton btnExit;
+    private javax.swing.JButton btnSearch;
     private javax.swing.JButton btnShowAll;
     private javax.swing.ButtonGroup btnsQueries;
     private javax.swing.JRadioButton document;

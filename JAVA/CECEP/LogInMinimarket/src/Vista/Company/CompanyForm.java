@@ -460,7 +460,6 @@ public class CompanyForm extends javax.swing.JInternalFrame {
                 setTitle("Company Management");
             }else {
                 String sql = "insert into company(Nit,Name,Address,Phone) values (" + nit + ",'"+name+"','"+address+"','"+phone+"' );";
-                JOptionPane.showMessageDialog(null, sql);
                 conect = DBConexion.Conectar();
                 st = conect.createStatement();
                 st.executeUpdate(sql);
@@ -475,31 +474,31 @@ public class CompanyForm extends javax.swing.JInternalFrame {
     
     public void PonerDatos(String sql){
         
-        Object[] employee = new Object[5];
+        Object[] company = new Object[5];
         
         try {
             conect = DBConexion.Conectar();
             st = conect.createStatement();
             rs = st.executeQuery(sql);
             while (rs.next()) {
-                employee[0] = rs.getInt("Id");
-                employee[1] = rs.getInt("Nit");
-                employee[2] = rs.getString("Name");
-                employee[3] = rs.getString("Address");
-                employee[4] = rs.getString("Phone");
+                company[0] = rs.getInt("Id");
+                company[1] = rs.getInt("Nit");
+                company[2] = rs.getString("Name");
+                company[3] = rs.getString("Address");
+                company[4] = rs.getString("Phone");
             }
         } catch (SQLException e) {
         }
         
-        if (employee[0] == null) {
+        if (company[0] == null) {
             JOptionPane.showMessageDialog(null, "This Company doesnt Exist");
             temp = false;
         }else{
-            txtId.setText(employee[0].toString());
-            txtNit.setText(employee[1].toString());
-            txtName.setText(employee[2].toString());
-            txtAddress.setText(employee[3].toString());
-            txtPhone.setText(employee[4].toString());
+            txtId.setText(company[0].toString());
+            txtNit.setText(company[1].toString());
+            txtName.setText(company[2].toString());
+            txtAddress.setText(company[3].toString());
+            txtPhone.setText(company[4].toString());
             temp = true;
         }
     }

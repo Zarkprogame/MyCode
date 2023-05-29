@@ -2,11 +2,13 @@ package Vista;
 
 import java.sql.*;
 import java.awt.Color;
+import java.awt.event.KeyEvent;
 import javax.swing.JOptionPane;
 
 public class LogIn extends javax.swing.JFrame {
     
     public static String activeEmployee = "";
+    public static String Employee = "";
     
     public LogIn() {
         initComponents();
@@ -56,6 +58,11 @@ public class LogIn extends javax.swing.JFrame {
         txtUser.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtUserActionPerformed(evt);
+            }
+        });
+        txtUser.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtUserKeyPressed(evt);
             }
         });
 
@@ -218,8 +225,16 @@ public class LogIn extends javax.swing.JFrame {
     }//GEN-LAST:event_btnLogInActionPerformed
 
     private void txtPasswordKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPasswordKeyPressed
-        //
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            ingresar();
+        }
     }//GEN-LAST:event_txtPasswordKeyPressed
+
+    private void txtUserKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtUserKeyPressed
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            (txtPassword).requestFocus();
+        }
+    }//GEN-LAST:event_txtUserKeyPressed
 
     public void ingresar(){
         Connection con1;
@@ -238,6 +253,7 @@ public class LogIn extends javax.swing.JFrame {
                 rs = pst.executeQuery();
                 if (rs.next()) {
                     activeEmployee = rs.getString("Job");
+                    Employee = rs.getString("Username");
                     this.dispose();
                     new SplashIn().setVisible(true);
                     

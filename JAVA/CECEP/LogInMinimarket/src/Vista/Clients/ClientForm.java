@@ -1,6 +1,10 @@
 package Vista.Clients;
 
 import Modelo.DBConexion;
+import Vista.Invoice.BillForm;
+import Vista.MdiMain;
+import static Vista.MdiMain.bill;
+import static Vista.MdiMain.desktopPane;
 import java.sql.*;
 import java.awt.Component;
 import java.awt.Desktop;
@@ -685,6 +689,18 @@ public class ClientForm extends javax.swing.JInternalFrame {
             }else {
                 Agregar();
             }
+            
+            if (BillForm.create) {
+                if (bill == null || bill.isClosed()) {
+                    bill = new BillForm();
+                    MdiMain.desktopPane.add(bill);
+                    int alto = (int)desktopPane.getHeight();
+                    int ancho = (int)desktopPane.getWidth();
+                    bill.setSize(ancho, alto);
+                }
+                bill.setVisible(true);  
+            }
+            BillForm.create = false;
             btnNext.setEnabled(true);
             btnLast.setEnabled(true);
             btnDelete.setEnabled(true);
@@ -750,6 +766,7 @@ public class ClientForm extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_btnHelpActionPerformed
 
     private void btnExitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExitActionPerformed
+        Vista.Invoice.BillForm.create = true;
         JOptionPane.showMessageDialog(null, "See you Soon");
         dispose();
         counterRow = 0;
@@ -908,7 +925,7 @@ public class ClientForm extends javax.swing.JInternalFrame {
     
     public void Eliminar(){
         
-        String User = JOptionPane.showInputDialog("Enter the Name that you want to Delete");
+        String User = JOptionPane.showInputDialog("Enter the Document that you want to Delete");
         repetido(User);
         
         if (!repetido) {
@@ -919,7 +936,8 @@ public class ClientForm extends javax.swing.JInternalFrame {
                 if (User.equals("")) {
                     JOptionPane.showMessageDialog(null, "Missing data to be entered");
                 }else {
-                    String sql = "delete from client where Name = " + '"' + User + '"' + ";";                                            
+                    String sql = "delete from client where Document = " + '"' + User + '"' + ";";  
+                    JOptionPane.showMessageDialog(null, sql);
                     conect = DBConexion.Conectar();
                     st = conect.createStatement();
                     st.executeUpdate(sql);
@@ -939,13 +957,13 @@ public class ClientForm extends javax.swing.JInternalFrame {
         repetido = false;
         
         try {
-            String sql = "Select Name from client;";
+            String sql = "Select Document from client;";
             conect = DBConexion.Conectar();
             st = conect.createStatement();
             rs = st.executeQuery(sql);
             
             while (rs.next()) {
-                Users = rs.getString("Name");
+                Users = rs.getString("Document");
                 if (Users.equals(User)) {
                     repetido = true;
                 }
