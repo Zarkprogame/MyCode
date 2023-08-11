@@ -1,16 +1,8 @@
 # #Write a program which displays the reverse of a string 
 
+def run():
+    string_user = input("write some String: ")
+    print(string_user[::-1])
 
-# text = input('WRITE A STRING: ')
-# new_text = ''
-
-# for word in reversed(text):
-#     new_text += word
-
-# print(new_text)
-
-nombre = 'ingrese4'
-temp = 0
-for i in nombre:
-    if i.isdigit:
-        temp = 1
+if __name__ == '__main__':
+    run()

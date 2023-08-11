@@ -1,9 +1,12 @@
 #Write a Program which prints the even numbers between 1 and 100 in an increasing order
 
-for number in range(101):
-    if (number % 2) == 0:
-        print(number)
-    number += 1
+def run():
+    for number in range(101):
+        if (number % 2) == 0:
+            print(number)
+
+if __name__ == '__main__':
+    run()
 
 #Write a Program which prints the even numbers between 1 and 100 in an decreasing order
 
