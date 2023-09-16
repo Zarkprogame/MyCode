@@ -1,0 +1,14 @@
+C:\Users\Zarkprogame\source\repos\Electronica\Electronica\bin\Debug\net6.0\Electronica.exe
+C:\Users\Zarkprogame\source\repos\Electronica\Electronica\bin\Debug\net6.0\Electronica.deps.json
+C:\Users\Zarkprogame\source\repos\Electronica\Electronica\bin\Debug\net6.0\Electronica.runtimeconfig.json
+C:\Users\Zarkprogame\source\repos\Electronica\Electronica\bin\Debug\net6.0\Electronica.dll
+C:\Users\Zarkprogame\source\repos\Electronica\Electronica\bin\Debug\net6.0\Electronica.pdb
+C:\Users\Zarkprogame\source\repos\Electronica\Electronica\obj\Debug\net6.0\Electronica.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Zarkprogame\source\repos\Electronica\Electronica\obj\Debug\net6.0\Electronica.AssemblyInfoInputs.cache
+C:\Users\Zarkprogame\source\repos\Electronica\Electronica\obj\Debug\net6.0\Electronica.AssemblyInfo.cs
+C:\Users\Zarkprogame\source\repos\Electronica\Electronica\obj\Debug\net6.0\Electronica.csproj.CoreCompileInputs.cache
+C:\Users\Zarkprogame\source\repos\Electronica\Electronica\obj\Debug\net6.0\Electronica.dll
+C:\Users\Zarkprogame\source\repos\Electronica\Electronica\obj\Debug\net6.0\refint\Electronica.dll
+C:\Users\Zarkprogame\source\repos\Electronica\Electronica\obj\Debug\net6.0\Electronica.pdb
+C:\Users\Zarkprogame\source\repos\Electronica\Electronica\obj\Debug\net6.0\Electronica.genruntimeconfig.cache
+C:\Users\Zarkprogame\source\repos\Electronica\Electronica\obj\Debug\net6.0\ref\Electronica.dll

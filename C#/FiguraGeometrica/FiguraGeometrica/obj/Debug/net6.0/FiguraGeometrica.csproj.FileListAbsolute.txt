@@ -1,0 +1,14 @@
+C:\Users\Zarkprogame\source\repos\FiguraGeometrica\FiguraGeometrica\bin\Debug\net6.0\FiguraGeometrica.exe
+C:\Users\Zarkprogame\source\repos\FiguraGeometrica\FiguraGeometrica\bin\Debug\net6.0\FiguraGeometrica.deps.json
+C:\Users\Zarkprogame\source\repos\FiguraGeometrica\FiguraGeometrica\bin\Debug\net6.0\FiguraGeometrica.runtimeconfig.json
+C:\Users\Zarkprogame\source\repos\FiguraGeometrica\FiguraGeometrica\bin\Debug\net6.0\FiguraGeometrica.dll
+C:\Users\Zarkprogame\source\repos\FiguraGeometrica\FiguraGeometrica\bin\Debug\net6.0\FiguraGeometrica.pdb
+C:\Users\Zarkprogame\source\repos\FiguraGeometrica\FiguraGeometrica\obj\Debug\net6.0\FiguraGeometrica.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Zarkprogame\source\repos\FiguraGeometrica\FiguraGeometrica\obj\Debug\net6.0\FiguraGeometrica.AssemblyInfoInputs.cache
+C:\Users\Zarkprogame\source\repos\FiguraGeometrica\FiguraGeometrica\obj\Debug\net6.0\FiguraGeometrica.AssemblyInfo.cs
+C:\Users\Zarkprogame\source\repos\FiguraGeometrica\FiguraGeometrica\obj\Debug\net6.0\FiguraGeometrica.csproj.CoreCompileInputs.cache
+C:\Users\Zarkprogame\source\repos\FiguraGeometrica\FiguraGeometrica\obj\Debug\net6.0\FiguraGeometrica.dll
+C:\Users\Zarkprogame\source\repos\FiguraGeometrica\FiguraGeometrica\obj\Debug\net6.0\refint\FiguraGeometrica.dll
+C:\Users\Zarkprogame\source\repos\FiguraGeometrica\FiguraGeometrica\obj\Debug\net6.0\FiguraGeometrica.pdb
+C:\Users\Zarkprogame\source\repos\FiguraGeometrica\FiguraGeometrica\obj\Debug\net6.0\FiguraGeometrica.genruntimeconfig.cache
+C:\Users\Zarkprogame\source\repos\FiguraGeometrica\FiguraGeometrica\obj\Debug\net6.0\ref\FiguraGeometrica.dll

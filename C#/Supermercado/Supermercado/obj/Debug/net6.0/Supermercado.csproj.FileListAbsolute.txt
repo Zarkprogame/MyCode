@@ -1,0 +1,14 @@
+C:\Users\Zarkprogame\MyCode\C#\Supermercado\Supermercado\bin\Debug\net6.0\Supermercado.exe
+C:\Users\Zarkprogame\MyCode\C#\Supermercado\Supermercado\bin\Debug\net6.0\Supermercado.deps.json
+C:\Users\Zarkprogame\MyCode\C#\Supermercado\Supermercado\bin\Debug\net6.0\Supermercado.runtimeconfig.json
+C:\Users\Zarkprogame\MyCode\C#\Supermercado\Supermercado\bin\Debug\net6.0\Supermercado.dll
+C:\Users\Zarkprogame\MyCode\C#\Supermercado\Supermercado\bin\Debug\net6.0\Supermercado.pdb
+C:\Users\Zarkprogame\MyCode\C#\Supermercado\Supermercado\obj\Debug\net6.0\Supermercado.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Zarkprogame\MyCode\C#\Supermercado\Supermercado\obj\Debug\net6.0\Supermercado.AssemblyInfoInputs.cache
+C:\Users\Zarkprogame\MyCode\C#\Supermercado\Supermercado\obj\Debug\net6.0\Supermercado.AssemblyInfo.cs
+C:\Users\Zarkprogame\MyCode\C#\Supermercado\Supermercado\obj\Debug\net6.0\Supermercado.csproj.CoreCompileInputs.cache
+C:\Users\Zarkprogame\MyCode\C#\Supermercado\Supermercado\obj\Debug\net6.0\Supermercado.dll
+C:\Users\Zarkprogame\MyCode\C#\Supermercado\Supermercado\obj\Debug\net6.0\refint\Supermercado.dll
+C:\Users\Zarkprogame\MyCode\C#\Supermercado\Supermercado\obj\Debug\net6.0\Supermercado.pdb
+C:\Users\Zarkprogame\MyCode\C#\Supermercado\Supermercado\obj\Debug\net6.0\Supermercado.genruntimeconfig.cache
+C:\Users\Zarkprogame\MyCode\C#\Supermercado\Supermercado\obj\Debug\net6.0\ref\Supermercado.dll

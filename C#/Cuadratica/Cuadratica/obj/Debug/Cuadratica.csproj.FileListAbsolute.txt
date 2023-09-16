@@ -1,0 +1,7 @@
+C:\Users\Zarkprogame\source\repos\Cuadratica\Cuadratica\bin\Debug\Cuadratica.exe.config
+C:\Users\Zarkprogame\source\repos\Cuadratica\Cuadratica\bin\Debug\Cuadratica.exe
+C:\Users\Zarkprogame\source\repos\Cuadratica\Cuadratica\bin\Debug\Cuadratica.pdb
+C:\Users\Zarkprogame\source\repos\Cuadratica\Cuadratica\obj\Debug\Cuadratica.csproj.AssemblyReference.cache
+C:\Users\Zarkprogame\source\repos\Cuadratica\Cuadratica\obj\Debug\Cuadratica.csproj.CoreCompileInputs.cache
+C:\Users\Zarkprogame\source\repos\Cuadratica\Cuadratica\obj\Debug\Cuadratica.exe
+C:\Users\Zarkprogame\source\repos\Cuadratica\Cuadratica\obj\Debug\Cuadratica.pdb

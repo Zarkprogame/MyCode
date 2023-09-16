@@ -1,0 +1,14 @@
+C:\Users\Zarkprogame\Documents\CECEP\CUARTO SEMESTRE\LENGUAJE INFORMATICO\Parcial\Planeacion Agregada\Planeacion Agregada\bin\Debug\net6.0\Planeacion Agregada.exe
+C:\Users\Zarkprogame\Documents\CECEP\CUARTO SEMESTRE\LENGUAJE INFORMATICO\Parcial\Planeacion Agregada\Planeacion Agregada\bin\Debug\net6.0\Planeacion Agregada.deps.json
+C:\Users\Zarkprogame\Documents\CECEP\CUARTO SEMESTRE\LENGUAJE INFORMATICO\Parcial\Planeacion Agregada\Planeacion Agregada\bin\Debug\net6.0\Planeacion Agregada.runtimeconfig.json
+C:\Users\Zarkprogame\Documents\CECEP\CUARTO SEMESTRE\LENGUAJE INFORMATICO\Parcial\Planeacion Agregada\Planeacion Agregada\bin\Debug\net6.0\Planeacion Agregada.dll
+C:\Users\Zarkprogame\Documents\CECEP\CUARTO SEMESTRE\LENGUAJE INFORMATICO\Parcial\Planeacion Agregada\Planeacion Agregada\bin\Debug\net6.0\Planeacion Agregada.pdb
+C:\Users\Zarkprogame\Documents\CECEP\CUARTO SEMESTRE\LENGUAJE INFORMATICO\Parcial\Planeacion Agregada\Planeacion Agregada\obj\Debug\net6.0\Planeacion Agregada.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Zarkprogame\Documents\CECEP\CUARTO SEMESTRE\LENGUAJE INFORMATICO\Parcial\Planeacion Agregada\Planeacion Agregada\obj\Debug\net6.0\Planeacion Agregada.AssemblyInfoInputs.cache
+C:\Users\Zarkprogame\Documents\CECEP\CUARTO SEMESTRE\LENGUAJE INFORMATICO\Parcial\Planeacion Agregada\Planeacion Agregada\obj\Debug\net6.0\Planeacion Agregada.AssemblyInfo.cs
+C:\Users\Zarkprogame\Documents\CECEP\CUARTO SEMESTRE\LENGUAJE INFORMATICO\Parcial\Planeacion Agregada\Planeacion Agregada\obj\Debug\net6.0\Planeacion Agregada.csproj.CoreCompileInputs.cache
+C:\Users\Zarkprogame\Documents\CECEP\CUARTO SEMESTRE\LENGUAJE INFORMATICO\Parcial\Planeacion Agregada\Planeacion Agregada\obj\Debug\net6.0\Planeacion Agregada.dll
+C:\Users\Zarkprogame\Documents\CECEP\CUARTO SEMESTRE\LENGUAJE INFORMATICO\Parcial\Planeacion Agregada\Planeacion Agregada\obj\Debug\net6.0\refint\Planeacion Agregada.dll
+C:\Users\Zarkprogame\Documents\CECEP\CUARTO SEMESTRE\LENGUAJE INFORMATICO\Parcial\Planeacion Agregada\Planeacion Agregada\obj\Debug\net6.0\Planeacion Agregada.pdb
+C:\Users\Zarkprogame\Documents\CECEP\CUARTO SEMESTRE\LENGUAJE INFORMATICO\Parcial\Planeacion Agregada\Planeacion Agregada\obj\Debug\net6.0\Planeacion Agregada.genruntimeconfig.cache
+C:\Users\Zarkprogame\Documents\CECEP\CUARTO SEMESTRE\LENGUAJE INFORMATICO\Parcial\Planeacion Agregada\Planeacion Agregada\obj\Debug\net6.0\ref\Planeacion Agregada.dll

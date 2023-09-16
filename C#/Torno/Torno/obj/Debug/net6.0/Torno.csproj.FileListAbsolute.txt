@@ -1,0 +1,14 @@
+C:\Users\Zarkprogame\MyCode\C#\Torno\Torno\bin\Debug\net6.0\Torno.exe
+C:\Users\Zarkprogame\MyCode\C#\Torno\Torno\bin\Debug\net6.0\Torno.deps.json
+C:\Users\Zarkprogame\MyCode\C#\Torno\Torno\bin\Debug\net6.0\Torno.runtimeconfig.json
+C:\Users\Zarkprogame\MyCode\C#\Torno\Torno\bin\Debug\net6.0\Torno.dll
+C:\Users\Zarkprogame\MyCode\C#\Torno\Torno\bin\Debug\net6.0\Torno.pdb
+C:\Users\Zarkprogame\MyCode\C#\Torno\Torno\obj\Debug\net6.0\Torno.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Zarkprogame\MyCode\C#\Torno\Torno\obj\Debug\net6.0\Torno.AssemblyInfoInputs.cache
+C:\Users\Zarkprogame\MyCode\C#\Torno\Torno\obj\Debug\net6.0\Torno.AssemblyInfo.cs
+C:\Users\Zarkprogame\MyCode\C#\Torno\Torno\obj\Debug\net6.0\Torno.csproj.CoreCompileInputs.cache
+C:\Users\Zarkprogame\MyCode\C#\Torno\Torno\obj\Debug\net6.0\Torno.dll
+C:\Users\Zarkprogame\MyCode\C#\Torno\Torno\obj\Debug\net6.0\refint\Torno.dll
+C:\Users\Zarkprogame\MyCode\C#\Torno\Torno\obj\Debug\net6.0\Torno.pdb
+C:\Users\Zarkprogame\MyCode\C#\Torno\Torno\obj\Debug\net6.0\Torno.genruntimeconfig.cache
+C:\Users\Zarkprogame\MyCode\C#\Torno\Torno\obj\Debug\net6.0\ref\Torno.dll

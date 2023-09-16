@@ -1,0 +1,14 @@
+C:\Users\Zarkprogame\MyCode\C#\cilindro\cilindro\bin\Debug\net6.0\cilindro.exe
+C:\Users\Zarkprogame\MyCode\C#\cilindro\cilindro\bin\Debug\net6.0\cilindro.deps.json
+C:\Users\Zarkprogame\MyCode\C#\cilindro\cilindro\bin\Debug\net6.0\cilindro.runtimeconfig.json
+C:\Users\Zarkprogame\MyCode\C#\cilindro\cilindro\bin\Debug\net6.0\cilindro.dll
+C:\Users\Zarkprogame\MyCode\C#\cilindro\cilindro\bin\Debug\net6.0\cilindro.pdb
+C:\Users\Zarkprogame\MyCode\C#\cilindro\cilindro\obj\Debug\net6.0\cilindro.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Zarkprogame\MyCode\C#\cilindro\cilindro\obj\Debug\net6.0\cilindro.AssemblyInfoInputs.cache
+C:\Users\Zarkprogame\MyCode\C#\cilindro\cilindro\obj\Debug\net6.0\cilindro.AssemblyInfo.cs
+C:\Users\Zarkprogame\MyCode\C#\cilindro\cilindro\obj\Debug\net6.0\cilindro.csproj.CoreCompileInputs.cache
+C:\Users\Zarkprogame\MyCode\C#\cilindro\cilindro\obj\Debug\net6.0\cilindro.dll
+C:\Users\Zarkprogame\MyCode\C#\cilindro\cilindro\obj\Debug\net6.0\refint\cilindro.dll
+C:\Users\Zarkprogame\MyCode\C#\cilindro\cilindro\obj\Debug\net6.0\cilindro.pdb
+C:\Users\Zarkprogame\MyCode\C#\cilindro\cilindro\obj\Debug\net6.0\cilindro.genruntimeconfig.cache
+C:\Users\Zarkprogame\MyCode\C#\cilindro\cilindro\obj\Debug\net6.0\ref\cilindro.dll
