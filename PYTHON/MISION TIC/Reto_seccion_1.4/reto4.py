@@ -29,7 +29,6 @@ def percentage_by_deparment(deparment_age):
                 
     for lista_departamentos in deparment_list:
         ages_by_department[lista_departamentos] = []
-    
     for departamento,edad in zip(deparment,age):
         ages_by_department[departamento].append(edad)
     
