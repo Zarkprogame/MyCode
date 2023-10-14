@@ -1,0 +1,16 @@
+C:\Users\Zarkprogame\MyCode\C#\Triangulo GUI\Triangulo GUI\bin\Debug\net6.0-windows\Triangulo GUI.exe
+C:\Users\Zarkprogame\MyCode\C#\Triangulo GUI\Triangulo GUI\bin\Debug\net6.0-windows\Triangulo GUI.deps.json
+C:\Users\Zarkprogame\MyCode\C#\Triangulo GUI\Triangulo GUI\bin\Debug\net6.0-windows\Triangulo GUI.runtimeconfig.json
+C:\Users\Zarkprogame\MyCode\C#\Triangulo GUI\Triangulo GUI\bin\Debug\net6.0-windows\Triangulo GUI.dll
+C:\Users\Zarkprogame\MyCode\C#\Triangulo GUI\Triangulo GUI\bin\Debug\net6.0-windows\Triangulo GUI.pdb
+C:\Users\Zarkprogame\MyCode\C#\Triangulo GUI\Triangulo GUI\obj\Debug\net6.0-windows\Triangulo_GUI.Form1.resources
+C:\Users\Zarkprogame\MyCode\C#\Triangulo GUI\Triangulo GUI\obj\Debug\net6.0-windows\Triangulo GUI.csproj.GenerateResource.cache
+C:\Users\Zarkprogame\MyCode\C#\Triangulo GUI\Triangulo GUI\obj\Debug\net6.0-windows\Triangulo GUI.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Zarkprogame\MyCode\C#\Triangulo GUI\Triangulo GUI\obj\Debug\net6.0-windows\Triangulo GUI.AssemblyInfoInputs.cache
+C:\Users\Zarkprogame\MyCode\C#\Triangulo GUI\Triangulo GUI\obj\Debug\net6.0-windows\Triangulo GUI.AssemblyInfo.cs
+C:\Users\Zarkprogame\MyCode\C#\Triangulo GUI\Triangulo GUI\obj\Debug\net6.0-windows\Triangulo GUI.csproj.CoreCompileInputs.cache
+C:\Users\Zarkprogame\MyCode\C#\Triangulo GUI\Triangulo GUI\obj\Debug\net6.0-windows\Triangulo GUI.dll
+C:\Users\Zarkprogame\MyCode\C#\Triangulo GUI\Triangulo GUI\obj\Debug\net6.0-windows\refint\Triangulo GUI.dll
+C:\Users\Zarkprogame\MyCode\C#\Triangulo GUI\Triangulo GUI\obj\Debug\net6.0-windows\Triangulo GUI.pdb
+C:\Users\Zarkprogame\MyCode\C#\Triangulo GUI\Triangulo GUI\obj\Debug\net6.0-windows\Triangulo GUI.genruntimeconfig.cache
+C:\Users\Zarkprogame\MyCode\C#\Triangulo GUI\Triangulo GUI\obj\Debug\net6.0-windows\ref\Triangulo GUI.dll
